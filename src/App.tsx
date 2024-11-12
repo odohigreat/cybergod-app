@@ -32,16 +32,18 @@ import {
 } from '@headlessui/react'
 import {
   Bars3Icon,
-  ShoppingBagIcon,
   XMarkIcon,
   MoonIcon,
   SunIcon,
+  UserPlusIcon,
   CogIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import SearchBar from './components/searchbar';
 import CgLogo from './assets/cglogo';
 import DarkCgLogo from './assets/darkcglogo';
+import Dropdown from './components/dropdown';
+import HeroButton from './components/herobutton';
 
 const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
 const navigation = {
@@ -230,7 +232,7 @@ function Home() {
                   {navigation.categories.map((category) => (
                     <Tab
                       key={category.name}
-                      className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900 data-[selected]:border-indigo-600 data-[selected]:text-indigo-600"
+                      className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-neutral-400 data-[selected]:border-neutral-600 dark:data-[selected]:border-neutral-100 data-[selected]:text-neutral-600 dark:data-[selected]:text-neutral-100"
                     >
                       {category.name}
                     </Tab>
@@ -242,15 +244,15 @@ function Home() {
                   <TabPanel key={category.name} className="space-y-12 px-4 py-6">
                     <div className="grid grid-cols-2 gap-x-4 gap-y-10">
                       {category.featured.map((item) => (
-                        <div key={item.name} className="group relative">
+                        <div key={item.name} className="group relative border-[2px] rounded-xl border-gray-300 dark:border-neutral-500 p-2">
                           <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
                             <img alt={item.imageAlt} src={item.imageSrc} className="object-cover object-center" />
                           </div>
-                          <a href={item.href} className="mt-6 block text-sm font-medium text-gray-900">
+                          <a href={item.href} className="mt-2 block font-medium text-md lg:text-xl text-gray-900 dark:text-white">
                             <span aria-hidden="true" className="absolute inset-0 z-10" />
                             {item.name}
                           </a>
-                          <p aria-hidden="true" className="mt-1 text-sm text-gray-500">
+                          <p aria-hidden="true" className="text-xs hover:underline text-slate-700 dark:text-gray-400">
                             View now
                           </p>
                         </div>
@@ -264,7 +266,7 @@ function Home() {
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               {navigation.pages.map((page) => (
                 <div key={page.name} className="flow-root">
-                  <a href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
+                  <a href={page.href} className="-m-2 block p-2 font-medium text-darkmode">
                     {page.name}
                   </a>
                 </div>
@@ -273,12 +275,12 @@ function Home() {
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               <div className="flow-root">
-                <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
+                <a href="#" className="-m-2 block p-2 font-medium text-darkmode">
                   Create an account
                 </a>
               </div>
               <div className="flow-root">
-                <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
+                <a href="#" className="-m-2 block p-2 font-medium text-darkmode">
                   Sign in
                 </a>
               </div>
@@ -286,7 +288,7 @@ function Home() {
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               {/* Currency selector */}
-              <form>
+              {/* <form>
                 <div className="inline-block">
                   <label htmlFor="mobile-currency" className="sr-only">
                     Currency
@@ -301,28 +303,16 @@ function Home() {
                         <option key={currency}>{currency}</option>
                       ))}
                     </select>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center">
-                      <ChevronDownIcon aria-hidden="true" className="h-5 w-5 text-gray-500" />
-                    </div>
                   </div>
                 </div>
-              </form>
+              </form> */}
             </div>
           </DialogPanel>
         </div>
       </Dialog>
 
       {/* Hero section */}
-      <div className="relative bg-gray-900">
-        {/* Decorative image and overlay */}
-        <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
-          <img
-            alt=""
-            src="https://tailwindui.com/plus/img/ecommerce-images/home-page-01-hero-full-width.jpg"
-            className="h-full w-full object-cover object-center"
-          />
-        </div>
-        <div aria-hidden="true" className="absolute inset-0 bg-gray-900 opacity-50" />
+      <div className="bg-neutral-100 dark:bg-neutral-900 h-[650px] lg:h-[550px]">
 
         {/* Navigation */}
         <header className="relative z-10">
@@ -467,9 +457,7 @@ function Home() {
                               <><SunIcon className='size-5 text-black dark:text-white' /></> :
                               <><MoonIcon className='size-5 text-black dark:text-white' /></>}
                           </button>
-                          <button className='btn text-black dark:text-white'>
-                            <CogIcon className='size-5' />
-                          </button>
+                          <Dropdown />
                         </div>
                       </div>
                     </div>
@@ -480,18 +468,26 @@ function Home() {
           </nav>
         </header>
 
-        <div className="relative mx-auto flex max-w-3xl flex-col items-center px-6 py-32 text-center sm:py-64 lg:px-0">
-          <h1 className="text-4xl font-bold tracking-tight text-white lg:text-6xl">New arrivals are here</h1>
-          <p className="mt-4 text-xl text-white">
-            The new arrivals have, well, newly arrived. Check out the latest options from our summer small-batch release
-            while they're still in stock.
-          </p>
-          <a
-            href="#"
-            className="mt-8 inline-block rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100"
-          >
-            Shop New Arrivals
-          </a>
+        <div className="relative mx-auto flex lg:flex-row flex-col-reverse lg:space-x-20 max-w-6xl items-center py-5 lg:py-10 px-5 lg:px-16">
+          <div className='flex flex-col space-y-5 items-start max-w-md text-gray-900 dark:text-neutral-100'>
+            <h1 className="text-4xl font-bold lg:leading-tight lg:text-5xl">Looking for the phone that's just for you?</h1>
+            <p className="text-lg">
+              You're now just one click away from finding the perfect phone that suits your needs.
+            </p>
+            {/* <button
+              className="btn text-darkmode px-5"
+            >
+              Get Started
+            </button> */}
+            <HeroButton />
+          </div>
+          <div>
+            <img
+              alt='hero-pic'
+              src='https://res.cloudinary.com/dl4f30xpb/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1731380066/WhatsApp_Image_2024-11-11_at_7.49.01_PM_tcv8yy.jpg'
+              className='rounded-3xl mb-5 lg:mb-0 border-darkmode'
+            />
+          </div>
         </div>
       </div>
 

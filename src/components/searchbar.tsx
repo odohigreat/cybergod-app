@@ -11,7 +11,7 @@ function SearchBar() {
           className='rounded-xl text-sm p-2 bg-neutral-100 dark:bg-neutral-900 focus:outline-none'
         />
       </div>
-      <div className='py-2 flex lg:hidden text-black dark:text-white rounded-xl bg-neutral-100 dark:bg-neutral-900 bdr'>
+      <div className='py-2 flex lg:hidden text-black dark:text-white rounded-xl bg-neutral-100 dark:bg-neutral-900 border-darkmode'>
         <MagnifyingGlassIcon className='size-5 mx-2' />
       </div>
     </>
