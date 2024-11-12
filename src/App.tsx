@@ -312,7 +312,7 @@ function Home() {
       </Dialog>
 
       {/* Hero section */}
-      <div className="bg-neutral-100 dark:bg-neutral-900 h-[650px] lg:h-[550px]">
+      <div className="bg-neutral-100 dark:bg-neutral-900 h-fit lg:h-fit pb-10">
 
         {/* Navigation */}
         <header className="relative z-10">
@@ -472,7 +472,7 @@ function Home() {
           <div className='flex flex-col space-y-5 items-start max-w-md text-gray-900 dark:text-neutral-100'>
             <h1 className="text-4xl font-bold lg:leading-tight lg:text-5xl">Looking for the phone that's just for you?</h1>
             <p className="text-lg">
-              You're now just one click away from finding the perfect phone that suits your needs.
+              You're just one click away from finding the perfect phone that suits your needs.
             </p>
             {/* <button
               className="btn text-darkmode px-5"
