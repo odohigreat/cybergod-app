@@ -201,7 +201,7 @@ function Home() {
   return (
     <div className={`${darkMode && "dark"}`} >
       {/* Mobile menu */}
-      <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="relative z-40 lg:hidden">
+      <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className={`${darkMode && "dark"} relative z-40 lg:hidden`}>
         <DialogBackdrop
           transition
           className="fixed inset-0 bg-black bg-opacity-25 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
@@ -210,7 +210,7 @@ function Home() {
         <div className="fixed inset-0 z-40 flex">
           <DialogPanel
             transition
-            className="relative flex w-full max-w-xs transform flex-col overflow-y-auto bg-white pb-12 shadow-xl transition duration-300 ease-in-out data-[closed]:-translate-x-full"
+            className="relative flex w-full max-w-xs transform flex-col overflow-y-auto bg-neutral-100 dark:bg-neutral-700 pb-12 shadow-xl transition duration-300 ease-in-out data-[closed]:-translate-x-full"
           >
             <div className="flex px-4 pb-2 pt-5">
               <button
@@ -251,7 +251,7 @@ function Home() {
                             {item.name}
                           </a>
                           <p aria-hidden="true" className="mt-1 text-sm text-gray-500">
-                            Shop now
+                            View now
                           </p>
                         </div>
                       ))}
@@ -456,27 +456,20 @@ function Home() {
                     </div>
 
                     <div className="flex flex-1 items-center justify-end">
-                      <div className="flex items-center lg:ml-8">
+                      <div className="flex items-center">
                         {/* DarkMode */}
-                        <button
-                          className='btn'
-                          onClick={toggleDarkMode}
-                        >
-                          {darkMode ?
-                            <><SunIcon className='size-5 text-black dark:text-white' /></> :
-                            <><MoonIcon className='size-5 text-black dark:text-white' /></>}
-                        </button>
-                        <button className='btn text-black dark:text-white'>
-                          <CogIcon className='size-5' />
-                        </button>
-
-                        {/* Cart */}
-                        <div className="ml-4 flow-root lg:ml-8">
-                          <a href="#" className="group -m-2 flex items-center p-2">
-                            <ShoppingBagIcon aria-hidden="true" className="h-6 w-6 flex-shrink-0 text-black dark:text-white" />
-                            <span className="ml-2 text-sm font-medium text-black dark:text-white">0</span>
-                            <span className="sr-only">items in cart, view bag</span>
-                          </a>
+                        <div className='flex items-center space-x-2'>
+                          <button
+                            className='btn'
+                            onClick={toggleDarkMode}
+                          >
+                            {darkMode ?
+                              <><SunIcon className='size-5 text-black dark:text-white' /></> :
+                              <><MoonIcon className='size-5 text-black dark:text-white' /></>}
+                          </button>
+                          <button className='btn text-black dark:text-white'>
+                            <CogIcon className='size-5' />
+                          </button>
                         </div>
                       </div>
                     </div>
