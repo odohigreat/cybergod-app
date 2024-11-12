@@ -11,7 +11,6 @@ function SearchBar() {
     setIsModalOpen(!isModalOpen);
   };
 
-
   return (
     <>
       <div className='hidden lg:flex items-center text-black dark:text-white rounded-xl bg-neutral-100 dark:bg-neutral-900 border-2 border-gray-400 dark:border-neutral-700 shadow-sm hover:shadow-md hover:brightness-95 focus:shadow-md'>
@@ -23,9 +22,8 @@ function SearchBar() {
         />
       </div>
 
-
+      {/* mobile screen search bar */}
       <div className="flex items-center">
-        {/* Button to open modal */}
         <button
           onClick={toggleModal}
           className='py-2 flex lg:hidden text-black dark:text-white rounded-xl bg-neutral-100 dark:bg-neutral-900 border-darkmode'>
@@ -34,7 +32,7 @@ function SearchBar() {
 
         {/* Modal */}
         {isModalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black backdrop-blur-sm bg-opacity-50">
+          <div className="fixed inset-0 flex items-start pt-28 justify-center bg-black backdrop-blur-sm bg-opacity-50">
             <div className="bg-white dark:bg-neutral-800 p-6 rounded-xl border-darkmode shadow-lg max-w-md w-full mx-5">
               <div className='flex items-baseline justify-between'>
                 <h2 className="text-xl font-bold mb-4 text-black dark:text-neutral-200">Search devices..</h2>
@@ -64,7 +62,6 @@ function SearchBar() {
           </div>
         )}
       </div>
-
     </>
   )
 }

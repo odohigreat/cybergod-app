@@ -8,7 +8,7 @@ import {
 
 function Dropdown() {
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="inline-block">
       <div>
         <MenuButton className="flex items-center focus:outline-none">
           <span className="sr-only">Open options</span>
@@ -20,7 +20,7 @@ function Dropdown() {
 
       <MenuItems
         transition
-        className="absolute right-0 px-1 z-10 mt-2 w-32 lg:w-40 border-darkmode font-semibold text-darkmode origin-top-right rounded-md bg-neutral-100 dark:bg-neutral-900 shadow-lg transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+        className="absolute right-0 px-1 mr-3 z-10 mt-2 w-32 lg:w-40 border-darkmode font-semibold text-darkmode origin-top-right rounded-md bg-neutral-100 dark:bg-neutral-900 shadow-lg transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
       >
         <div className="py-1">
           <MenuItem>
