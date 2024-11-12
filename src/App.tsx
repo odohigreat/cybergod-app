@@ -49,7 +49,7 @@ const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
 const navigation = {
   categories: [
     {
-      name: 'Women',
+      name: 'Devices',
       featured: [
         {
           name: 'New Arrivals',
@@ -78,7 +78,7 @@ const navigation = {
       ],
     },
     {
-      name: 'Men',
+      name: 'blog',
       featured: [
         {
           name: 'New Arrivals',
@@ -109,7 +109,8 @@ const navigation = {
     },
   ],
   pages: [
-    { name: 'Company', href: '#' },
+    { name: 'Reviews', href: '#' },
+    { name: 'Stores', href: '#' },
     { name: 'Stores', href: '#' },
   ],
 }
@@ -420,7 +421,7 @@ function Home() {
                             <a
                               key={page.name}
                               href={page.href}
-                              className="flex items-center text-sm font-medium text-black dark:text-white"
+                              className="flex items-center text-sm hover:border-b-2 px-2 hover:border-b-neutral-700 dark:hover:border-b-neutral-300 font-medium text-black dark:text-white"
                             >
                               {page.name}
                             </a>
@@ -474,11 +475,6 @@ function Home() {
             <p className="text-lg">
               You're just one click away from finding the perfect phone that suits your needs.
             </p>
-            {/* <button
-              className="btn text-darkmode px-5"
-            >
-              Get Started
-            </button> */}
             <HeroButton />
           </div>
           <div>
