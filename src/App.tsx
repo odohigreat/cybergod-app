@@ -39,17 +39,17 @@ import {
   CogIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import SearchBar from './components/searchbar';
+import SearchBar from './Components/searchbar';
 import CgLogo from './assets/cglogo';
 import DarkCgLogo from './assets/darkcglogo';
-import Dropdown from './components/dropdown';
-import HeroButton from './components/herobutton';
+import Dropdown from './Components/dropdown';
+import HeroButton from './Components/herobutton';
 
 const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
 const navigation = {
   categories: [
     {
-      name: 'Devices',
+      name: 'Brands',
       featured: [
         {
           name: 'New Arrivals',
@@ -78,7 +78,7 @@ const navigation = {
       ],
     },
     {
-      name: 'blog',
+      name: 'Featured',
       featured: [
         {
           name: 'New Arrivals',
@@ -110,8 +110,8 @@ const navigation = {
   ],
   pages: [
     { name: 'Reviews', href: '#' },
-    { name: 'Stores', href: '#' },
-    { name: 'Stores', href: '#' },
+    { name: 'Shop', href: '#' },
+    { name: 'About Us', href: '#' },
   ],
 }
 const categories = [
@@ -318,17 +318,8 @@ function Home() {
         {/* Navigation */}
         <header className="relative z-10">
           <nav aria-label="Top">
-            {/* Top navigation */}
-            <div className="bg-gray-900">
-              <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
                 {/* Currency selector */}
-                <form>
-                  <div>
-                    <label htmlFor="desktop-currency" className="sr-only">
-                      Currency
-                    </label>
-                    <div className="group relative -ml-2 rounded-md border-transparent bg-gray-900 focus:outline-none">
-                      <select
+                {/* <select
                         id="desktop-currency"
                         name="currency"
                         className="flex items-center rounded-md border-transparent bg-gray-900 bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-white focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-100"
@@ -336,29 +327,15 @@ function Home() {
                         {currencies.map((currency) => (
                           <option key={currency}>{currency}</option>
                         ))}
-                      </select>
-                    </div>
-                  </div>
-                </form>
+                      </select> */}
 
-                <div className="flex items-center space-x-6">
-                  <a href="#" className="text-sm font-medium text-white hover:text-gray-100">
-                    Sign in
-                  </a>
-                  <a href="#" className="text-sm font-medium text-white hover:text-gray-100">
-                    Create an account
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Secondary navigation */}
+            {/* navigation */}
             <div className="bg-neutral-200 dark:bg-neutral-800">
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div>
                   <div className="flex h-16 items-center justify-between">
                     {/* Logo (lg+) */}
-                    <div className="hidden lg:flex space-x-5 lg:flex-1 lg:items-center">
+                    <div className="hidden lg:basis-1/6 lg:flex space-x-5 lg:flex-1 lg:items-center">
                       <a href="#">
                         <span className="sr-only">Your Company</span>
                         {darkMode ? <CgLogo /> : <DarkCgLogo />}

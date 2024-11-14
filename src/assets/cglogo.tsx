@@ -8,7 +8,7 @@ function CgLogo() {
         src={cglogo}
         className="h-8 w-auto"
       />
-      <label className='font-mono text-gray-300 text-lg font-bold'>CyberGod™</label>
+      <label className='font-mono text-gray-300 text-lg font-bold hidden lg:flex'>CyberGod™</label>
     </div>
   )
 }
