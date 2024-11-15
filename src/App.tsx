@@ -284,12 +284,12 @@ function Home() {
               </div>
               <TabPanels as={Fragment}>
                 {navigation.categories.map((category) => (
-                  <TabPanel key={category.name} className="space-y-12 px-4 py-6">
-                    <div className="grid grid-cols-2 gap-x-4 gap-y-10">
+                  <TabPanel key={category.name} className="space-y-6 px-4 py-6">
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-5">
                       {category.featured.map((item) => (
                         <div key={item.name} className="group relative border-[2px] rounded-xl border-gray-300 dark:border-neutral-500 p-2">
                           <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
-                            <img alt={item.imageAlt} src={item.imageSrc} className="object-cover object-center" />
+                            <img alt={item.imageAlt} src={item.imageSrc} className="object-cover max-h-12 w-full object-center" />
                           </div>
                           <a href={item.href} className="mt-2 block font-medium text-md lg:text-xl text-gray-900 dark:text-white">
                             <span aria-hidden="true" className="absolute inset-0 z-10" />
@@ -300,6 +300,10 @@ function Home() {
                           </p>
                         </div>
                       ))}
+                    </div>
+                    <div className='flex items-stretch space-x-2 justify-end text-slate-700 dark:text-gray-200'>
+                      <p className=''>All Brands</p>
+                      <ArrowLongRightIcon className='size-5 self-end'/>
                     </div>
                   </TabPanel>
                 ))}
@@ -392,7 +396,7 @@ function Home() {
                           {navigation.categories.map((category) => (
                             <Popover key={category.name} className="flex">
                               <div className="relative flex">
-                                <PopoverButton className="group relative z-10 flex items-center justify-center text-sm font-medium text-black dark:text-white transition-colors duration-200 ease-out">
+                                <PopoverButton className="group relative z-10 flex items-center hover:border-b-2 hover:border-b-neutral-700 dark:hover:border-b-neutral-400 justify-center text-sm font-medium text-black dark:text-white transition-colors duration-200 ease-out">
                                   {category.name}
                                   <span
                                     aria-hidden="true"
@@ -449,7 +453,7 @@ function Home() {
                             <a
                               key={page.name}
                               href={page.href}
-                              className="flex items-center text-sm hover:border-b-2 px-2 hover:border-b-neutral-700 dark:hover:border-b-neutral-300 font-medium text-black dark:text-white"
+                              className="flex items-center text-sm px-2 hover:border-b-2 hover:border-b-neutral-700 dark:hover:border-b-neutral-300 font-medium text-black dark:text-white"
                             >
                               {page.name}
                             </a>
