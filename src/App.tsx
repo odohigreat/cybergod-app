@@ -35,6 +35,7 @@ import {
   XMarkIcon,
   MoonIcon,
   SunIcon,
+  ArrowLongRightIcon,
   UserPlusIcon,
   CogIcon,
 } from '@heroicons/react/24/outline'
@@ -52,28 +53,64 @@ const navigation = {
       name: 'Brands',
       featured: [
         {
-          name: 'New Arrivals',
+          name: 'Samsung',
           href: '#',
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-category-01.jpg',
-          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
+          imageSrc: 'https://res.cloudinary.com/dl4f30xpb/image/upload/v1731626673/galaxy-s24-ultra-highlights-color-titanium-green-back-mo_syyxhs.jpg',
+          imageAlt: 'Basic samsung device aesthetic',
         },
         {
-          name: 'Basic Tees',
+          name: 'Apple',
           href: '#',
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-category-02.jpg',
-          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
+          imageSrc: 'https://res.cloudinary.com/dl4f30xpb/image/upload/c_thumb,w_200,g_face/v1731408796/IMG_20240923_121246_722_vlbsot.jpg',
+          imageAlt: 'Basic iPhone device aesthetic',
         },
         {
-          name: 'Accessories',
+          name: 'Google',
           href: '#',
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-category-03.jpg',
-          imageAlt: 'Model wearing minimalist watch with black wristband and white watch face.',
+          imageSrc: 'https://res.cloudinary.com/dl4f30xpb/image/upload/c_thumb,w_200,g_face/v1731409149/IMG_20240815_120738_427_sxh9oq.jpg',
+          imageAlt: 'Basic pixel device aesthetic',
         },
         {
-          name: 'Carry',
+          name: 'Tecno',
           href: '#',
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-category-04.jpg',
-          imageAlt: 'Model opening tan leather long wallet with credit card pockets and cash pouch.',
+          imageSrc: 'https://skit.ng/wp-content/uploads/2024/05/Tecno-Camon-30-3.webp',
+          imageAlt: 'Basic tecno device aesthetic',
+        },
+        {
+          name: 'Xiaomi',
+          href: '#',
+          imageSrc: 'https://www.cambridgemechatronics.com/media/cache/8e/78/8e782565bdc57faf70387535be120074.webp',
+          imageAlt: 'Basic xiaomi device aesthetic',
+        },
+        {
+          name: 'Infinix',
+          href: '#',
+          imageSrc: 'https://img.baba-blog.com/2024/10/Infinix-Hot-50-scaled-1.jpg?x-oss-process=style%2Ffull',
+          imageAlt: 'Basic infinix device aesthetic',
+        },
+        {
+          name: 'Nothing',
+          href: '#',
+          imageSrc: 'https://intl.nothing.tech/cdn/shop/files/Phone-2-PDP-Glyph-Header-Desktop.jpg?v=1688994873',
+          imageAlt: 'Basic nothing device aesthetic',
+        },
+        {
+          name: 'Itel',
+          href: '#',
+          imageSrc: 'https://i.gadgets360cdn.com/large/itel_s25_main_1731144498965.jpg',
+          imageAlt: 'Basic itel device aesthetic',
+        },
+        {
+          name: 'Realme',
+          href: '#',
+          imageSrc: 'https://i.gadgets360cdn.com/large/realme_gt_5_pro_realme_1717405064774.jpg',
+          imageAlt: 'Basic realme device aesthetic',
+        },
+        {
+          name: 'Oppo',
+          href: '#',
+          imageSrc: 'https://awsimages.detik.net.id/community/media/visual/2024/01/08/oppo-find-x7-ultra_169.webp?w=600&q=90',
+          imageAlt: 'Basic oppo device aesthetic',
         },
       ],
     },
@@ -81,29 +118,34 @@ const navigation = {
       name: 'Featured',
       featured: [
         {
-          name: 'New Arrivals',
+          name: 'Updates',
           href: '#',
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-01-men-category-01.jpg',
-          imageAlt: 'Hats and sweaters on wood shelves next to various colors of t-shirts on hangers.',
+          imageSrc: 'https://www.tuaw.com/wp-content/uploads/2024/08/Apple-Intelligence-scaled.jpeg',
+          imageAlt: 'latest tech updates',
         },
         {
-          name: 'Basic Tees',
+          name: 'Creators',
           href: '#',
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-01-men-category-02.jpg',
-          imageAlt: 'Model wearing light heather gray t-shirt.',
+          imageSrc: 'https://fwmedia.fandomwire.com/wp-content/uploads/2024/09/26045556/Screenshot-2024-09-26-2.25.10-PM-1024x442.png',
+          imageAlt: 'latest from top tech content creators',
+        },
+        {
+          name: 'New Devices',
+          href: '#',
+          imageSrc: 'https://www.techinsights.com/sites/default/files/2024-09/huawei-mate-xt-tri-fold.jpg',
+          imageAlt: 'new device releases',
+        },
+        {
+          name: 'Events',
+          href: '#',
+          imageSrc: 'https://io.google/2024/app/images/io24-featured-keynote-recap.webp',
+          imageAlt: 'most recent tech events',
         },
         {
           name: 'Accessories',
           href: '#',
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-01-men-category-03.jpg',
-          imageAlt:
-            'Grey 6-panel baseball hat with black brim, black mountain graphic on front, and light heather gray body.',
-        },
-        {
-          name: 'Carry',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-01-men-category-04.jpg',
-          imageAlt: 'Model putting folded cash into slim card holder olive leather wallet with hand stitching.',
+          imageSrc: 'https://cdn.db.io/images/dlg3xw1d/production/38c9ecbd385d3561f292efe7f31c5e81d9a6bbca-3750x1500.jpg',
+          imageAlt: 'device accesories',
         },
       ],
     },
@@ -318,8 +360,8 @@ function Home() {
         {/* Navigation */}
         <header className="relative z-10">
           <nav aria-label="Top">
-                {/* Currency selector */}
-                {/* <select
+            {/* Currency selector */}
+            {/* <select
                         id="desktop-currency"
                         name="currency"
                         className="flex items-center rounded-md border-transparent bg-gray-900 bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-white focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-100"
@@ -368,25 +410,34 @@ function Home() {
 
                                 <div className="relative bg-neutral-100 dark:bg-neutral-700">
                                   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                                    <div className="grid grid-cols-4 gap-x-8 gap-y-10 py-16">
+                                    <div className="grid grid-cols-5 gap-x-8 gap-y-10 pb-5 pt-10">
                                       {category.featured.map((item) => (
-                                        <div key={item.name} className="group relative border-[2px] rounded-xl border-gray-300 dark:border-neutral-500 p-2">
+                                        <div key={item.name} className="group relative border-[2px] bg-transparent dark:bg-neutral-800 rounded-xl border-gray-300 dark:border-neutral-500 p-2 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
                                           <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100">
                                             <img
                                               alt={item.imageAlt}
                                               src={item.imageSrc}
-                                              className="object-cover object-center"
+                                              className="object-cover lg:max-h-20 w-full object-center"
                                             />
                                           </div>
-                                          <a href={item.href} className="mt-2 block font-medium text-xl text-gray-900 dark:text-white">
-                                            <span aria-hidden="true" className="absolute inset-0 z-10" />
-                                            {item.name}
-                                          </a>
-                                          <p aria-hidden="true" className="text-xs hover:underline text-slate-700 dark:text-gray-400">
-                                            View now
-                                          </p>
+                                          <div className='flex items-baseline justify-between'>
+                                            <a href={item.href} className="mt-2 block font-medium text-xl text-gray-900 dark:text-white">
+                                              <span aria-hidden="true" className="absolute inset-0 z-10" />
+                                              {item.name}
+                                            </a>
+                                            <p aria-hidden="true" className="text-xs text-slate-700 dark:text-gray-400">
+                                              View
+                                            </p>
+                                          </div>
                                         </div>
                                       ))}
+                                    </div>
+                                    <div className='flex items-center justify-end space-x-2 pb-5 text-gray-900 dark:text-white'>
+                                      <p
+                                        className='cursor-pointer'>
+                                        All Brands
+                                      </p>
+                                      <ArrowLongRightIcon className='size-5 cursor-pointer' />
                                     </div>
                                   </div>
                                 </div>
