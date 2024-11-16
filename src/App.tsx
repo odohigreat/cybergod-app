@@ -40,11 +40,11 @@ import {
   CogIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import SearchBar from './components/searchbar';
+import SearchBar from './Components/searchbar';
 import CgLogo from './Assets/cglogo';
 import DarkCgLogo from './Assets/darkcglogo';
-import Dropdown from './components/dropdown';
-import HeroButton from './components/herobutton';
+import Dropdown from './Components/dropdown';
+import HeroButton from './Components/herobutton';
 
 const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
 const navigation = {
