@@ -41,8 +41,8 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import SearchBar from './Components/searchbar';
-import CgLogo from './AllAssets/cglogo';
-import DarkCgLogo from './AllAssets/darkcglogo';
+import CgLogo from './Assets/cglogo';
+import DarkCgLogo from './Assets/darkcglogo';
 import Dropdown from './Components/dropdown';
 import HeroButton from './Components/herobutton';
 
