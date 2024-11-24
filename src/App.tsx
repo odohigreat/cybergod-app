@@ -185,25 +185,25 @@ const categories = [
 ]
 const collections = [
   {
-    name: 'Handcrafted Collection',
+    name: 'Explore by Features',
     href: '#',
     imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/home-page-01-collection-01.jpg',
     imageAlt: 'Brown leather key ring with brass metal loops and rivets on wood table.',
-    description: 'Keep your phone, keys, and wallet together, so you can lose everything at once.',
+    description: 'Best cameras, fastest processors, long-lasting batteries.',
   },
   {
-    name: 'Organized Desk Collection',
+    name: 'Compare Top Brands',
     href: '#',
     imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/home-page-01-collection-02.jpg',
     imageAlt: 'Natural leather mouse pad on white desk next to porcelain mug and keyboard.',
-    description: 'The rest of the house will still be a mess, but your desk will look great.',
+    description: 'Apple, Samsung, Google Pixel, and more.',
   },
   {
-    name: 'Focus Collection',
+    name: 'Customized Suggestions',
     href: '#',
     imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/home-page-01-collection-03.jpg',
     imageAlt: 'Person placing task list card into walnut card holder next to felt carrying case on leather desk pad.',
-    description: 'Be more productive than enterprise project managers with a single piece of paper.',
+    description: 'Answer a few questions, and well do the rest!',
   },
 ]
 const footerNavigation = {
@@ -602,10 +602,10 @@ function Home() {
           className="mx-auto dark:bg-neutral-800 max-w-xl px-4 pt-24 sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8"
         >
           <h2 id="collection-heading" className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
-            Recent reviews
+            What we do
           </h2>
-          <p className="mt-4 text-base text-gray-500">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sagittis felis et ultrices consectetur.
+          <p className="text-base text-gray-500">
+            Not sure which phone suits your needs? Use our expert recommendations to find the best smartphone for your lifestyle. Whether you're a gamer, a photographer, or a multitasker, we've got you covered!
           </p>
 
           <div className="mt-10 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0">
@@ -621,7 +621,7 @@ function Home() {
                     className="h-full w-full object-cover border-darkmode object-center"
                   />
                 </div>
-                <h3 className="mt-4 text-base font-semibold text-slate-900 dark:text-white">{collection.name}</h3>
+                <h3 className="mt-4 text-xl font-semibold text-slate-900 dark:text-white">{collection.name}</h3>
                 <p className="mt-2 text-sm text-gray-500">{collection.description}</p>
               </a>
             ))}
@@ -641,7 +641,7 @@ function Home() {
             <div className="relative bg-gray-900 bg-opacity-75 px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
               <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
                 <h2 id="comfort-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                  Arbeiten Macht Frei
+                  Simplify your tech choices.
                 </h2>
                 <p className="mt-3 text-xl text-white">
                   Aenean nec orci quam. Suspendisse imperdiet egestas est, non condimentum turpis malesuada ullamcorper.
@@ -732,12 +732,12 @@ function Home() {
                   type="text"
                   required
                   autoComplete="email"
-                  className="w-full min-w-0 appearance-none rounded-md border border-white bg-white px-4 py-2 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900"
+                  className="w-full min-w-0 appearance-none border-darkmode px-4 py-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none"
                 />
                 <div className="ml-4 flex-shrink-0">
                   <button
                     type="submit"
-                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                    className="btn text-black dark:text-white"
                   >
                     Sign up
                   </button>
