@@ -158,27 +158,27 @@ const navigation = {
 }
 const categories = [
   {
-    name: 'Realme officially launches in Nigeria',
+    name: 'Realme officially launches its operations in Nigeria.',
     href: '#',
     imageSrc: 'https://techeconomy.ng/wp-content/uploads/2024/10/realme-in-Nigeria.jpg',
   },
   {
-    name: 'Samsung Galaxy S25 teasers',
+    name: 'New Samsung Galaxy S25 mock ups leaked online',
     href: '#',
     imageSrc: 'https://www.androidheadlines.com/wp-content/uploads/2024/09/Galaxy-S25-Ultra-5K1-1420x799.webp',
   },
   {
-    name: 'Gemini for iOS',
+    name: '"Gemini for iOS", better than Apple Intelligence?',
     href: '#',
     imageSrc: 'https://static1.howtogeekimages.com/wordpress/wp-content/uploads/2024/02/53528020292_1ca68ef944_o.jpg',
   },
   {
-    name: 'Xiaomi HyperOS 2 Updates',
+    name: 'Xiaomi HyperOS 2 Updates, Availability and.. Xiaomi AI?',
     href: '#',
     imageSrc: 'https://www.gizmochina.com/wp-content/uploads/2024/11/HyperOS-2-eligible-devices-and-rollout-timeline-1024x576.png',
   },
   {
-    name: 'iOS 18.2 rolls out',
+    name: 'iOS 18.2 rolls out on all Eligible iPhones worldwide',
     href: '#',
     imageSrc: 'https://www.ispazio.net/wp-content/uploads/2024/10/ios-18-2.jpg',
   },
@@ -245,13 +245,13 @@ function Home() {
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className={`${darkMode && "dark"} relative z-40 lg:hidden`}>
         <DialogBackdrop
           transition
-          className="fixed inset-0 bg-black bg-opacity-25 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
+          className="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-25 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
         />
 
         <div className="fixed inset-0 z-40 flex">
           <DialogPanel
             transition
-            className="relative flex w-full max-w-xs transform flex-col overflow-y-auto bg-neutral-100 dark:bg-neutral-700 pb-12 shadow-xl transition duration-300 ease-in-out data-[closed]:-translate-x-full"
+            className="relative flex w-full max-w-xs rounded-r-lg border-[2px] border-gray-300 dark:border-neutral-500 transform flex-col overflow-y-auto bg-neutral-200 dark:bg-neutral-800 pb-12 shadow-xl transition duration-300 ease-in-out data-[closed]:-translate-x-full"
           >
             <div className="flex px-4 pb-2 pt-5">
               <button
@@ -280,31 +280,36 @@ function Home() {
               </div>
               <TabPanels as={Fragment}>
                 {navigation.categories.map((category) => (
-                  <TabPanel key={category.name} className="space-y-6 px-4 py-6">
+                  <TabPanel key={category.name} className="space-y-6 px-4 py-6 max-h-[350px] overflow-scroll">
                     <div className="grid grid-cols-2 gap-x-4 gap-y-5">
                       {category.featured.map((item) => (
-                        <div key={item.name} className="group relative border-[2px] rounded-xl border-gray-300 dark:border-neutral-500 p-2">
-                          <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
-                            <img alt={item.imageAlt} src={item.imageSrc} className="object-cover max-h-12 w-full object-center" />
+                        <div key={item.name} className="group relative bg-neutral-100 dark:bg-transparent border-[2px] rounded-xl border-gray-300 dark:border-neutral-500 p-2">
+                          <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100">
+                            <img alt={item.imageAlt} src={item.imageSrc} className="object-cover h-16 w-full object-center" />
                           </div>
-                          <a href={item.href} className="mt-2 block font-medium text-md lg:text-xl text-gray-900 dark:text-white">
-                            <span aria-hidden="true" className="absolute inset-0 z-10" />
-                            {item.name}
-                          </a>
-                          <p aria-hidden="true" className="text-xs hover:underline text-slate-700 dark:text-gray-400">
-                            View now
-                          </p>
+                          <div className='flex items-baseline justify-between space-x-2'>
+                            <a href={item.href} className="mt-2 block text-nowrap max-w-32 overflow-hidden font-medium text-base text-gray-900 dark:text-white">
+                              <span aria-hidden="true" className="absolute inset-0 z-10" />
+                              {item.name}
+                            </a>
+                            <p aria-hidden="true" className="text-xs hover:underline text-slate-700 dark:text-gray-400 p-1 px-2 hover:bg-gray-300 border border-gray-300 rounded-md">
+                              View
+                            </p>
+                          </div>
                         </div>
                       ))}
-                    </div>
-                    <div className='flex items-stretch space-x-2 justify-end text-slate-700 dark:text-gray-200'>
-                      <p className=''>All Brands</p>
-                      <ArrowLongRightIcon className='size-5 self-end' />
                     </div>
                   </TabPanel>
                 ))}
               </TabPanels>
             </TabGroup>
+
+            <div className='flex items-stretch p-2 justify-end text-slate-700 dark:text-gray-200 my-1 mx-4'>
+              <button className='btn'>
+                <p className=''>All Brands</p>
+                <ArrowLongRightIcon className='size-5 self-end' />
+              </button>
+            </div>
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               {navigation.pages.map((page) => (
@@ -425,19 +430,19 @@ function Home() {
                                               <span aria-hidden="true" className="absolute inset-0 z-10" />
                                               {item.name}
                                             </a>
-                                            <p aria-hidden="true" className="text-xs text-slate-700 dark:text-gray-400">
+                                            <button aria-hidden="true" className="text-xs text-slate-700 dark:text-gray-400 p-1 px-2 hover:bg-gray-300 border border-gray-300 group-active:scale-75 rounded-md">
                                               View
-                                            </p>
+                                            </button>
                                           </div>
                                         </div>
                                       ))}
                                     </div>
                                     <div className='flex items-center justify-end space-x-2 pb-5 text-gray-900 dark:text-white'>
                                       <p
-                                        className='cursor-pointer'>
+                                        className='cursor-pointer inline-flex items-start hover:underline hover:brightness-75'>
                                         All Brands
+                                        <ArrowLongRightIcon className='size-5 cursor-pointer' />
                                       </p>
-                                      <ArrowLongRightIcon className='size-5 cursor-pointer' />
                                     </div>
                                   </div>
                                 </div>
@@ -517,7 +522,7 @@ function Home() {
 
       <main>
         {/* Category section */}
-        <section aria-labelledby="category-heading" className="dark:bg-neutral-800 pt-24 sm:pt-10 xl:mx-auto xl:max-w-7xl xl:px-8">
+        <section aria-labelledby="category-heading" className="dark:bg-neutral-800 pt-8 pb-5 md:pt-10 xl:mx-auto xl:max-w-7xl xl:px-8">
           <div className="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="category-heading" className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
               Updates
@@ -536,16 +541,22 @@ function Home() {
                     <a
                       key={category.name}
                       href={category.href}
-                      className="relative flex h-80 w-56 flex-col overflow-hidden border-darkmode rounded-lg p-2 hover: xl:w-auto"
+                      className="relative flex h-80 w-56 flex-col overflow-hidden border-darkmode rounded-lg p-2 xl:w-auto"
                     >
                       <span aria-hidden="true" className="absolute inset-0">
-                        <img alt="" src={category.imageSrc} className="h-full w-full hover:scale-125 transition-all ease-in-out duration-300 object-cover object-center" />
+                        <img alt="" src={category.imageSrc} className="size-fit min-h-40 object-cover hover:brightness-110 object-center" />
+                        <div className='px-2'>
+                          <span className='relative text-slate-900 text-[10px] mt-auto dark:text-white'>2nd December, 2024</span>
+                        </div>
+                        <h4 className='px-2'>
+                          <span className="relative text-start mt-auto text-lg font-bold text-slate-900 dark:text-white">{category.name}</span>
+                        </h4>
                       </span>
-                      <span
-                        aria-hidden="true"
-                        className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-gray-100 dark:from-neutral-900 opacity-100"
-                      />
-                      <span className="relative mt-auto text-center text-xl font-bold text-slate-900 dark:text-white">{category.name}</span>
+                      <span className='relative text-right mt-auto text-slate-900 text-xs dark:text-white'>
+                        <button className='btn'>
+                          View now
+                        </button>
+                      </span>
                     </a>
                   ))}
                 </div>
