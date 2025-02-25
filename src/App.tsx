@@ -382,26 +382,25 @@ function Home() {
                 <div>
                   <div className="flex h-16 items-center justify-between">
                     {/* Logo (lg+) */}
-                    <div className="hidden lg:basis-1/6 lg:flex space-x-5 lg:flex-1 lg:items-center">
+                    <div className="hidden lg:basis-1/6 lg:flex lg:items-center">
                       <a href="#">
                         <span className="sr-only">Your Company</span>
                         {darkMode ? <CgLogo /> : <DarkCgLogo />}
                       </a>
-                      <SearchBar />
                     </div>
 
-                    <div className="hidden h-full lg:flex">
+                    <div className="hidden h-5 lg:flex lg:items-stretch lg:justify-between">
                       {/* Flyout menus */}
-                      <PopoverGroup className="inset-x-0 bottom-0 px-4">
+                      <PopoverGroup className="px-4">
                         <div className="flex h-full justify-center space-x-8">
                           {navigation.categories.map((category) => (
                             <Popover key={category.name} className="flex">
                               <div className="relative flex">
-                                <PopoverButton className="group relative z-10 flex items-center hover:border-b-2 hover:border-b-neutral-700 dark:hover:border-b-neutral-400 justify-center text-sm font-medium text-black dark:text-white transition-colors duration-200 ease-out">
+                                <PopoverButton className="group relative z-10 flex items-center p-3 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-700 justify-center text-sm font-medium text-black dark:text-white transition-colors duration-200 ease-out">
                                   {category.name}
                                   <span
                                     aria-hidden="true"
-                                    className="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out group-data-[open]:bg-white"
+                                    className="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out group-data-[open]:bg-black dark:group-data-[open]:bg-white"
                                   />
                                 </PopoverButton>
                               </div>
@@ -454,7 +453,7 @@ function Home() {
                             <a
                               key={page.name}
                               href={page.href}
-                              className="flex items-center text-sm px-2 hover:border-b-2 hover:border-b-neutral-700 dark:hover:border-b-neutral-300 font-medium text-black dark:text-white"
+                              className="flex items-center text-sm py-3 px-2 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-700 font-medium text-black dark:text-white"
                             >
                               {page.name}
                             </a>
@@ -469,9 +468,6 @@ function Home() {
                         <span className="sr-only">Open menu</span>
                         <Bars3Icon aria-hidden="true" className="h-6 w-6 text-black dark:text-white" />
                       </button>
-
-                      {/* Search */}
-                      <SearchBar />
                     </div>
 
                     {/* Logo (lg-) */}
@@ -480,17 +476,23 @@ function Home() {
                     </div>
 
                     <div className="flex flex-1 items-center justify-end">
-                      <div className="flex items-center">
+                      <div className="flex items-center space-x-2">
+
+                        {/* Search bar component */}
+                        <SearchBar />
+
                         {/* DarkMode */}
                         <div className='flex items-center space-x-2'>
-                          <button
-                            className='btn'
-                            onClick={toggleDarkMode}
-                          >
-                            {darkMode ?
-                              <><SunIcon className='size-5 text-black dark:text-white' /></> :
-                              <><MoonIcon className='size-5 text-black dark:text-white' /></>}
-                          </button>
+                          <div className='hidden lg:flex'>
+                            <button
+                              className='btn'
+                              onClick={toggleDarkMode}
+                            >
+                              {darkMode ?
+                                <><SunIcon className='size-5 text-black dark:text-white' /></> :
+                                <><MoonIcon className='size-5 text-black dark:text-white' /></>}
+                            </button>
+                          </div>
                           <Dropdown />
                         </div>
                       </div>
@@ -546,7 +548,7 @@ function Home() {
                       <span aria-hidden="true" className="absolute inset-0">
                         <img alt="" src={category.imageSrc} className="size-fit min-h-40 object-cover hover:brightness-110 object-center" />
                         <div className='px-2'>
-                          <span className='relative text-slate-900 text-[10px] mt-auto dark:text-white'>2nd December, 2024</span>
+                          <span className='relative text-slate-900 text-[10px] mt-auto dark:text-white'>6th January, 2025</span>
                         </div>
                         <h4 className='px-2'>
                           <span className="relative text-start mt-auto text-lg font-bold text-slate-900 dark:text-white">{category.name}</span>

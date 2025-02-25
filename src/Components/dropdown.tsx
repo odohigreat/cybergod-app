@@ -1,6 +1,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import {
   UserPlusIcon,
+  AdjustmentsVerticalIcon,
   ArrowLeftEndOnRectangleIcon,
   CurrencyPoundIcon,
   GlobeAltIcon,
@@ -13,7 +14,7 @@ function Dropdown() {
         <MenuButton className="flex items-center focus:outline-none">
           <span className="sr-only">Open options</span>
           <button className='btn text-black dark:text-white'>
-            <UserPlusIcon className='size-5' />
+            <AdjustmentsVerticalIcon className='size-5' />
           </button>
         </MenuButton>
       </div>
