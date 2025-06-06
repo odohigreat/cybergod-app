@@ -154,6 +154,7 @@ const navigation = {
     { name: 'Reviews', href: '#' },
     { name: 'Shop', href: '#' },
     { name: 'About Us', href: '#' },
+    { name: 'Blog', href: '#' },
   ],
 }
 const categories = [
@@ -233,6 +234,7 @@ const footerNavigation = {
 
 function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { sendRequest } = useAppContext();
   const [darkMode, setDarkMode] = useState(false)
 
   const toggleDarkMode = () => {
@@ -396,7 +398,7 @@ function Home() {
                           {navigation.categories.map((category) => (
                             <Popover key={category.name} className="flex">
                               <div className="relative flex">
-                                <PopoverButton className="group relative z-10 flex items-center p-3 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-700 justify-center text-sm font-medium text-black dark:text-white transition-colors duration-200 ease-out">
+                                <PopoverButton className="group relative z-10 flex items-center p-3 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-700 outline-none justify-center text-sm font-medium text-black dark:text-white transition-colors duration-200 ease-out">
                                   {category.name}
                                   <span
                                     aria-hidden="true"
@@ -453,7 +455,7 @@ function Home() {
                             <a
                               key={page.name}
                               href={page.href}
-                              className="flex items-center text-sm py-3 px-2 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-700 font-medium text-black dark:text-white"
+                              className="flex items-center text-sm py-3 px-2 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-700 outline-none font-medium text-black dark:text-white"
                             >
                               {page.name}
                             </a>
@@ -769,3 +771,7 @@ function Home() {
 }
 
 export default Home;
+
+function useAppContext(): { sendRequest: any; } {
+  throw new Error('Function not implemented.');
+}
