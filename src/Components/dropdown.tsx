@@ -14,7 +14,7 @@ function Dropdown() {
         <MenuButton className="flex items-center focus:outline-none">
           <span className="sr-only">Open options</span>
           <button className='btn text-black dark:text-white'>
-            <AdjustmentsVerticalIcon className='size-5' />
+            <AdjustmentsVerticalIcon className='size-5 rotate-90' />
           </button>
         </MenuButton>
       </div>
