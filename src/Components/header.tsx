@@ -45,6 +45,7 @@ import CgLogo from '../Assets/cglogo';
 import DarkCgLogo from '../Assets/darkcglogo';
 import Dropdown from '../Components/dropdown';
 import HeroButton from '../Components/herobutton';
+import { Link } from 'react-router-dom';
 
 const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
 const navigation = {
@@ -151,9 +152,9 @@ const navigation = {
     },
   ],
   pages: [
-    { name: 'Plaza', href: '#' },
-    { name: 'About Us', href: '#' },
-    { name: 'Blog', href: '#' },
+    { name: 'Plaza', to: '#' },
+    { name: 'About Us', to: '#' },
+    { name: 'Blog', to: '/blog' },
   ],
 }
 
@@ -239,23 +240,23 @@ function Header() {
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               {navigation.pages.map((page) => (
                 <div key={page.name} className="flow-root">
-                  <a href={page.href} className="-m-2 block p-2 font-medium text-darkmode">
+                  <Link to={page.to} className="-m-2 block p-3 font-medium rounded-lg bg-neutral-300 bg-opacity-80 text-darkmode">
                     {page.name}
-                  </a>
+                  </Link>
                 </div>
               ))}
             </div>
 
-            <div className="space-y-6 border-t border-gray-200 px-4 py-6">
+            <div className="flex space-x-4 justify-between w-full border-t border-gray-200 px-4 py-6">
               <div className="flow-root">
-                <a href="#" className="-m-2 block p-2 font-medium text-darkmode">
+                <a href="#" className="-m-2 px-6 py-2.5 block font-medium rounded-lg text-neutral-50 bg-neutral-500 active:scale-95 active:brightness-85">
                   Create an account
                 </a>
               </div>
               <div className="flow-root">
-                <a href="#" className="-m-2 block p-2 font-medium text-darkmode">
+                <Link to="/sign-in" className="-m-2 px-6 py-2.5 block font-medium rounded-lg bg-neutral-300 text-darkmode active:scale-95 active:brightness-85">
                   Sign in
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -373,7 +374,7 @@ function Header() {
                         {navigation.pages.map((page) => (
                           <a
                             key={page.name}
-                            href={page.href}
+                            href={page.to}
                             className="flex items-center text-sm py-3 px-2 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-700 outline-none font-medium text-black dark:text-white"
                           >
                             {page.name}
@@ -414,11 +415,13 @@ function Header() {
                               <><MoonIcon className='size-5 text-black dark:text-white' /></>}
                           </button>
                         </div> */}
-                        <button 
-                        title='Sign In'
-                        className='btn'>
-                          <UserPlusIcon className='size-5' />
-                        </button>
+                        <Link to="/sign-in">
+                          <button
+                            title='Sign In'
+                            className='btn'>
+                            <UserPlusIcon className='size-5' />
+                          </button>
+                        </Link>
                         {/* <Dropdown /> */}
                       </div>
                     </div>

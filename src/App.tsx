@@ -1,118 +1,7 @@
 import React from 'react';
 import HeroButton from './Components/herobutton';
 import Header from './Components/header';
-import { FaArrowRight } from "react-icons/fa6";
-
-const navigation = {
-  categories: [
-    {
-      name: 'Discover',
-      featured: [
-        {
-          name: 'Samsung',
-          href: '#',
-          imageSrc: 'https://res.cloudinary.com/dl4f30xpb/image/upload/v1731626673/galaxy-s24-ultra-highlights-color-titanium-green-back-mo_syyxhs.jpg',
-          imageAlt: 'Basic samsung device aesthetic',
-        },
-        {
-          name: 'Apple',
-          href: '#',
-          imageSrc: 'https://res.cloudinary.com/dl4f30xpb/image/upload/c_thumb,w_200,g_face/v1731408796/IMG_20240923_121246_722_vlbsot.jpg',
-          imageAlt: 'Basic iPhone device aesthetic',
-        },
-        {
-          name: 'Google',
-          href: '#',
-          imageSrc: 'https://res.cloudinary.com/dl4f30xpb/image/upload/c_thumb,w_200,g_face/v1731409149/IMG_20240815_120738_427_sxh9oq.jpg',
-          imageAlt: 'Basic pixel device aesthetic',
-        },
-        {
-          name: 'Tecno',
-          href: '#',
-          imageSrc: 'https://skit.ng/wp-content/uploads/2024/05/Tecno-Camon-30-3.webp',
-          imageAlt: 'Basic tecno device aesthetic',
-        },
-        {
-          name: 'Xiaomi',
-          href: '#',
-          imageSrc: 'https://www.cambridgemechatronics.com/media/cache/8e/78/8e782565bdc57faf70387535be120074.webp',
-          imageAlt: 'Basic xiaomi device aesthetic',
-        },
-        {
-          name: 'Infinix',
-          href: '#',
-          imageSrc: 'https://img.baba-blog.com/2024/10/Infinix-Hot-50-scaled-1.jpg?x-oss-process=style%2Ffull',
-          imageAlt: 'Basic infinix device aesthetic',
-        },
-        {
-          name: 'Nothing',
-          href: '#',
-          imageSrc: 'https://intl.nothing.tech/cdn/shop/files/Phone-2-PDP-Glyph-Header-Desktop.jpg?v=1688994873',
-          imageAlt: 'Basic nothing device aesthetic',
-        },
-        {
-          name: 'Itel',
-          href: '#',
-          imageSrc: 'https://i.gadgets360cdn.com/large/itel_s25_main_1731144498965.jpg',
-          imageAlt: 'Basic itel device aesthetic',
-        },
-        {
-          name: 'Realme',
-          href: '#',
-          imageSrc: 'https://i.gadgets360cdn.com/large/realme_gt_5_pro_realme_1717405064774.jpg',
-          imageAlt: 'Basic realme device aesthetic',
-        },
-        {
-          name: 'Oppo',
-          href: '#',
-          imageSrc: 'https://awsimages.detik.net.id/community/media/visual/2024/01/08/oppo-find-x7-ultra_169.webp?w=600&q=90',
-          imageAlt: 'Basic oppo device aesthetic',
-        },
-      ],
-    },
-    {
-      name: 'Featured',
-      featured: [
-        {
-          name: 'Updates',
-          href: '#',
-          imageSrc: 'https://www.tuaw.com/wp-content/uploads/2024/08/Apple-Intelligence-scaled.jpeg',
-          imageAlt: 'latest tech updates',
-        },
-        {
-          name: 'Creators',
-          href: '#',
-          imageSrc: 'https://fwmedia.fandomwire.com/wp-content/uploads/2024/09/26045556/Screenshot-2024-09-26-2.25.10-PM-1024x442.png',
-          imageAlt: 'latest from top tech content creators',
-        },
-        {
-          name: 'New Devices',
-          href: '#',
-          imageSrc: 'https://www.techinsights.com/sites/default/files/2024-09/huawei-mate-xt-tri-fold.jpg',
-          imageAlt: 'new device releases',
-        },
-        {
-          name: 'Events',
-          href: '#',
-          imageSrc: 'https://io.google/2024/app/images/io24-featured-keynote-recap.webp',
-          imageAlt: 'most recent tech events',
-        },
-        {
-          name: 'Accessories',
-          href: '#',
-          imageSrc: 'https://cdn.db.io/images/dlg3xw1d/production/38c9ecbd385d3561f292efe7f31c5e81d9a6bbca-3750x1500.jpg',
-          imageAlt: 'device accesories',
-        },
-      ],
-    },
-  ],
-  pages: [
-    { name: 'Plaza', href: '#' },
-    { name: 'About Us', href: '#' },
-    { name: 'Blog', href: '#' },
-  ],
-}
-
+import { Link } from 'react-router-dom';
 
 const categories = [
   {
@@ -193,7 +82,9 @@ function Home() {
 
   return (
     <div>
-      <Header />
+      <span className=''>
+        <Header />
+      </span>
       {/* Hero section */}
       <div className="bg-gradient-to-bl from-neutral-100 to-neutral-200 dark:bg-neutral-900 h-fit lg:h-fit pb-10">
         <div className="relative mx-auto flex lg:flex-row flex-col-reverse lg:space-x-20 max-w-6xl items-center py-5 lg:py-10 px-5 lg:px-16">
@@ -219,12 +110,12 @@ function Home() {
         <section aria-labelledby="category-heading" className="dark:bg-neutral-800 pt-8 pb-5 md:pt-10 xl:mx-auto xl:max-w-7xl xl:px-8">
           <div className="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="category-heading" className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Updates
+              Blog Updates
             </h2>
-            <a href="#" className="hidden text-sm font-semibold text-neutral-400 hover:text-black dark:hover:text-white sm:block">
-              more updates
+            <Link to="/blog" className="hidden text-sm font-semibold text-neutral-400 hover:text-black dark:hover:text-white sm:block">
+              More updates
               <span aria-hidden="true"> &rarr;</span>
-            </a>
+            </Link>
           </div>
 
           <div className="mt-4 flow-root">
@@ -261,15 +152,28 @@ function Home() {
           <div className="mt-6 px-4 sm:hidden">
             <a href="#" className="block text-sm font-semibold text-neutral-400 hover:text-black dark:hover:text-white">
               More updates
-             
+
             </a>
           </div>
         </section>
 
+        <div className="bg-white py-10">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-12 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1" src="https://tailwindcss.com/plus-assets/img/logos/158x48/transistor-logo-gray-900.svg" alt="Transistor" width="158" height="48" />
+              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1" src="https://tailwindcss.com/plus-assets/img/logos/158x48/reform-logo-gray-900.svg" alt="Reform" width="158" height="48" />
+              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1" src="https://tailwindcss.com/plus-assets/img/logos/158x48/tuple-logo-gray-900.svg" alt="Tuple" width="158" height="48" />
+              <img className="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1" src="https://tailwindcss.com/plus-assets/img/logos/158x48/savvycal-logo-gray-900.svg" alt="SavvyCal" width="158" height="48" />
+              <img className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1" src="https://tailwindcss.com/plus-assets/img/logos/158x48/statamic-logo-gray-900.svg" alt="Statamic" width="158" height="48" />
+            </div>
+          </div>
+        </div>
+
+
         {/* Featured section */}
         <section
           aria-labelledby="social-impact-heading"
-          className="mx-auto dark:bg-neutral-800 max-w-7xl px-4 pt-24 sm:px-6 sm:pt-32 lg:px-8"
+          className="mx-auto dark:bg-neutral-800 max-w-7xl px-4"
         >
           <div className="relative overflow-hidden rounded-lg border-darkmode">
             <div className="absolute inset-0">
@@ -452,7 +356,7 @@ function Home() {
           </div>
 
           <div className="border-t border-gray-800 py-10">
-            <p className="text-sm text-gray-400">Copyright &copy; 2024 Cybergod, Inc.</p>
+            <p className="text-sm text-gray-400">2025 Cybergod, All Rights Reserved.</p>
           </div>
         </div>
       </footer>
@@ -461,7 +365,3 @@ function Home() {
 }
 
 export default Home;
-
-function useAppContext(): { sendRequest: any; } {
-  throw new Error('Function not implemented.');
-}
