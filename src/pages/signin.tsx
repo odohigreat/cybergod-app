@@ -11,7 +11,7 @@ function SignIn() {
             <h2 className="mt-8 text-2xl/9 font-bold tracking-tight text-gray-900">Sign in to your account</h2>
             <p className="mt-2 text-sm/6 text-gray-500">
               Not a member?
-              <a href="#" className="font-semibold text-blue-500 hover:text-blue-400 hover:underline"> Start a 14 day free trial</a>
+              <a href="#" className="font-semibold text-blue-500 hover:text-blue-400 hover:underline"> Create a new account</a>
             </p>
           </div>
 
