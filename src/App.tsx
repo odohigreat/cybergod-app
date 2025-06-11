@@ -3,6 +3,7 @@ import HeroButton from './Components/herobutton';
 import Header from './Components/header';
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
+import Faq from './Components/faq';
 
 const categories = [
   {
@@ -326,6 +327,7 @@ function Home() {
             </div>
           </div>
         </section>
+        <Faq />
       </main>
 
       <footer aria-labelledby="footer-heading" className="bg-gray-900">
