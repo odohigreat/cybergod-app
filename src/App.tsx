@@ -87,41 +87,41 @@ function Home() {
       <main>
 
         {/* trendy device previews */}
-        <div className="bg-white py-7 md:py-10 px-5">
-          <motion.h2 className="font-semibold text-3xl md:text-4xl text-black pb-8 pl-2 md:pl-10"
+        <div className="bg-white py-7 md:py-10 px-2 md:px-16 mx-auto max-w-7xl">
+          <motion.h2 className="font-semibold text-3xl md:text-4xl text-black pb-8 pl-2"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }}>
             Trending Devices
           </motion.h2>
-          <div className="mx-auto max-w-7xl px-2 md:px-6 lg:px-8">
-            <motion.div className="grid grid-cols-2 items-center gap-x-8 gap-y-12 md:grid-cols-5 md:gap-x-10 md:gap-y-14"
+          <div className="">
+            <motion.div className="grid grid-cols-2 gap-5 items-center md:grid-cols-5"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}>
-              <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-44 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
+              <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
                 <span className='px-2 py-0.5 text-xs self-end rounded-lg border border-green-500 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>
                 <img src='https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s25-edge.jpg' alt='Samsung Galaxy S25 Edge' className='rounded-lg h-28' />
                 <h3 className='text-base font-semibold text-center text-gray-900 dark:text-white '>Samsung Galaxy S25 Edge</h3>
               </div>
-              <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-44 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
+              <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
                 <span className='px-2 py-0.5 text-xs self-end rounded-lg border border-green-500 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>
                 <img src='https://fdn2.gsmarena.com/vv/bigpic/oneplus-13s-.jpg' alt='One Plus 13s' className='rounded-lg h-28' />
                 <h3 className='text-base font-semibold text-center text-gray-900 dark:text-white '>One Plus 13s</h3>
               </div>
-              <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-44 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
+              <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
                 <span className='px-2 py-0.5 text-xs self-end rounded-lg border border-green-500 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>
                 <img src='https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16e.jpg' alt='Apple iPhone 16e' className='rounded-lg h-28' />
                 <h3 className='text-base font-semibold text-center text-gray-900 dark:text-white '>Apple iPhone 16e</h3>
               </div>
-              <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-44 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
+              <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
                 <span className='px-2 py-0.5 text-xs self-end rounded-lg border border-green-500 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>
                 <img src='https://fdn2.gsmarena.com/vv/bigpic/google-pixel-9-pro-.jpg' alt='Google Pixel 9 Pro' className='rounded-lg h-28' />
                 <h3 className='text-base font-semibold text-center text-gray-900 dark:text-white '>Google Pixel 9 Pro</h3>
               </div>
-              <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-44 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
+              <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
                 <span className='px-2 py-0.5 text-xs self-end rounded-lg border border-green-500 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>
                 <img src='https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16-plus.jpg' alt='Apple iPhone 16 Plus' className='rounded-lg h-28' />
                 <h3 className='text-base font-semibold text-center text-gray-900 dark:text-white '>Apple iPhone 16 Plus</h3>
