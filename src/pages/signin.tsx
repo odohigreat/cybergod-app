@@ -21,14 +21,14 @@ function SignIn() {
                 <div>
                   <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">Email address</label>
                   <div className="mt-2">
-                    <input type="email" name="email" id="email" autoComplete="email" placeholder="johndoe@gmail.com" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 placeholder:text-neutral-200 border-2 border-neutral-200 focus:border-blue-500 outline-none" />
+                    <input type="email" name="email" id="email" autoComplete="email" placeholder="johndoe@gmail.com" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 placeholder:text-neutral-200 border-2 border-neutral-300 focus:border-blue-500 outline-none" />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">Password</label>
                   <div className="mt-2">
-                    <input type="password" name="password" id="password" autoComplete="current-password" placeholder="********" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 placeholder:text-neutral-200 border-2 border-neutral-200 focus:border-blue-500 outline-none" />
+                    <input type="password" name="password" id="password" autoComplete="current-password" placeholder="********" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 placeholder:text-neutral-200 border-2 border-neutral-300 focus:border-blue-500 outline-none" />
                   </div>
                 </div>
 
@@ -62,7 +62,7 @@ function SignIn() {
               </div>
 
               <div className="mt-6 grid grid-cols-2 gap-4">
-                <a href="#" className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus-visible:ring-transparent">
+                <a href="#" className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-2 ring-gray-300 ring-inset hover:bg-gray-50 focus-visible:ring-transparent">
                   <svg className="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M12.0003 4.75C13.7703 4.75 15.3553 5.36002 16.6053 6.54998L20.0303 3.125C17.9502 1.19 15.2353 0 12.0003 0C7.31028 0 3.25527 2.69 1.28027 6.60998L5.27028 9.70498C6.21525 6.86002 8.87028 4.75 12.0003 4.75Z" fill="#EA4335" />
                     <path d="M23.49 12.275C23.49 11.49 23.415 10.73 23.3 10H12V14.51H18.47C18.18 15.99 17.34 17.25 16.08 18.1L19.945 21.1C22.2 19.01 23.49 15.92 23.49 12.275Z" fill="#4285F4" />
@@ -72,8 +72,8 @@ function SignIn() {
                   <span className="text-sm/6 font-semibold">Google</span>
                 </a>
 
-                <a href="#" className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus-visible:ring-transparent">
-                  <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/732px-Apple_logo_black.svg.png' className="size-5" />
+                <a href="#" className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-2 ring-gray-300 ring-inset hover:bg-gray-50 focus-visible:ring-transparent">
+                  <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/732px-Apple_logo_black.svg.png' className="h-5 w-4" />
                   <span className="text-sm/6 font-semibold">Apple</span>
                 </a>
               </div>
