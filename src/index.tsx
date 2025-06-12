@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Blog from './pages/blog';
 import SignIn from './pages/signin';
+import AllBrands from './pages/allbrands';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,6 +16,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route index element={<App />} />
+        <Route path="/allbrands" element={<AllBrands />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/sign-in" element={<SignIn />} />
       </Routes>
