@@ -77,7 +77,7 @@ const brands = [
   {
     name: "Honor",
     href: "#",
-    imageSrc: "/images/brands/honor.png",
+    imageSrc: "https://digital.bg/wp-content/uploads/2025/06/honor-x6c-1.jpg",
     imageAlt: "Honor device aesthetic",
   },
   {
@@ -89,7 +89,7 @@ const brands = [
   {
     name: "Huawei",
     href: "#",
-    imageSrc: "/images/brands/huawei.png",
+    imageSrc: "https://fdn2.gsmarena.com/vv/pics/huawei/huawei-pura80-ultra-3.jpg",
     imageAlt: "Huawei device aesthetic",
   },
   {

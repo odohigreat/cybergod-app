@@ -232,9 +232,11 @@ function Header() {
             </TabGroup>
 
             <div className='flex items-stretch p-2 justify-end text-slate-700 dark:text-gray-200 my-1 mx-4'>
-              <button className='btn'>
-                <p className=''>All Brands</p>
-              </button>
+              <Link to="/all-brands">
+                <button className='btn'>
+                  <p className=''>All Brands</p>
+                </button>
+              </Link>
             </div>
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
@@ -359,14 +361,16 @@ function Header() {
                                     ))}
                                   </div>
                                   <div className='flex items-center justify-end space-x-2 pb-5 text-gray-900 dark:text-white'>
-                                    <p
-                                      className='cursor-pointer px-2 py-1 rounded-md inline-flex items-start hover:bg-neutral-200 hover:bg-opacity-35 hover:brightness-75 transition-all duration-200 ease-in-out'>
-                                      All Brands
-                                      {/* <ArrowLongRightIcon className='size-5 cursor-pointer' /> */}
-                                      {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-4">
+                                    <Link to="/all-brands">
+                                      <p
+                                        className='cursor-pointer px-2 py-1 rounded-md inline-flex items-start hover:bg-neutral-200 hover:bg-opacity-35 hover:brightness-75 transition-all duration-200 ease-in-out'>
+                                        All Brands
+                                        {/* <ArrowLongRightIcon className='size-5 cursor-pointer' /> */}
+                                        {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-4">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                                       </svg> */}
-                                    </p>
+                                      </p>
+                                    </Link>
                                   </div>
                                 </div>
                               </div>
