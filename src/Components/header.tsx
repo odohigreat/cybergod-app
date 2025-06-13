@@ -232,7 +232,7 @@ function Header() {
             </TabGroup>
 
             <div className='flex items-stretch p-2 justify-end text-slate-700 dark:text-gray-200 my-1 mx-4'>
-              <Link to="/all-brands">
+              <Link to="/allbrands">
                 <button className='btn'>
                   <p className=''>All Brands</p>
                 </button>
@@ -361,7 +361,7 @@ function Header() {
                                     ))}
                                   </div>
                                   <div className='flex items-center justify-end space-x-2 pb-5 text-gray-900 dark:text-white'>
-                                    <Link to="/all-brands">
+                                    <Link to="/allbrands">
                                       <p
                                         className='cursor-pointer px-2 py-1 rounded-md inline-flex items-start hover:bg-neutral-200 hover:bg-opacity-35 hover:brightness-75 transition-all duration-200 ease-in-out'>
                                         All Brands
