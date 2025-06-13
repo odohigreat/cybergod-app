@@ -153,8 +153,9 @@ const navigation = {
   ],
   pages: [
     { name: 'Plaza', to: '#' },
-    { name: 'About Us', to: '#' },
+    { name: 'About', to: '#' },
     { name: 'Blog', to: '/blog' },
+    { name: 'Reviews', to: '#' },
   ],
 }
 
@@ -233,7 +234,6 @@ function Header() {
             <div className='flex items-stretch p-2 justify-end text-slate-700 dark:text-gray-200 my-1 mx-4'>
               <button className='btn'>
                 <p className=''>All Brands</p>
-                <ArrowLongRightIcon className='size-5 self-end' />
               </button>
             </div>
 
@@ -299,7 +299,7 @@ function Header() {
                       </select> */}
 
           {/* navigation */}
-          <div className="bg-neutral-200 dark:bg-neutral-800">
+          <div className="bg-neutral-200 bg-opacity-75 backdrop-blur-md dark:bg-neutral-800">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div>
                 <div className="flex h-16 items-center justify-between">
@@ -318,11 +318,11 @@ function Header() {
                         {navigation.categories.map((category) => (
                           <Popover key={category.name} className="flex">
                             <div className="relative flex">
-                              <PopoverButton className="group relative z-10 flex items-center p-3 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-700 outline-none justify-center text-sm font-medium text-black dark:text-white transition-colors duration-200 ease-out">
+                              <PopoverButton className="group relative z-10 flex items-center p-3 rounded-md hover:bg-neutral-300 dark:hover:bg-neutral-700 outline-none justify-center text-sm font-medium text-black dark:text-white transition-colors duration-200 ease-out">
                                 {category.name}
                                 <span
                                   aria-hidden="true"
-                                  className="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out group-data-[open]:bg-black dark:group-data-[open]:bg-white"
+                                  className="absolute inset-x-0 -bottom-px h-0.5 transition rounded-b-md duration-200 ease-out group-data-[open]:bg-black dark:group-data-[open]:bg-white"
                                 />
                               </PopoverButton>
                             </div>
@@ -360,9 +360,12 @@ function Header() {
                                   </div>
                                   <div className='flex items-center justify-end space-x-2 pb-5 text-gray-900 dark:text-white'>
                                     <p
-                                      className='cursor-pointer inline-flex items-start hover:underline hover:brightness-75'>
+                                      className='cursor-pointer px-2 py-1 rounded-md inline-flex items-start hover:bg-neutral-200 hover:bg-opacity-35 hover:brightness-75 transition-all duration-200 ease-in-out'>
                                       All Brands
-                                      <ArrowLongRightIcon className='size-5 cursor-pointer' />
+                                      {/* <ArrowLongRightIcon className='size-5 cursor-pointer' /> */}
+                                      {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                      </svg> */}
                                     </p>
                                   </div>
                                 </div>
@@ -375,7 +378,7 @@ function Header() {
                           <a
                             key={page.name}
                             href={page.to}
-                            className="flex items-center text-sm py-3 px-2 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-700 outline-none font-medium text-black dark:text-white"
+                            className="flex items-center text-sm py-3 px-2 rounded-md hover:bg-neutral-300 dark:hover:bg-neutral-700 outline-none font-medium text-black dark:text-white"
                           >
                             {page.name}
                           </a>

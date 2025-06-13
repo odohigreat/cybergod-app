@@ -40,7 +40,7 @@ function Faq() {
     <>
       <div id="faq" className="mx-auto max-w-7xl px-3 md:px-20 pb-3 md:pb-10">
         <section className="flex flex-col space-y-3 md:space-y-5 justify-between items-center">
-          <h2 className="text-4xl md:text-5xl text-center font-semibold">Some Frequently Asked
+          <h2 className="text-3xl md:text-4xl text-center font-semibold">Some Frequently Asked
             <b className="text-blue-400"> Questions</b>
           </h2>
         </section>
