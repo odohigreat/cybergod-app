@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 import Blog from './pages/blog';
 import SignIn from './pages/signin';
 import AllBrands from './pages/allbrands';
+import Quiz from './pages/quiz';
+import Result from './pages/result';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,6 +21,8 @@ root.render(
         <Route path="/allbrands" element={<AllBrands />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/result" element={<Result />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

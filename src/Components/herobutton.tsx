@@ -1,9 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 function HeroButton() {
+  const navigate = useNavigate();
+
   return (
-    /* From Uiverse.io by nathAd17 */
     <button
       type="submit"
       className="flex btn gap-5 items-center text-lg bg-gray-50 backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-neutral-600 dark:before:bg-neutral-800 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-5 px-4 py-2 overflow-hidden border-2 rounded-full group"
+      onClick={() => navigate("/quiz")}
     >
       Get Started
       <svg
