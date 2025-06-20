@@ -2,6 +2,7 @@ import { useState } from "react";
 import { questions } from "../data/questions";
 import Question from "../Components/Question";
 import { useNavigate } from "react-router-dom";
+import Header from "../Components/header";
 
 function Quiz() {
   const [current, setCurrent] = useState(0);
@@ -21,9 +22,12 @@ function Quiz() {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10">
-      <Question question={questions[current]} onAnswer={handleAnswer} />
-    </div>
+    <>
+      <Header />
+      <div className="max-w-xl mx-auto mt-10">
+        <Question question={questions[current]} onAnswer={handleAnswer} />
+      </div>
+    </>
   );
 }
 

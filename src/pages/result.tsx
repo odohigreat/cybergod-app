@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Header from "../Components/header";
 
 export default function Result() {
   const [phone, setPhone] = useState<string>("");
@@ -23,9 +24,13 @@ export default function Result() {
   }, []);
 
   return (
-    <div className="max-w-xl mx-auto mt-10 text-center p-4">
-      <h1 className="text-2xl font-bold mb-4">We Recommend:</h1>
-      <p className="text-xl bg-green-100 p-4 rounded">{phone}</p>
-    </div>
+    <>
+      <Header />
+      <div className="max-w-xl mx-auto mt-10 text-center p-4">
+
+        <h1 className="text-2xl font-bold mb-4">We Recommend:</h1>
+        <p className="text-xl bg-green-100 p-4 rounded">{phone}</p>
+      </div>
+    </>
   );
 }
