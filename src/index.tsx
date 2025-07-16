@@ -9,6 +9,7 @@ import SignIn from './pages/signin';
 import AllBrands from './pages/allbrands';
 import Quiz from './pages/quiz';
 import Result from './pages/result';
+import Specs from './pages/specs';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -23,6 +24,7 @@ root.render(
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/result" element={<Result />} />
+        <Route path="/specs" element={<Specs />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

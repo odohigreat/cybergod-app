@@ -78,11 +78,13 @@ function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}>
-              <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
-                <span className='px-2 py-0.5 text-xs self-end rounded-lg border border-green-500 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>
-                <img src='https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s25-edge.jpg' alt='Samsung Galaxy S25 Edge' className='rounded-lg h-28' />
-                <h3 className='text-base font-semibold text-center text-gray-900 dark:text-white '>Samsung Galaxy S25 Edge</h3>
-              </div>
+              <Link to="/specs">
+                <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
+                  <span className='px-2 py-0.5 text-xs self-end rounded-lg border border-green-500 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>
+                  <img src='https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s25-edge.jpg' alt='Samsung Galaxy S25 Edge' className='rounded-lg h-28' />
+                  <h3 className='text-base font-semibold text-center text-gray-900 dark:text-white '>Samsung Galaxy S25 Edge</h3>
+                </div>
+              </Link>
               <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
                 <span className='px-2 py-0.5 text-xs self-end rounded-lg border border-green-500 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>
                 <img src='https://fdn2.gsmarena.com/vv/bigpic/oneplus-13s-.jpg' alt='One Plus 13s' className='rounded-lg h-28' />
