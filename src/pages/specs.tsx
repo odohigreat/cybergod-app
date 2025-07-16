@@ -42,13 +42,13 @@ function Specs() {
         <div>
           <h1 className="text-lg md:text-3xl pb-1 md:pb-5">Samsung Galaxy S25 Edge</h1>
         </div>
-        <section className="flex space-x-4 shadow-inner w-screen overflow-scroll p-2 md:p-4 rounded-lg md:rounded-2xl">
+        <section className="flex space-x-4 shadow-inner w-fit p-2 md:p-4 rounded-lg md:rounded-2xl">
           <div className='flex flex-col size-fit items-center p-2 md:p-5 rounded-2xl bg-neutral-400 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 transition-all duration-200 ease-in-out'>
             <img src='https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s25-edge.jpg' alt='Samsung Galaxy S25 Edge' className='rounded-lg h-36 md:h-52' />
           </div>
           <div className="grid grid-flow-col grid-rows-2 gap-2">
             {specs.map((spec) => (
-              <section key={spec.label} className="w-28 h-20 md:w-52 bg-opacity-30 bg-neutral-400 rounded-xl px-2 py-1 overflow-clip cursor-pointer hover:shadow-sm shadow-neutral-200 hover:border hover:border-zinc-500 hover:brightness-105 transition-all duration-200 ease-in-out">
+              <section key={spec.label} className="w-28 md:w-52 bg-opacity-30 bg-neutral-400 rounded-xl px-2 py-1 overflow-clip cursor-pointer hover:shadow-sm shadow-neutral-200 hover:border hover:border-zinc-500 hover:brightness-105 transition-all duration-200 ease-in-out">
                 <div className="flex items-start justify-between space-x-1">
                   <p className="text-md font-semibold">{spec.label}
                     <h2 className="text-sm font-normal">{spec.value}</h2>
