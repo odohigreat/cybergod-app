@@ -2,9 +2,10 @@ import React from 'react';
 import HeroButton from './Components/herobutton';
 import Header from './Components/header';
 import { Link } from 'react-router-dom';
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Faq from './Components/faq';
 import Footer from './Components/footer';
+import { devices } from './data/devices';
 
 const categories = [
   {
@@ -34,15 +35,46 @@ const categories = [
   },
 ]
 
+function CountUp({ end, suffix = "", duration = 2 }: { end: number, suffix?: string, duration?: number }) {
+  const [count, setCount] = React.useState(0);
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+  React.useEffect(() => {
+    if (isInView) {
+      let startTimestamp: number;
+      const step = (timestamp: number) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+
+        // easing function: easeOutExpo
+        const easeOutExpo = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+
+        setCount(Math.floor(easeOutExpo * end));
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+  }, [isInView, end, duration]);
+
+  return (
+    <span ref={ref}>
+      {count.toLocaleString()}{suffix}
+    </span>
+  );
+}
+
 function Home() {
 
   return (
-    <div>
+    <div className="bg-neutral-50 dark:bg-black transition-colors duration-300">
       <div className='fixed top-0 w-full z-50'>
         <Header />
       </div>
       {/* Hero section */}
-      <div className="bg-gradient-to-bl from-neutral-100 to-neutral-200 dark:bg-neutral-900 h-fit lg:h-fit pt-16 pb-10">
+      <div className="bg-gradient-to-bl from-neutral-100 to-neutral-200 dark:bg-none dark:bg-black h-fit lg:h-fit pt-16 pb-10">
         <div className="relative mx-auto flex lg:flex-row flex-col-reverse lg:space-x-20 max-w-6xl items-center py-5 lg:py-10 px-5 lg:px-16">
           <div className='flex flex-col space-y-5 items-start max-w-md text-gray-900 dark:text-neutral-100'>
             <h1 className="text-4xl font-bold lg:leading-tight lg:text-5xl">Looking for the phone that's just for you?</h1>
@@ -64,8 +96,8 @@ function Home() {
       <main>
 
         {/* trendy device previews */}
-        <div className="bg-white py-7 md:py-10 px-2 md:px-16 mx-auto max-w-7xl">
-          <motion.h2 className="font-semibold text-3xl md:text-4xl text-black pb-8 pl-2"
+        <div className="bg-white dark:bg-black py-7 md:py-10 px-2 md:px-16 mx-auto max-w-7xl transition-colors duration-300">
+          <motion.h2 className="font-semibold text-3xl md:text-4xl text-black dark:text-white pb-8 pl-2 transition-colors duration-300"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
@@ -78,43 +110,28 @@ function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}>
-              <Link to="/specs">
-                <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
-                  <span className='px-2 py-0.5 text-xs self-end rounded-lg border border-green-500 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>
-                  <img src='https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s25-edge.jpg' alt='Samsung Galaxy S25 Edge' className='rounded-lg h-28' />
-                  <h3 className='text-base font-semibold text-center text-gray-900 dark:text-white '>Samsung Galaxy S25 Edge</h3>
-                </div>
-              </Link>
-              <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
-                <span className='px-2 py-0.5 text-xs self-end rounded-lg border border-green-500 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>
-                <img src='https://fdn2.gsmarena.com/vv/bigpic/oneplus-13s-.jpg' alt='One Plus 13s' className='rounded-lg h-28' />
-                <h3 className='text-base font-semibold text-center text-gray-900 dark:text-white '>One Plus 13s</h3>
-              </div>
-              <div className='flex flex-col items-center justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
-                <span className='px-2 py-0.5 text-xs self-end rounded-lg border border-green-500 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>
-                <img src='https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16e.jpg' alt='Apple iPhone 16e' className='rounded-lg h-28' />
-                <h3 className='text-base font-semibold text-center text-gray-900 dark:text-white '>Apple iPhone 16e</h3>
-              </div>
-              <div className='flex flex-col items-center justify-around space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
-                <img src='https://fdn2.gsmarena.com/vv/bigpic/google-pixel-9-pro-.jpg' alt='Google Pixel 9 Pro' className='rounded-lg h-28' />
-                <h3 className='text-base font-semibold text-center text-gray-900 dark:text-white '>Google Pixel 9 Pro</h3>
-              </div>
-              <div className='flex flex-col items-center justify-around space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 transition-all duration-200 ease-in-out'>
-                <img src='https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16-plus.jpg' alt='Apple iPhone 16 Plus' className='rounded-lg h-28' />
-                <h3 className='text-base font-semibold text-center text-gray-900 dark:text-white '>Apple iPhone 16 Plus</h3>
-              </div>
+              {devices.map((device) => (
+                <Link key={device.id} to={`/specs?device=${device.id}`}>
+                  <div className='flex flex-col items-center group justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 ease-in-out border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 hover:shadow-xl hover:shadow-neutral-500/10 hover:-translate-y-1 transition-all duration-500'>
+                    {device.isNew && <span className='px-2 py-0.5 text-green-900 text-xs self-end rounded-md border border-green-500 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>}
+                    {device.isTrending && <span className='px-2 py-0.5 text-xs text-blue-900 self-end rounded-md border border-blue-500 bg-blue-400 bg-opacity-55 hover:bg-opacity-80'>Trending</span>}
+                    <img src={device.imageSrc} alt={device.name} className='rounded-lg h-28 group-hover:scale-110 transition-all duration-500 ease-in-out' />
+                    <h3 className='text-base truncate w-full font-semibold text-center text-gray-900 dark:text-white'>{device.name}</h3>
+                  </div>
+                </Link>
+              ))}
             </motion.div>
           </div>
         </div>
 
         {/* Partnering brands section */}
-        <div className="bg-white py-10 p-5">
+        <div className="bg-white dark:bg-black py-10 p-5 transition-colors duration-300">
           <motion.span className='flex flex-col pb-10 items-center justify-center text-center'
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }}>
-            <h2 className="font-semibold text-3xl text-black">Trusted by various
+            <h2 className="font-semibold text-3xl text-black dark:text-white transition-colors duration-300">Trusted by various
               <b className='text-blue-400'> reputable</b> brands
             </h2>
           </motion.span>
@@ -124,60 +141,66 @@ function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}>
-              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1" src="https://tailwindcss.com/plus-assets/img/logos/158x48/transistor-logo-gray-900.svg" alt="Transistor" width="158" height="48" />
-              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1" src="https://tailwindcss.com/plus-assets/img/logos/158x48/reform-logo-gray-900.svg" alt="Reform" width="158" height="48" />
-              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1" src="https://tailwindcss.com/plus-assets/img/logos/158x48/tuple-logo-gray-900.svg" alt="Tuple" width="158" height="48" />
-              <img className="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1" src="https://tailwindcss.com/plus-assets/img/logos/158x48/savvycal-logo-gray-900.svg" alt="SavvyCal" width="158" height="48" />
-              <img className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1" src="https://tailwindcss.com/plus-assets/img/logos/158x48/statamic-logo-gray-900.svg" alt="Statamic" width="158" height="48" />
+              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/transistor-logo-gray-900.svg" alt="Transistor" width="158" height="48" />
+              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/reform-logo-gray-900.svg" alt="Reform" width="158" height="48" />
+              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/tuple-logo-gray-900.svg" alt="Tuple" width="158" height="48" />
+              <img className="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/savvycal-logo-gray-900.svg" alt="SavvyCal" width="158" height="48" />
+              <img className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/statamic-logo-gray-900.svg" alt="Statamic" width="158" height="48" />
             </motion.div>
           </div>
         </div>
 
-        <div className="relative py-12 md:py-24">
+        <div className="relative py-12 md:py-24 bg-neutral-50 dark:bg-black transition-colors duration-300">
           <motion.span className='flex flex-col pb-10 items-center justify-center text-center'
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }}>
-            <h2 className="font-semibold text-4xl text-black">Quick view
+            <h2 className="font-semibold text-4xl text-black dark:text-white transition-colors duration-300">Quick view
               <b className='text-blue-400'> Statistics</b>
             </h2>
           </motion.span>
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <dl className="grid grid-cols-1 gap-x-4 gap-y-16 text-center lg:grid-cols-3">
-              <motion.div className="mx-auto flex max-w-xs flex-col gap-y-4 w-full px-16 py-7 border border-blue-200 bg-opacity-15 rounded-xl bg-blue-300 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out"
+              <motion.div className="mx-auto flex max-w-xs flex-col gap-y-2 w-full px-16 py-7 border border-blue-200 dark:border-blue-900/50 bg-opacity-15 dark:bg-opacity-10 rounded-xl bg-blue-300 dark:bg-blue-900 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out shadow-sm dark:shadow-none"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
                 viewport={{ once: true, amount: 0.2 }}>
-                <dt className="text-base/7 text-black text-nowrap">Visits every 24 hours</dt>
-                <dd className="order-first text-3xl font-semibold tracking-tight text-neutral-800 text-nowrap sm:text-5xl">23,000</dd>
+                <dt className="text-base/7 text-blue-700 dark:text-blue-400 font-semibold text-nowrap transition-colors duration-300">Visits every 24 hours</dt>
+                <dd className="order-first text-3xl font-black tracking-tight text-neutral-800 dark:text-white text-nowrap sm:text-5xl transition-colors duration-300">
+                  <CountUp end={23000} />
+                </dd>
               </motion.div>
-              <motion.div className="mx-auto flex max-w-xs flex-col gap-y-4 w-full px-16 py-7 border border-blue-200 bg-opacity-15 rounded-xl bg-blue-300 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out"
+              <motion.div className="mx-auto flex max-w-xs flex-col gap-y-2 w-full px-16 py-7 border border-blue-200 dark:border-blue-900/50 bg-opacity-15 dark:bg-opacity-10 rounded-xl bg-blue-300 dark:bg-blue-900 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out shadow-sm dark:shadow-none"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
                 viewport={{ once: true, amount: 0.2 }}>
-                <dt className="text-base/7 text-black text-nowrap">Detailed device reviews</dt>
-                <dd className="order-first text-3xl font-semibold tracking-tight text-neutral-800 text-nowrap sm:text-5xl">2,000+</dd>
+                <dt className="text-base/7 text-blue-700 dark:text-blue-400 font-semibold text-nowrap transition-colors duration-300">Detailed device reviews</dt>
+                <dd className="order-first text-3xl font-black tracking-tight text-neutral-800 dark:text-white text-nowrap sm:text-5xl transition-colors duration-300">
+                  <CountUp end={2000} suffix="+" />
+                </dd>
               </motion.div>
-              <motion.div className="mx-auto flex max-w-xs flex-col gap-y-4 w-full px-16 py-7 border border-blue-200 bg-opacity-15 rounded-xl bg-blue-300 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out"
+              <motion.div className="mx-auto flex max-w-xs flex-col gap-y-2 w-full px-16 py-7 border border-blue-200 dark:border-blue-900/50 bg-opacity-15 dark:bg-opacity-10 rounded-xl bg-blue-300 dark:bg-blue-900 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out shadow-sm dark:shadow-none"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
                 viewport={{ once: true, amount: 0.2 }}>
-                <dt className="text-base/7 text-black text-nowrap">Active users currently</dt>
-                <dd className="order-first text-3xl font-semibold tracking-tight text-neutral-800 text-nowrap sm:text-5xl">1,000+</dd>
+                <dt className="text-base/7 text-blue-700 dark:text-blue-400 font-semibold text-nowrap transition-colors duration-300">Active users currently</dt>
+                <dd className="order-first text-3xl font-black tracking-tight text-neutral-800 dark:text-white text-nowrap sm:text-5xl transition-colors duration-300">
+                  <CountUp end={1000} suffix="+" />
+                </dd>
               </motion.div>
             </dl>
           </div>
           {/* Grid background */}
-          <div className="absolute -z-10 inset-0 h-full w-full bg-[linear-gradient(to_right,#73737320_2px,transparent_2px),linear-gradient(to_bottom,#73737320_2px,transparent_2px)] bg-[size:40px_40px]" />
+          <div className="absolute -z-10 inset-0 h-full w-full brightness-150 dark:brightness-[0.2] bg-[linear-gradient(to_right,#73737320_2px,transparent_2px),linear-gradient(to_bottom,#73737320_2px,transparent_2px)] bg-[size:30px_30px]" />
         </div>
 
 
         {/* Category section */}
-        <section aria-labelledby="category-heading" className="dark:bg-neutral-800 pt-8 pb-16 md:pt-10 xl:mx-auto xl:max-w-7xl xl:px-8">
+        <section aria-labelledby="category-heading" className="dark:bg-black pt-8 pb-16 md:pt-10 xl:mx-auto xl:max-w-7xl xl:px-8">
           <div className="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="category-heading" className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
               Blog Updates
@@ -196,7 +219,7 @@ function Home() {
                     <a
                       key={category.name}
                       href={category.href}
-                      className="relative flex h-80 w-56 flex-col overflow-hidden border-2 border-neutral-200 rounded-2xl p-2 xl:w-auto"
+                      className="relative flex h-80 w-56 flex-col overflow-hidden border border-neutral-200 dark:border-neutral-800 rounded-2xl p-2 xl:w-auto transition-colors duration-300 bg-white dark:bg-[#0a0a0a]"
                     >
                       <span aria-hidden="true" className="absolute inset-0">
                         <img alt="" src={category.imageSrc} className="size-fit min-h-40 object-cover hover:brightness-110 rounded-2xl p-2 object-center" />
@@ -204,11 +227,11 @@ function Home() {
                           <span className='relative text-slate-900 text-[10px] mt-auto dark:text-white'>12th June, 2025</span>
                         </div>
                         <h4 className='px-2'>
-                          <span className="relative text-start mt-auto text-lg font-bold text-slate-900 dark:text-white">{category.name}</span>
+                          <span className="relative text-start mt-auto text-lg font-bold text-slate-900 dark:text-white transition-colors duration-300">{category.name}</span>
                         </h4>
                       </span>
                       <span className='relative text-right mt-auto text-slate-900 text-xs dark:text-white'>
-                        <button className='btn'>
+                        <button className='btn text-white bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-lg px-4 py-1.5 transition-colors'>
                           View now
                         </button>
                       </span>
@@ -228,7 +251,7 @@ function Home() {
         {/* Featured section */}
         <section
           aria-labelledby="social-impact-heading"
-          className="mx-auto dark:bg-neutral-800 max-w-7xl px-4"
+          className="mx-auto dark:bg-black max-w-7xl px-4"
         >
           <div className="relative overflow-hidden rounded-lg border-darkmode">
             <div className="absolute inset-0">
@@ -274,7 +297,7 @@ function Home() {
         </section> */}
 
         {/* Featured section */}
-        <section aria-labelledby="comfort-heading" className="mx-auto dark:bg-neutral-800 max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+        <section aria-labelledby="comfort-heading" className="mx-auto dark:bg-black max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <div className="relative overflow-hidden border-darkmode rounded-lg">
             <div className="absolute inset-0">
               <img

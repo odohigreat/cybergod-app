@@ -26,7 +26,7 @@ const footerNavigation = {
 function Footer() {
   return (
     <>
-      <footer aria-labelledby="footer-heading" className="bg-gray-900">
+      <footer aria-labelledby="footer-heading" className="bg-gray-900 dark:bg-neutral-950 transition-colors duration-300">
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>
@@ -98,22 +98,24 @@ function Footer() {
                   type="text"
                   required
                   autoComplete="email"
-                  className="w-full min-w-0 appearance-none border-darkmode px-4 py-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none"
+                  className="w-full min-w-0 appearance-none rounded-lg bg-white/5 dark:bg-[#0a0a0a] px-4 py-2 text-base text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/10 sm:w-64"
+                  placeholder="Enter your email"
                 />
                 <div className="ml-4 flex-shrink-0">
                   <button
                     type="submit"
-                    className="btn text-black dark:text-white"
+                    className="flex w-full items-center justify-center rounded-lg bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
                   >
-                    Sign up
+                    Subscribe
                   </button>
                 </div>
               </form>
             </div>
           </div>
 
-          <div className="border-t border-gray-800 py-10">
-            <p className="text-sm text-gray-400">2025 Cybergod, All Rights Reserved.</p>
+          <div className="flex justify-between border-t border-gray-800 py-10">
+            <p className="text-sm text-gray-400">2026 Cybergod, All Rights Reserved.</p>
+            <p className="text-sm text-gray-400">Cybergod made it.</p>
           </div>
         </div>
       </footer>

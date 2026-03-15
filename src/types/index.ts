@@ -1,3 +1,18 @@
+export interface Spec {
+  label: string;
+  value: string;
+}
+
+export interface Device {
+  id: string;
+  name: string;
+  imageSrc: string;
+  isTrending?: boolean;
+  isNew?: boolean;
+  brand: string;
+  specs: Spec[];
+}
+
 export interface Option {
   text: string;
   trait: string;

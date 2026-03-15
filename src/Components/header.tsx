@@ -15,7 +15,7 @@ import React from 'react';
   ```
 */
 
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import {
   Dialog,
   DialogBackdrop,
@@ -74,7 +74,7 @@ const navigation = {
         {
           name: 'Tecno',
           href: '#',
-          imageSrc: 'https://skit.ng/wp-content/uploads/2024/05/Tecno-Camon-30-3.webp',
+          imageSrc: 'https://fdn2.gsmarena.com/vv/pics/tecno/tecno-camon-50-pro-3.jpg',
           imageAlt: 'Basic tecno device aesthetic',
         },
         {
@@ -92,7 +92,7 @@ const navigation = {
         {
           name: 'Nothing',
           href: '#',
-          imageSrc: 'https://intl.nothing.tech/cdn/shop/files/Phone-2-PDP-Glyph-Header-Desktop.jpg?v=1688994873',
+          imageSrc: 'https://fdn.gsmarena.com/imgroot/reviews/25/nothing-phone-3a-pro/lifestyle/-1024w2/gsmarena_004.jpg',
           imageAlt: 'Basic nothing device aesthetic',
         },
         {
@@ -161,15 +161,34 @@ const navigation = {
 
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('darkMode')
+      if (saved !== null) {
+        return saved === 'true'
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+    return false
+  })
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkMode', 'true')
+    } else {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkMode', 'false')
+    }
+  }, [darkMode])
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
   }
 
   return (
-    <section className={`${darkMode && "dark"}`}>
-      <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className={`${darkMode && "dark"} relative z-40 lg:hidden`}>
+    <>
+      <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="relative z-40 lg:hidden">
         <DialogBackdrop
           transition
           className="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-25 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
@@ -287,150 +306,135 @@ function Header() {
         </div>
       </Dialog>
 
-      <header className="relative z-10">
+      <header className="relative z-10 mt-2 mx-auto w-[calc(100%-1rem)] md:w-[calc(120%-2rem)] max-w-7xl rounded-2xl shadow-xl border border-neutral-200/60 dark:border-neutral-700/60 bg-white/70 dark:bg-neutral-800/80 backdrop-blur-xl transition-all duration-300">
         <nav aria-label="Top">
-          {/* Currency selector */}
-          {/* <select
-                        id="desktop-currency"
-                        name="currency"
-                        className="flex items-center rounded-md border-transparent bg-gray-900 bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-white focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-100"
-                      >
-                        {currencies.map((currency) => (
-                          <option key={currency}>{currency}</option>
-                        ))}
-                      </select> */}
+          <div className="mx-auto px-4 sm:px-6 lg:px-8">
+            <div>
+              <div className="flex h-16 items-center justify-between">
+                {/* Logo (lg+) */}
+                <div className="hidden lg:basis-1/6 lg:flex lg:items-center">
+                  <a href="#">
+                    <span className="sr-only">Your Company</span>
+                    {darkMode ? <CgLogo /> : <DarkCgLogo />}
+                  </a>
+                </div>
 
-          {/* navigation */}
-          <div className="bg-neutral-200 bg-opacity-75 backdrop-blur-md dark:bg-neutral-800">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div>
-                <div className="flex h-16 items-center justify-between">
-                  {/* Logo (lg+) */}
-                  <div className="hidden lg:basis-1/6 lg:flex lg:items-center">
-                    <a href="#">
-                      <span className="sr-only">Your Company</span>
-                      {darkMode ? <CgLogo /> : <DarkCgLogo />}
-                    </a>
-                  </div>
+                <div className="hidden h-5 lg:flex lg:items-stretch lg:justify-between">
+                  {/* Flyout menus */}
+                  <PopoverGroup className="px-4">
+                    <div className="flex h-full justify-center space-x-8">
+                      {navigation.categories.map((category) => (
+                        <Popover key={category.name} className="flex">
+                          <div className="relative flex">
+                            <PopoverButton className="group relative z-10 flex items-center p-3 rounded-md hover:bg-neutral-300 dark:hover:bg-neutral-700 outline-none justify-center text-sm font-medium text-black dark:text-white transition-colors duration-200 ease-out">
+                              {category.name}
+                              <span
+                                aria-hidden="true"
+                                className="absolute inset-x-0 -bottom-px h-0.5 transition rounded-b-md duration-200 ease-out group-data-[open]:bg-black dark:group-data-[open]:bg-white"
+                              />
+                            </PopoverButton>
+                          </div>
 
-                  <div className="hidden h-5 lg:flex lg:items-stretch lg:justify-between">
-                    {/* Flyout menus */}
-                    <PopoverGroup className="px-4">
-                      <div className="flex h-full justify-center space-x-8">
-                        {navigation.categories.map((category) => (
-                          <Popover key={category.name} className="flex">
-                            <div className="relative flex">
-                              <PopoverButton className="group relative z-10 flex items-center p-3 rounded-md hover:bg-neutral-300 dark:hover:bg-neutral-700 outline-none justify-center text-sm font-medium text-black dark:text-white transition-colors duration-200 ease-out">
-                                {category.name}
-                                <span
-                                  aria-hidden="true"
-                                  className="absolute inset-x-0 -bottom-px h-0.5 transition rounded-b-md duration-200 ease-out group-data-[open]:bg-black dark:group-data-[open]:bg-white"
-                                />
-                              </PopoverButton>
-                            </div>
+                          <PopoverPanel
+                            transition
+                            className="absolute inset-x-0 top-full text-sm text-gray-500 transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+                          >
+                            {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
+                            <div aria-hidden="true" className="absolute inset-0 top-1/2 bg-white shadow" />
 
-                            <PopoverPanel
-                              transition
-                              className="absolute inset-x-0 top-full text-sm text-gray-500 transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
-                            >
-                              {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                              <div aria-hidden="true" className="absolute inset-0 top-1/2 bg-white shadow" />
-
-                              <div className="relative bg-neutral-100 dark:bg-neutral-700">
-                                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                                  <div className="grid grid-cols-5 gap-x-8 gap-y-10 pb-5 pt-10">
-                                    {category.featured.map((item) => (
-                                      <div key={item.name} className="group relative border-[2px] bg-transparent dark:bg-neutral-800 rounded-xl border-gray-300 dark:border-neutral-500 p-2 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
-                                        <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100">
-                                          <img
-                                            alt={item.imageAlt}
-                                            src={item.imageSrc}
-                                            className="object-cover lg:max-h-20 w-full object-center"
-                                          />
-                                        </div>
-                                        <div className='flex items-baseline justify-between'>
-                                          <a href={item.href} className="mt-2 block font-medium text-xl text-gray-900 dark:text-white">
-                                            <span aria-hidden="true" className="absolute inset-0 z-10" />
-                                            {item.name}
-                                          </a>
-                                          <button aria-hidden="true" className="text-xs text-slate-700 dark:text-gray-400 p-1 px-2 hover:bg-gray-300 border border-gray-300 group-active:scale-75 rounded-md">
-                                            View
-                                          </button>
-                                        </div>
+                            <div className="relative bg-neutral-100 dark:bg-neutral-700">
+                              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                                <div className="grid grid-cols-5 gap-x-8 gap-y-10 pb-5 pt-10">
+                                  {category.featured.map((item) => (
+                                    <div key={item.name} className="group relative border-[2px] bg-transparent dark:bg-neutral-800 rounded-xl border-gray-300 dark:border-neutral-500 p-2 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+                                      <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100">
+                                        <img
+                                          alt={item.imageAlt}
+                                          src={item.imageSrc}
+                                          className="object-cover lg:max-h-20 w-full object-center"
+                                        />
                                       </div>
-                                    ))}
-                                  </div>
-                                  <div className='flex items-center justify-end space-x-2 pb-5 text-gray-900 dark:text-white'>
-                                    <Link to="/allbrands">
-                                      <p
-                                        className='cursor-pointer px-2 py-1 rounded-md inline-flex items-start hover:bg-neutral-200 hover:bg-opacity-35 hover:brightness-75 transition-all duration-200 ease-in-out'>
-                                        All Brands
-                                        {/* <ArrowLongRightIcon className='size-5 cursor-pointer' /> */}
-                                        {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-4">
+                                      <div className='flex items-baseline justify-between'>
+                                        <a href={item.href} className="mt-2 block font-medium text-xl text-gray-900 dark:text-white">
+                                          <span aria-hidden="true" className="absolute inset-0 z-10" />
+                                          {item.name}
+                                        </a>
+                                        <button aria-hidden="true" className="text-xs text-slate-700 dark:text-gray-400 p-1 px-2 hover:bg-gray-300 border border-gray-300 group-active:scale-75 rounded-md">
+                                          View
+                                        </button>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                                <div className='flex items-center justify-end space-x-2 pb-5 text-gray-900 dark:text-white'>
+                                  <Link to="/allbrands">
+                                    <p
+                                      className='cursor-pointer px-2 py-1 rounded-md inline-flex items-start hover:bg-neutral-200 hover:bg-opacity-35 hover:brightness-75 transition-all duration-200 ease-in-out'>
+                                      All Brands
+                                      {/* <ArrowLongRightIcon className='size-5 cursor-pointer' /> */}
+                                      {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-4">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                                       </svg> */}
-                                      </p>
-                                    </Link>
-                                  </div>
+                                    </p>
+                                  </Link>
                                 </div>
                               </div>
-                            </PopoverPanel>
-                          </Popover>
-                        ))}
+                            </div>
+                          </PopoverPanel>
+                        </Popover>
+                      ))}
 
-                        {navigation.pages.map((page) => (
-                          <a
-                            key={page.name}
-                            href={page.to}
-                            className="flex items-center text-sm py-3 px-2 rounded-md hover:bg-neutral-300 dark:hover:bg-neutral-700 outline-none font-medium text-black dark:text-white"
-                          >
-                            {page.name}
-                          </a>
-                        ))}
+                      {navigation.pages.map((page) => (
+                        <a
+                          key={page.name}
+                          href={page.to}
+                          className="flex items-center text-sm py-3 px-2 rounded-md hover:bg-neutral-300 dark:hover:bg-neutral-700 outline-none font-medium text-black dark:text-white"
+                        >
+                          {page.name}
+                        </a>
+                      ))}
+                    </div>
+                  </PopoverGroup>
+                </div>
+
+                {/* Mobile menu and search (lg-) */}
+                <div className="flex flex-1 items-center lg:hidden">
+                  <button type="button" onClick={() => setMobileMenuOpen(true)} className="-ml-2 p-2 text-white">
+                    <span className="sr-only">Open menu</span>
+                    <Bars3Icon aria-hidden="true" className="h-6 w-6 text-black dark:text-white" />
+                  </button>
+                  {/* Search bar component */}
+                  <SearchBar />
+                </div>
+
+                {/* Logo (lg-) */}
+                <div className='lg:hidden'>
+                  {darkMode ? <CgLogo /> : <DarkCgLogo />}
+                </div>
+
+                <div className="flex flex-1 items-center justify-end">
+                  <div className="flex items-center space-x-2">
+
+                    {/* DarkMode */}
+                    <div className='flex items-center space-x-2'>
+                      <div className='flex'>
+                        <button
+                          className='btn'
+                          onClick={toggleDarkMode}
+                        >
+                          {darkMode ?
+                            <><SunIcon className='size-5 text-black dark:text-white' /></> :
+                            <><MoonIcon className='size-5 text-black dark:text-white' /></>}
+                        </button>
                       </div>
-                    </PopoverGroup>
-                  </div>
-
-                  {/* Mobile menu and search (lg-) */}
-                  <div className="flex flex-1 items-center lg:hidden">
-                    <button type="button" onClick={() => setMobileMenuOpen(true)} className="-ml-2 p-2 text-white">
-                      <span className="sr-only">Open menu</span>
-                      <Bars3Icon aria-hidden="true" className="h-6 w-6 text-black dark:text-white" />
-                    </button>
-                  </div>
-
-                  {/* Logo (lg-) */}
-                  <div className='lg:hidden'>
-                    {darkMode ? <CgLogo /> : <DarkCgLogo />}
-                  </div>
-
-                  <div className="flex flex-1 items-center justify-end">
-                    <div className="flex items-center space-x-2">
-
-                      {/* Search bar component */}
-                      <SearchBar />
-
-                      {/* DarkMode */}
-                      <div className='flex items-center space-x-2'>
-                        {/* <div className='hidden lg:flex'>
-                          <button
-                            className='btn'
-                            onClick={toggleDarkMode}
-                          >
-                            {darkMode ?
-                              <><SunIcon className='size-5 text-black dark:text-white' /></> :
-                              <><MoonIcon className='size-5 text-black dark:text-white' /></>}
-                          </button>
-                        </div> */}
-                        <Link to="/sign-in">
-                          <button
-                            title='Sign In'
-                            className='btn'>
-                            <UserPlusIcon className='size-5' />
-                          </button>
-                        </Link>
-                        {/* <Dropdown /> */}
-                      </div>
+                      <Link to="/sign-in">
+                        <button
+                          title='Sign In'
+                          className='btn'>
+                          <UserPlusIcon className='size-5 text-black dark:text-white' />
+                        </button>
+                      </Link>
+                      {/* <Dropdown /> */}
                     </div>
                   </div>
                 </div>
@@ -439,7 +443,7 @@ function Header() {
           </div>
         </nav>
       </header>
-    </section>
+    </>
   )
 }
 

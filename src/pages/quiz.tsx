@@ -22,12 +22,12 @@ function Quiz() {
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-white dark:bg-black transition-colors duration-300">
       <Header />
-      <div className="max-w-xl mx-auto mt-10">
+      <div className="max-w-xl mx-auto mt-10 p-4">
         <Question question={questions[current]} onAnswer={handleAnswer} />
       </div>
-    </>
+    </div>
   );
 }
 
