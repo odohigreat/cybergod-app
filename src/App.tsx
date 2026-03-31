@@ -242,9 +242,9 @@ function Home() {
             </div>
           </div>
           <div className="mt-6 px-4 sm:hidden">
-            <a href="#" className="block text-sm font-semibold text-neutral-400 hover:text-black dark:hover:text-white">
+            <Link to="/blog" className="block text-sm font-semibold text-neutral-400 hover:text-black dark:hover:text-white">
               More updates
-            </a>
+            </Link>
           </div>
         </section>
 
@@ -272,12 +272,12 @@ function Home() {
                   Duis sit amet rutrum nisl, quis blandit magna. Mauris aliquam odio velit, id mattis nunc mattis at.
                   Aenean nec orci quam. Suspendisse imperdiet egestas est, non condimentum turpis malesuada ullamcorper
                 </p>
-                <a
-                  href="#"
+                <button
+                  type="button"
                   className="mt-8 block w-full rounded-lg border border-transparent bg-blue-400 px-8 py-2 text-base font-medium text-gray-100 hover:bg-blue-300 sm:w-auto"
                 >
                   Lorem Ipsum
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -316,12 +316,12 @@ function Home() {
                   Suspendisse ac nisi tristique, dapibus tellus quis, blandit dui. Nam maximus vestibulum nunc,
                   non dictum diam gravida vehicula. Nulla volutpat mauris nulla, sed hendrerit purus feugiat vel.
                 </p>
-                <a
-                  href="#"
+                <button
+                  type="button"
                   className="mt-8 block w-full rounded-lg border border-transparent bg-blue-400 px-8 py-2 text-base font-medium text-gray-100 hover:bg-blue-300 sm:w-auto"
                 >
                   Lorem Ipsum
-                </a>
+                </button>
               </div>
             </div>
           </div>

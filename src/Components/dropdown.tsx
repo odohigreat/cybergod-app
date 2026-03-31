@@ -26,34 +26,34 @@ function Dropdown() {
         <div className="py-1">
           <MenuItem>
             <div className='flex px-4 items-center justify-between border-b border-b-gray-400 dark:border-neutral-800'>
-              <a
-                href="#"
-                className="block py-2 text-sm data-[focus]:bg-blue-50 dark:data-[focus]:bg-blue-900/20 data-[focus]:text-blue-600 dark:data-[focus]:text-blue-400 data-[focus]:outline-none"
+              <button
+                type="button"
+                className="block w-full text-left py-2 text-sm data-[focus]:bg-blue-50 dark:data-[focus]:bg-blue-900/20 data-[focus]:text-blue-600 dark:data-[focus]:text-blue-400 data-[focus]:outline-none"
               >
                 Discover
-              </a>
+              </button>
               <GlobeAltIcon className='size-4' />
             </div>
           </MenuItem>
           <MenuItem>
             <div className='flex px-4 items-center justify-between border-b border-b-gray-400 dark:border-neutral-800'>
-              <a
-                href="#"
-                className="block py-2 text-sm data-[focus]:bg-blue-50 dark:data-[focus]:bg-blue-900/20 data-[focus]:text-blue-600 dark:data-[focus]:text-blue-400 data-[focus]:outline-none"
+              <button
+                type="button"
+                className="block w-full text-left py-2 text-sm data-[focus]:bg-blue-50 dark:data-[focus]:bg-blue-900/20 data-[focus]:text-blue-600 dark:data-[focus]:text-blue-400 data-[focus]:outline-none"
               >
                 Currency
-              </a>
+              </button>
               <CurrencyPoundIcon className='size-4' />
             </div>
           </MenuItem>
           <MenuItem>
             <div className='flex px-4 items-center justify-between border-b border-b-gray-400 dark:border-b-neutral-700'>
-              <a
-                href="#"
-                className="block py-2 text-sm  data-[focus]:bg-blue-50 dark:data-[focus]:bg-blue-900/20 data-[focus]:text-blue-600 dark:data-[focus]:text-blue-400 data-[focus]:outline-none"
+              <button
+                type="button"
+                className="block w-full text-left py-2 text-sm  data-[focus]:bg-blue-50 dark:data-[focus]:bg-blue-900/20 data-[focus]:text-blue-600 dark:data-[focus]:text-blue-400 data-[focus]:outline-none"
               >
                 Sign In
-              </a>
+              </button>
               <ArrowLeftEndOnRectangleIcon className='size-4' />
             </div>
           </MenuItem>

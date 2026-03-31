@@ -35,19 +35,13 @@ import {
   XMarkIcon,
   MoonIcon,
   SunIcon,
-  ArrowLongRightIcon,
   UserPlusIcon,
-  CogIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import SearchBar from '../Components/searchbar';
 import CgLogo from '../Assets/cglogo';
 import DarkCgLogo from '../Assets/darkcglogo';
-import Dropdown from '../Components/dropdown';
-import HeroButton from '../Components/herobutton';
 import { Link } from 'react-router-dom';
 
-const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
 const navigation = {
   categories: [
     {
@@ -270,9 +264,9 @@ function Header() {
 
             <div className="flex space-x-4 justify-between w-full border-t border-gray-200 px-4 py-6">
               <div className="flow-root">
-                <a href="#" className="-m-2 px-6 py-2.5 block font-medium rounded-lg text-neutral-50 bg-neutral-500 active:scale-95 active:brightness-85">
+                <Link to="/sign-in" className="-m-2 px-6 py-2.5 block font-medium rounded-lg text-neutral-50 bg-neutral-500 active:scale-95 active:brightness-85">
                   Create an account
-                </a>
+                </Link>
               </div>
               <div className="flow-root">
                 <Link to="/sign-in" className="-m-2 px-6 py-2.5 block font-medium rounded-lg bg-neutral-300 text-darkmode active:scale-95 active:brightness-85">
@@ -313,10 +307,10 @@ function Header() {
               <div className="flex h-16 items-center justify-between">
                 {/* Logo (lg+) */}
                 <div className="hidden lg:basis-1/6 lg:flex lg:items-center">
-                  <a href="#">
+                  <Link to="/">
                     <span className="sr-only">Your Company</span>
                     {darkMode ? <CgLogo /> : <DarkCgLogo />}
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="hidden h-5 lg:flex lg:items-stretch lg:justify-between">

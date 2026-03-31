@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
 
-interface Faq {
+interface FaqItem {
   question: string;
   answer: string;
 }
 
-const faqs: Faq[] = [
+const faqs: FaqItem[] = [
   {
     question: "What does Cybergod do?",
     answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tellus ipsum, tincidunt a maximus at, interdum.",
@@ -45,7 +45,7 @@ function Faq() {
           </h2>
         </section>
         <main className="flex flex-col space-y-5 mx-0 md:mx-10 my-10">
-          {faqs.map((faq: Faq, index: number) => (
+          {faqs.map((faq: FaqItem, index: number) => (
             <Disclosure key={index} >
               <div className={`${openStates[index] ? "border-2 border-blue-400 dark:border-neutral-700/60 rounded-3xl" : "border-none"}`}>
                 <div className={`${openStates[index] ? "rounded-t-3xl hover:bg-neutral-100 dark:hover:bg-[#0a0a0a]" : "rounded-2xl"} flex space-x-5 items-center justify-between w-full p-3 md:p-5 cursor-pointer transition-colors ease-in-out duration-300 hover:bg-neutral-100 dark:hover:bg-[#0a0a0a] bg-neutral-50 dark:bg-black`}>
