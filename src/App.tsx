@@ -3,36 +3,42 @@ import HeroButton from './Components/herobutton';
 import Header from './Components/header';
 import { Link } from 'react-router-dom';
 import { motion, useInView } from "framer-motion";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Faq from './Components/faq';
 import Footer from './Components/footer';
 import { devices } from './data/devices';
 
 const categories = [
   {
-    name: 'Apple begins public roll out for new iOS26 beta',
+    name: 'Apple Unveils the iPhone 17e: The New Mid-Range King',
     href: '#',
-    imageSrc: 'https://images.macrumors.com/t/GyI9rHsJegad7V1bX9ft9Ctde18=/1600x0/article-new/2025/06/iOS-26-Feature.jpg',
+    imageSrc: 'https://www.apple.com/newsroom/images/2026/03/apple-introduces-iphone-17e/article/Apple-iPhone-17e-hero-260302_big.jpg.large_2x.jpg',
   },
   {
-    name: 'New Samsung Galaxy S25 Edge hits the market',
+    name: 'Samsung Galaxy Z TriFold: The Tablet in Your Pocket',
     href: '#',
-    imageSrc: 'https://cdn.mos.cms.futurecdn.net/cCUHDdzJUhbgLmeaUud6NK.jpg',
+    imageSrc: 'https://cdn.mos.cms.futurecdn.net/rd8TgnBpGtECzUiS7iix5J.jpg',
   },
   {
-    name: '"Gemini for iOS", Better than Apple Intelligence?',
+    name: '"Honor’s "Robot Phone" Steals the Show at MWC',
     href: '#',
-    imageSrc: 'https://static1.howtogeekimages.com/wordpress/wp-content/uploads/2024/02/53528020292_1ca68ef944_o.jpg',
+    imageSrc: 'https://www-file.honor.com/content/dam/honor/global/news/2026/honor-mwc2026-launch/news-1.jpg',
   },
   {
-    name: 'Redmi release fully speced out budget device',
+    name: 'Nothing Phone (4a) and the Redesigned Glyph Bar',
     href: '#',
-    imageSrc: 'https://www.revu.com.ph/wp-content/uploads/2025/05/Xiaomi-Redmi-A5-price-and-specs-via-Revu-Philippines.jpg',
+    imageSrc: 'https://b2c-contenthub.com/wp-content/uploads/2026/03/Nothing-Phone-4a-Pro-silver-camera-closeup-angled.jpg?quality=50&strip=all&w=1200',
   },
   {
-    name: 'Indepth review of iPadOS 26 and its new features',
+    name: 'The "iPhone Fold" Leak: A New Era for Apple',
     href: '#',
-    imageSrc: 'https://www.cnet.com/a/img/resize/7c4b701680d2e19e08084ec10e6ab9e400865804/hub/2025/06/09/1f03c914-bae8-40e6-8ec8-38940b1da3b8/screenshot-2025-06-09-at-2-17-00pm.png?auto=webp&fit=crop&height=675&width=1200',
+    imageSrc: 'https://images.macrumors.com/t/E1anqCZ_oAnmKS7hvkakEhcfcwM=/800x0/smart/article-new/2025/12/iphone-fold-text.jpg?lossy',
   },
+  // {
+  //   name: 'Qualcomm and Starlink Bring "Mainstream" Satellite SOS',
+  //   href: '#',
+  //   imageSrc: 'https://www.reuters.com/resizer/v2/XADAZMKCYRME7NNMJIITK2QOWU.jpg?auth=7710865e5b5a32604e35fd9e98f70eebb8ab577b94d9e38709ed412bbc67d3e5&width=1920&quality=80',
+  // },
 ]
 
 function CountUp({ end, suffix = "", duration = 2 }: { end: number, suffix?: string, duration?: number }) {
@@ -67,6 +73,14 @@ function CountUp({ end, suffix = "", duration = 2 }: { end: number, suffix?: str
 }
 
 function Home() {
+  const blogScrollRef = React.useRef<HTMLDivElement>(null);
+
+  const scrollBlog = (direction: 'left' | 'right') => {
+    if (blogScrollRef.current) {
+      const scrollAmount = 300; // rough width of one card + gap
+      blogScrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="bg-neutral-50 dark:bg-black transition-colors duration-300">
@@ -74,7 +88,7 @@ function Home() {
         <Header />
       </div>
       {/* Hero section */}
-      <div className="bg-gradient-to-bl from-neutral-100 to-neutral-200 dark:bg-none dark:bg-black h-fit lg:h-fit pt-16 pb-10">
+      <div className="bg-gradient-to-bl from-neutral-100 to-neutral-200 dark:bg-none dark:bg-black h-fit lg:h-fit pt-20 md:pt-16 pb-10">
         <div className="relative mx-auto flex lg:flex-row flex-col-reverse lg:space-x-20 max-w-6xl items-center py-5 lg:py-10 px-5 lg:px-16">
           <div className='flex flex-col space-y-5 items-start max-w-md text-gray-900 dark:text-neutral-100'>
             <h1 className="text-4xl font-bold lg:leading-tight lg:text-5xl">Looking for the phone that's just for you?</h1>
@@ -102,25 +116,25 @@ function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }}>
-            Trending Devices
+            <b className='text-blue-400'>Trending</b> Devices
           </motion.h2>
           <div className="">
-            <motion.div className="grid grid-cols-2 gap-5 items-center md:grid-cols-5"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-              viewport={{ once: true, amount: 0.2 }}>
+            <div className="grid grid-cols-2 gap-5 items-center md:grid-cols-5">
               {devices.map((device) => (
                 <Link key={device.id} to={`/specs?device=${device.id}`}>
-                  <div className='flex flex-col items-center group justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 ease-in-out border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 hover:shadow-xl hover:shadow-neutral-500/10 hover:-translate-y-1 transition-all duration-500'>
-                    {device.isNew && <span className='px-2 py-0.5 text-green-900 text-xs self-end rounded-md border border-green-500 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>}
-                    {device.isTrending && <span className='px-2 py-0.5 text-xs text-blue-900 self-end rounded-md border border-blue-500 bg-blue-400 bg-opacity-55 hover:bg-opacity-80'>Trending</span>}
+                  <motion.div className='flex flex-col items-center group justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 dark:bg-neutral-900 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 ease-in-out border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 hover:shadow-xl hover:shadow-neutral-500/10 hover:-translate-y-1 transition-all duration-500'
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    viewport={{ once: true, amount: 0.2 }}>
+                    {device.isNew && <span className='px-2 py-0.5 text-green-100 text-xs dark:text-black self-end rounded-md border border-green-300 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>}
+                    {device.isTrending && <span className='px-2 py-0.5 text-xs text-blue-100 dark:text-black self-end rounded-md border border-blue-300 bg-blue-400 bg-opacity-55 hover:bg-opacity-80'>Trending</span>}
                     <img src={device.imageSrc} alt={device.name} className='rounded-lg h-28 group-hover:scale-110 transition-all duration-500 ease-in-out' />
                     <h3 className='text-base truncate w-full font-semibold text-center text-gray-900 dark:text-white'>{device.name}</h3>
-                  </div>
+                  </motion.div>
                 </Link>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
 
@@ -132,7 +146,7 @@ function Home() {
             transition={{ duration: 1.5, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }}>
             <h2 className="font-semibold text-3xl text-black dark:text-white transition-colors duration-300">Trusted by various
-              <b className='text-blue-400'> reputable</b> brands
+              <b className='text-blue-400'> Reputable</b> brands
             </h2>
           </motion.span>
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -203,7 +217,7 @@ function Home() {
         <section aria-labelledby="category-heading" className="dark:bg-black pt-8 pb-16 md:pt-10 xl:mx-auto xl:max-w-7xl xl:px-8">
           <div className="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="category-heading" className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Blog Updates
+              <b className='text-blue-400'>Blog</b> Updates
             </h2>
             <Link to="/blog" className="hidden text-sm font-semibold text-neutral-400 hover:text-black dark:hover:text-white sm:block">
               More updates
@@ -211,40 +225,60 @@ function Home() {
             </Link>
           </div>
 
-          <div className="mt-4 flow-root">
-            <div className="-my-2">
-              <div className="relative box-content h-80 overflow-x-auto py-2 xl:overflow-visible">
-                <div className="absolute flex space-x-8 px-4 sm:px-6 lg:px-8 xl:relative xl:grid xl:grid-cols-5 xl:gap-x-8 xl:space-x-0 xl:px-0">
-                  {categories.map((category) => (
-                    <a
-                      key={category.name}
-                      href={category.href}
-                      className="relative flex h-80 w-56 flex-col overflow-hidden border border-neutral-200 dark:border-neutral-800 rounded-2xl p-2 xl:w-auto transition-colors duration-300 bg-white dark:bg-[#0a0a0a]"
-                    >
-                      <span aria-hidden="true" className="absolute inset-0">
-                        <img alt="" src={category.imageSrc} className="size-fit min-h-40 object-cover hover:brightness-110 rounded-2xl p-2 object-center" />
-                        <div className='px-2'>
-                          <span className='relative text-slate-900 text-[10px] mt-auto dark:text-white'>12th June, 2025</span>
-                        </div>
-                        <h4 className='px-2'>
-                          <span className="relative text-start mt-auto text-lg font-bold text-slate-900 dark:text-white transition-colors duration-300">{category.name}</span>
-                        </h4>
-                      </span>
-                      <span className='relative text-right mt-auto text-slate-900 text-xs dark:text-white'>
-                        <button className='btn text-white bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-lg px-4 py-1.5 transition-colors'>
-                          View now
-                        </button>
-                      </span>
-                    </a>
-                  ))}
-                </div>
+          <div className="mt-8 relative">
+            <div
+              ref={blogScrollRef}
+              className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 pb-6 sm:px-6 lg:px-8 xl:grid xl:grid-cols-5 xl:gap-6 xl:px-0 w-full"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              <style>{`.overflow-x-auto::-webkit-scrollbar { display: none; }`}</style>
+              {categories.map((category) => (
+                <a
+                  key={category.name}
+                  href={category.href}
+                  className="snap-center shrink-0 relative flex h-80 w-72 flex-col overflow-hidden border border-neutral-200 dark:border-neutral-800 rounded-2xl p-2 xl:w-auto transition-colors duration-300 bg-white dark:bg-[#0a0a0a]"
+                >
+                  <span aria-hidden="true" className="absolute inset-0">
+                    <img alt="" src={category.imageSrc} className="size-fit max-h-40 min-w-full object-cover hover:brightness-110 rounded-2xl p-2 object-center" />
+                    <div className='px-2'>
+                      <span className='relative text-slate-900 text-[10px] mt-auto dark:text-white'>Tuesday, March 31, 2026</span>
+                    </div>
+                    <h4 className='px-2'>
+                      <span className="relative text-start mt-auto text-lg font-bold text-slate-900 dark:text-white transition-colors duration-300">{category.name}</span>
+                    </h4>
+                  </span>
+                  <span className='relative text-right mt-auto text-slate-900 text-xs dark:text-white'>
+                    <button className='btn text-black/80 dark:text-white bg-blue-500 hover:brightness-95 dark:bg-blue-600 dark:hover:brightness-95 rounded-lg px-4 py-1.5 transition-colors'>
+                      View now
+                    </button>
+                  </span>
+                </a>
+              ))}
+            </div>
+
+            {/* Arrows for scrolling (hidden on xl screens since it becomes a grid) */}
+            <div className="flex px-4 mt-5 md:hidden items-center justify-between">
+              <div className="text-center">
+                <Link to="/blog" className="inline-block text-sm font-semibold text-neutral-400 hover:text-black dark:hover:text-white">
+                  More updates &rarr;
+                </Link>
+              </div>
+
+              <div className="flex justify-center items-center gap-4">
+                <button
+                  onClick={() => scrollBlog('left')}
+                  className="btn p-3 dark:border-neutral-800 bg-white dark:bg-[#0a0a0a] text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors shadow-sm"
+                >
+                  <ChevronLeftIcon className="size-5" />
+                </button>
+                <button
+                  onClick={() => scrollBlog('right')}
+                  className="btn p-3 dark:border-neutral-800 bg-white dark:bg-[#0a0a0a] text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors shadow-sm"
+                >
+                  <ChevronRightIcon className="size-5" />
+                </button>
               </div>
             </div>
-          </div>
-          <div className="mt-6 px-4 sm:hidden">
-            <Link to="/blog" className="block text-sm font-semibold text-neutral-400 hover:text-black dark:hover:text-white">
-              More updates
-            </Link>
           </div>
         </section>
 

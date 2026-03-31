@@ -19,6 +19,23 @@ export const devices: Device[] = [
     ]
   },
   {
+    id: "apple-iphone-17e",
+    name: "Apple iPhone 17e",
+    imageSrc: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17e.jpg",
+    isNew: true,
+    brand: "Apple",
+    specs: [
+      { label: "Display", value: "6.1\" AMOLED, 1170x2532" },
+      { label: "Chipset", value: "Apple A19" },
+      { label: "Camera", value: "48 MP main, 2160p video" },
+      { label: "Battery", value: "4005 mAh, 15W wired" },
+      { label: "Dimensions", value: "146.7 x 71.5 x 7.8 mm" },
+      { label: "Weight", value: "169 g" },
+      { label: "Resistance", value: "IP68 dust/water resistant" },
+      { label: "AI", value: "Apple Intelligence integration" }
+    ]
+  },
+  {
     id: "nothing-phone-4a-pro",
     name: "Nothing Phone (4a) Pro",
     imageSrc: "https://fdn2.gsmarena.com/vv/bigpic/nothing-phone-4a-pro.jpg",
@@ -36,37 +53,21 @@ export const devices: Device[] = [
     ]
   },
   {
-    id: "samsung-galaxy-s26",
-    name: "Samsung Galaxy S26",
-    imageSrc: "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s26.jpg",
-    isNew: true,
-    brand: "Samsung",
+    id: "apple-iphone-17-pro-max",
+    name: "Apple iPhone 17 Pro Max",
+    imageSrc: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17-pro-max.jpg",
+    isTrending: true,
+    isNew: false,
+    brand: "Apple",
     specs: [
-      { label: "Display", value: "6.3\" AMOLED, 120Hz" },
-      { label: "Chipset", value: "Snapdragon 8 Elite Gen 5" },
-      { label: "Camera", value: "50 MP main, 4320p video" },
-      { label: "Battery", value: "4300 mAh, 25W wired" },
-      { label: "Dimensions", value: "149.6 x 71.7 x 7.2 mm" },
-      { label: "Weight", value: "167 g" },
+      { label: "Display", value: "6.9\" LTPO Super Retina XDR OLED, 120Hz" },
+      { label: "Chipset", value: "Apple A19 Pro" },
+      { label: "Camera", value: "48 MP main + 12 MP periscope (5x)" },
+      { label: "Battery", value: "4823 mAh, 25W wired" },
+      { label: "Dimensions", value: "163.4 x 78 x 8.8 mm" },
+      { label: "Weight", value: "233 g" },
       { label: "Resistance", value: "IP68 dust/water resistant" },
-      { label: "AI", value: "Galaxy AI integrated" }
-    ]
-  },
-  {
-    id: "infinix-note-60-ultra",
-    name: "Infinix Note 60 Ultra",
-    imageSrc: "https://fdn2.gsmarena.com/vv/bigpic/infinix-note60-ultra--.jpg",
-    isNew: true,
-    brand: "Infinix",
-    specs: [
-      { label: "Display", value: "6.78\" AMOLED, 144Hz" },
-      { label: "Chipset", value: "Dimensity 8400 Ultimate" },
-      { label: "Camera", value: "50 MP main, 2160p video" },
-      { label: "Battery", value: "7000 mAh, 100W wired" },
-      { label: "Dimensions", value: "162.3 x 77.2 x 7.9 mm" },
-      { label: "Weight", value: "220 g" },
-      { label: "Resistance", value: "IP64 dust/water resistant" },
-      { label: "AI", value: "XOS 16 AI features" }
+      { label: "AI", value: "Apple Intelligence integration" }
     ]
   },
   {
@@ -87,38 +88,37 @@ export const devices: Device[] = [
     ]
   },
   {
-    id: "apple-iphone-17e",
-    name: "Apple iPhone 17e",
-    imageSrc: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17e.jpg",
+    id: "tecno-spark-50",
+    name: "Tecno Spark 50",
+    imageSrc: "https://fdn2.gsmarena.com/vv/bigpic/tecno-spark50.jpg",
     isNew: true,
-    brand: "Apple",
+    brand: "Tecno",
     specs: [
-      { label: "Display", value: "6.1\" AMOLED, 1170x2532" },
-      { label: "Chipset", value: "Apple A19" },
-      { label: "Camera", value: "48 MP main, 2160p video" },
-      { label: "Battery", value: "4005 mAh, 15W wired" },
-      { label: "Dimensions", value: "146.7 x 71.5 x 7.8 mm" },
-      { label: "Weight", value: "169 g" },
+      { label: "Display", value: "6.78\" IPS LCD, 120Hz" },
+      { label: "Chipset", value: "Mediatek Dimensity 6400" },
+      { label: "Camera", value: "50 MP main, 4320p video" },
+      { label: "Battery", value: "6500 mAh, 45W wired" },
+      { label: "Dimensions", value: "167.9 x 79.3 x 8.2 mm" },
+      { label: "Weight", value: "210 g" },
       { label: "Resistance", value: "IP68 dust/water resistant" },
-      { label: "AI", value: "Apple Intelligence integration" }
+      { label: "AI", value: "HiOS 16 AI features" }
     ]
   },
   {
-    id: "apple-iphone-17-pro-max",
-    name: "Apple iPhone 17 Pro Max",
-    imageSrc: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17-pro-max.jpg",
-    isTrending: true,
-    isNew: false,
-    brand: "Apple",
+    id: "infinix-note-60-ultra",
+    name: "Infinix Note 60 Ultra",
+    imageSrc: "https://fdn2.gsmarena.com/vv/bigpic/infinix-note60-ultra--.jpg",
+    isNew: true,
+    brand: "Infinix",
     specs: [
-      { label: "Display", value: "6.9\" LTPO Super Retina XDR OLED, 120Hz" },
-      { label: "Chipset", value: "Apple A19 Pro" },
-      { label: "Camera", value: "48 MP main + 12 MP periscope (5x)" },
-      { label: "Battery", value: "4823 mAh, 25W wired" },
-      { label: "Dimensions", value: "163.4 x 78 x 8.8 mm" },
-      { label: "Weight", value: "233 g" },
-      { label: "Resistance", value: "IP68 dust/water resistant" },
-      { label: "AI", value: "Apple Intelligence integration" }
+      { label: "Display", value: "6.78\" AMOLED, 144Hz" },
+      { label: "Chipset", value: "Dimensity 8400 Ultimate" },
+      { label: "Camera", value: "50 MP main, 2160p video" },
+      { label: "Battery", value: "7000 mAh, 100W wired" },
+      { label: "Dimensions", value: "162.3 x 77.2 x 7.9 mm" },
+      { label: "Weight", value: "220 g" },
+      { label: "Resistance", value: "IP64 dust/water resistant" },
+      { label: "AI", value: "XOS 16 AI features" }
     ]
   },
   {

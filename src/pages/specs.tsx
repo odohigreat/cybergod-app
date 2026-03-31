@@ -59,14 +59,22 @@ function Specs() {
 
   if (!device) return null;
 
+  // Generate consistent pseudo-random price
+  const baseUsdPrice = 499 + (device.id.length * 15) + (device.name.charCodeAt(0) * 5);
+  const formattedNgn = new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 }).format(baseUsdPrice * 1500);
+  const formattedUsd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(baseUsdPrice);
+  const formattedInr = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(baseUsdPrice * 83.5);
+
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-black text-neutral-900 dark:text-neutral-100 font-sans selection:bg-blue-100 dark:selection:bg-blue-900 transition-colors duration-300">
-      <Header />
+      <div className="fixed top-0 w-full z-50">
+        <Header />
+      </div>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20">
-        <Link to="/" className="inline-flex items-center text-sm font-medium text-neutral-500 hover:text-neutral-800 dark:hover:text-white mb-8 transition-colors group">
+        <Link to="/" className="inline-flex items-center text-md font-medium text-neutral-500 hover:text-neutral-800 dark:hover:text-white mb-8 transition-colors group">
           <ChevronLeftIcon className="size-5 mr-1 group-hover:-translate-x-1 transition-transform" />
-          Back to browsing
+          Back
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -83,7 +91,7 @@ function Specs() {
                 <img
                   src={device.imageSrc}
                   alt={device.name}
-                  className="w-full h-full object-contain hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-contain hover:scale-105 transition-transform duration-700 rounded-3xl"
                 />
                 {device.isNew && (
                   <div className="absolute top-6 left-6 px-4 py-1.5 bg-green-500 text-white text-xs font-bold tracking-wider uppercase rounded-full shadow-lg">
@@ -97,8 +105,8 @@ function Specs() {
               <button
                 onClick={() => setIsWishlisted(!isWishlisted)}
                 className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-semibold transition-all duration-300 ${isWishlisted
-                    ? "bg-red-50 text-red-600 dark:bg-red-950/30 dark:text-red-400 border border-red-200 dark:border-red-900"
-                    : "bg-white text-neutral-900 dark:bg-[#0a0a0a] dark:text-white border border-neutral-200 dark:border-neutral-800 hover:border-red-200 dark:hover:border-red-900"
+                  ? "bg-red-50 text-red-600 dark:bg-red-950/30 dark:text-red-400 border border-red-200 dark:border-red-900"
+                  : "bg-white text-neutral-900 dark:bg-[#0a0a0a] dark:text-white border border-neutral-200 dark:border-neutral-800 hover:border-red-200 dark:hover:border-red-900"
                   }`}
               >
                 {isWishlisted ? <HeartIconSolid className="size-5" /> : <HeartIconOutline className="size-5" />}
@@ -131,7 +139,7 @@ function Specs() {
           </motion.div>
 
           {/* Right: Info & Specs */}
-          <div className="lg:col-span-7 space-y-12">
+          <div className="lg:col-span-7 space-y-7">
             <motion.header
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -142,7 +150,7 @@ function Specs() {
                 <div className="h-1 w-1 rounded-full bg-neutral-300 dark:bg-neutral-700" />
                 <span className="text-neutral-500 text-xs font-medium uppercase tracking-widest">Premium Device</span>
               </div>
-              <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-neutral-900 dark:text-white">
+              <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-neutral-900 dark:text-white">
                 {device.name}
               </h1>
               <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl">
@@ -178,6 +186,89 @@ function Specs() {
                   </div>
                 </motion.div>
               ))}
+            </motion.section>
+
+            {/* Pricing Section */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-8 p-6 md:p-8 rounded-3xl bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800"
+            >
+              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+                Estimated Pricing
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 shadow-sm relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-green-500/5 transition-colors group-hover:bg-green-500/10"></div>
+                  <span className="text-sm text-neutral-500 font-bold tracking-widest uppercase mb-2 z-10">Nigerian Naira (NGN)</span>
+                  <span className="text-3xl font-black text-green-600 dark:text-green-500 z-10">{formattedNgn}</span>
+                </div>
+                <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 shadow-sm relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-blue-500/5 transition-colors group-hover:bg-blue-500/10"></div>
+                  <span className="text-sm text-neutral-500 font-bold tracking-widest uppercase mb-2 z-10">US Dollar (USD)</span>
+                  <span className="text-3xl font-black text-neutral-900 dark:text-white z-10">{formattedUsd}</span>
+                </div>
+                <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 shadow-sm relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-orange-500/5 transition-colors group-hover:bg-orange-500/10"></div>
+                  <span className="text-sm text-neutral-500 font-bold tracking-widest uppercase mb-2 z-10">Indian Rupee (INR)</span>
+                  <span className="text-3xl font-black text-orange-600 dark:text-orange-500 z-10">{formattedInr}</span>
+                </div>
+              </div>
+            </motion.section>
+
+            {/* Suggested Vendors Section */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="mt-8 p-6 md:p-8 rounded-3xl bg-neutral-100 dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800"
+            >
+              <div className="text-left mb-8">
+                <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white flex items-center gap-2">
+                  Suggested Vendors
+                </h2>
+                <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+                  Purchase your next device from our highly recommended and trusted retail partners.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                  // { name: 'Amazon', rating: '4.9/5', desc: 'Global shipping and prime coverage.', color: 'from-orange-500/20 to-yellow-500/20' },
+                  // { name: 'Best Buy', rating: '4.8/5', desc: 'Expert tech support and warranties.', color: 'from-blue-500/20 to-cyan-500/20' },
+                  { name: 'Jumia', rating: '4.6/5', desc: 'Fast delivery across the continent.', color: 'from-neutral-500/20 to-neutral-400/20' },
+                  { name: 'Slot Systems', rating: '4.7/5', desc: 'Premium local retail experience.', color: 'from-red-500/20 to-rose-500/20' }
+                ].map((vendor, idx) => (
+                  <motion.a
+                    key={vendor.name}
+                    href="#"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: idx * 0.1 }}
+                    viewport={{ once: true }}
+                    className="group relative flex flex-col p-5 bg-white dark:bg-black rounded-2xl border border-neutral-200 dark:border-neutral-800 hover:border-blue-500/50 dark:hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-1 overflow-hidden z-10"
+                  >
+                    <div className={`absolute -inset-2 bg-gradient-to-br ${vendor.color} opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 -z-10`} />
+
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="text-lg font-bold text-neutral-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        {vendor.name}
+                      </h3>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                        ★ {vendor.rating}
+                      </span>
+                    </div>
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400 flex-grow mb-4">
+                      {vendor.desc}
+                    </p>
+                    <div className="mt-auto flex items-center text-xs font-semibold text-blue-600 dark:text-blue-400 group-hover:translate-x-1 transition-transform">
+                      Shop now <span aria-hidden="true" className="ml-1">&rarr;</span>
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
             </motion.section>
 
             {/* Related Devices - Brand new feature */}

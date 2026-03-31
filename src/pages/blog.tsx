@@ -4,8 +4,10 @@ import Header from "../Components/header";
 function Blog() {
   return (
     <div className="bg-white dark:bg-black min-h-screen transition-colors duration-300">
-      <Header />
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="fixed top-0 w-full z-50">
+        <Header />
+      </div>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-28 pb-20">
         <div className="mx-auto max-w-2xl lg:max-w-4xl">
           <div className="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
             <article className="relative isolate flex flex-col gap-8 lg:flex-row">

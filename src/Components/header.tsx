@@ -191,13 +191,13 @@ function Header() {
         <div className="fixed inset-0 z-40 flex">
           <DialogPanel
             transition
-            className="relative flex w-full max-w-xs rounded-r-lg border-[2px] border-gray-300 dark:border-neutral-500 transform flex-col overflow-y-auto bg-neutral-200 dark:bg-neutral-800 pb-12 shadow-xl transition duration-300 ease-in-out data-[closed]:-translate-x-full"
+            className="relative flex w-full top-20 left-3 bottom-20 max-w-xs rounded-2xl transform flex-col overflow-y-auto bg-white dark:bg-[#0a0a0a] pb-12 shadow-2xl transition duration-300 ease-in-out data-[closed]:-translate-x-full   border border-neutral-200/60 dark:border-neutral-700/60 bg-white/70 dark:bg-neutral-800/80 backdrop-blur-xl transition-all duration-300"
           >
-            <div className="flex px-4 pb-2 pt-5">
+            <div className="flex justify-end px-4 pb-2 pt-5">
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
+                className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors"
               >
                 <span className="sr-only">Close menu</span>
                 <XMarkIcon aria-hidden="true" className="h-6 w-6" />
@@ -206,12 +206,12 @@ function Header() {
 
             {/* Links */}
             <TabGroup className="mt-2">
-              <div className="border-b border-gray-200">
+              <div className="border-b border-neutral-200 dark:border-neutral-800">
                 <TabList className="-mb-px flex space-x-8 px-4">
                   {navigation.categories.map((category) => (
                     <Tab
                       key={category.name}
-                      className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-neutral-400 data-[selected]:border-neutral-600 dark:data-[selected]:border-neutral-100 data-[selected]:text-neutral-600 dark:data-[selected]:text-neutral-100"
+                      className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-neutral-500 dark:text-neutral-400 data-[selected]:border-blue-600 dark:data-[selected]:border-blue-400 data-[selected]:text-blue-600 dark:data-[selected]:text-blue-400 outline-none transition-colors"
                     >
                       {category.name}
                     </Tab>
@@ -223,18 +223,15 @@ function Header() {
                   <TabPanel key={category.name} className="space-y-6 px-4 py-6 max-h-[350px] overflow-scroll">
                     <div className="grid grid-cols-2 gap-x-4 gap-y-5">
                       {category.featured.map((item) => (
-                        <div key={item.name} className="group relative bg-neutral-100 dark:bg-transparent border-[2px] rounded-xl border-gray-300 dark:border-neutral-500 p-2">
-                          <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100">
-                            <img alt={item.imageAlt} src={item.imageSrc} className="object-cover h-16 w-full object-center" />
+                        <div key={item.name} className="group relative bg-neutral-50 dark:bg-[#111] border border-neutral-200 dark:border-neutral-800 hover:border-blue-500/50 dark:hover:border-blue-500/50 rounded-xl p-2 transition-all duration-300">
+                          <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-white dark:bg-black">
+                            <img alt={item.imageAlt} src={item.imageSrc} className="object-cover h-16 w-full object-center group-hover:scale-105 transition-transform duration-300" />
                           </div>
-                          <div className='flex items-baseline justify-between space-x-2'>
-                            <a href={item.href} className="mt-2 block text-nowrap max-w-32 overflow-hidden font-medium text-base text-gray-900 dark:text-white">
+                          <div className='flex items-center justify-between space-x-2 mt-2'>
+                            <a href={item.href} className="block text-nowrap max-w-32 overflow-hidden font-medium text-sm text-neutral-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                               <span aria-hidden="true" className="absolute inset-0 z-10" />
                               {item.name}
                             </a>
-                            <p aria-hidden="true" className="text-xs hover:underline text-slate-700 dark:text-gray-400 p-1 px-2 hover:bg-gray-300 border border-gray-300 rounded-md">
-                              View
-                            </p>
                           </div>
                         </div>
                       ))}
@@ -252,32 +249,28 @@ function Header() {
               </Link>
             </div>
 
-            <div className="space-y-6 border-t border-gray-200 px-4 py-6">
+            <div className="space-y-2 border-t border-neutral-200 dark:border-neutral-800 px-4 py-6">
               {navigation.pages.map((page) => (
                 <div key={page.name} className="flow-root">
-                  <Link to={page.to} className="-m-2 block p-3 font-medium rounded-lg bg-neutral-300 bg-opacity-80 text-darkmode">
+                  <Link to={page.to} className="-m-2 block p-3 font-medium rounded-lg text-neutral-900 dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors">
                     {page.name}
                   </Link>
                 </div>
               ))}
             </div>
 
-            <div className="flex space-x-4 justify-between w-full border-t border-gray-200 px-4 py-6">
-              <div className="flow-root">
-                <Link to="/sign-in" className="-m-2 px-6 py-2.5 block font-medium rounded-lg text-neutral-50 bg-neutral-500 active:scale-95 active:brightness-85">
-                  Create an account
-                </Link>
-              </div>
-              <div className="flow-root">
-                <Link to="/sign-in" className="-m-2 px-6 py-2.5 block font-medium rounded-lg bg-neutral-300 text-darkmode active:scale-95 active:brightness-85">
-                  Sign in
-                </Link>
-              </div>
+            <div className="flex space-x-4 w-full border-t border-neutral-200 dark:border-neutral-800 px-4 py-4">
+              <Link to="/sign-in" className="btn w-full text-center text-nowrap px-6 py-3 font-semibold rounded-xl text-black/80 dark:text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 transition-colors shadow-sm">
+                Create account
+              </Link>
+              <Link to="/sign-in" className="btn w-fit px-6 py-3 font-semibold rounded-xl text-neutral-900 dark:text-white bg-neutral-100 dark:bg-black hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
+                Sign in
+              </Link>
             </div>
 
-            <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-              {/* Currency selector */}
-              {/* <form>
+            {/* <div className="space-y-6 border-t border-neutral-200 dark:border-neutral-800 px-4 py-6"> */}
+            {/* Currency selector */}
+            {/* <form>
                 <div className="inline-block">
                   <label htmlFor="mobile-currency" className="sr-only">
                     Currency
@@ -295,10 +288,10 @@ function Header() {
                   </div>
                 </div>
               </form> */}
-            </div>
+            {/* </div> */}
           </DialogPanel>
-        </div>
-      </Dialog>
+        </div >
+      </Dialog >
 
       <header className="relative z-10 mt-2 mx-auto w-[calc(100%-1rem)] md:w-[calc(120%-2rem)] max-w-7xl rounded-2xl shadow-xl border border-neutral-200/60 dark:border-neutral-700/60 bg-white/70 dark:bg-neutral-800/80 backdrop-blur-xl transition-all duration-300">
         <nav aria-label="Top">
