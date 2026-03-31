@@ -36,4 +36,4 @@ function AppProvider({ children }: Props) {
   )
 }
 
-export default AppContext;
+export { AppContext, AppProvider };

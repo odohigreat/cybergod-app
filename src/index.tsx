@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, createBrowserRouter, Route, RouterProvider, Routes, } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -14,6 +14,17 @@ import Specs from './pages/specs';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+// Global Dark Mode Initialization
+if (
+  localStorage.theme === 'dark' ||
+  (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+) {
+  document.documentElement.classList.add('dark');
+} else {
+  document.documentElement.classList.remove('dark');
+}
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
