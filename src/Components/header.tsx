@@ -293,7 +293,7 @@ function Header() {
         </div >
       </Dialog >
 
-      <header className="relative z-10 mt-2 mx-auto w-[calc(100%-1rem)] md:w-[calc(120%-2rem)] max-w-7xl rounded-2xl shadow-xl border border-neutral-200/60 dark:border-neutral-700/60 bg-white/70 dark:bg-neutral-800/80 backdrop-blur-xl transition-all duration-300">
+      <header className="relative z-10 mt-2 mx-auto w-[calc(100%-1rem)] md:w-[calc(120%-2rem)] max-w-7xl rounded-xl shadow-xl border border-neutral-200/60 dark:border-neutral-700/60 bg-white/70 dark:bg-neutral-800/80 backdrop-blur-xl transition-all duration-300">
         <nav aria-label="Top">
           <div className="mx-auto px-4 sm:px-6 lg:px-8">
             <div>

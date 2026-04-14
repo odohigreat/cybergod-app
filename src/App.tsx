@@ -88,7 +88,7 @@ function Home() {
         <Header />
       </div>
       {/* Hero section */}
-      <div className="bg-gradient-to-bl from-neutral-100 to-neutral-200 dark:bg-none dark:bg-black h-fit lg:h-fit pt-20 md:pt-16 pb-10">
+      <div className="bg-gradient-to-bl from-neutral-100 to-neutral-200 dark:bg-none dark:bg-black h-fit lg:h-fit pt-20 pb-10">
         <div className="relative mx-auto flex lg:flex-row flex-col-reverse lg:space-x-20 max-w-6xl items-center py-5 lg:py-10 px-5 lg:px-16">
           <div className='flex flex-col space-y-5 items-start max-w-md text-gray-900 dark:text-neutral-100'>
             <h1 className="text-4xl font-bold lg:leading-tight lg:text-5xl">Looking for the phone that's just for you?</h1>
@@ -127,8 +127,8 @@ function Home() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}>
-                    {device.isNew && <span className='px-2 py-0.5 text-green-100 text-xs dark:text-black self-end rounded-md border border-green-300 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>}
-                    {device.isTrending && <span className='px-2 py-0.5 text-xs text-blue-100 dark:text-black self-end rounded-md border border-blue-300 bg-blue-400 bg-opacity-55 hover:bg-opacity-80'>Trending</span>}
+                    {device.isNew && <span className='px-2 py-0.5 text-green-700 text-xs dark:text-white self-end rounded-md border border-green-300 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>}
+                    {device.isTrending && <span className='px-2 py-0.5 text-xs text-blue-700 dark:text-white self-end rounded-md border border-blue-300 bg-blue-400 bg-opacity-55 hover:bg-opacity-80'>Trending</span>}
                     <img src={device.imageSrc} alt={device.name} className='rounded-lg h-28 group-hover:scale-110 transition-all duration-500 ease-in-out' />
                     <h3 className='text-base truncate w-full font-semibold text-center text-gray-900 dark:text-white'>{device.name}</h3>
                   </motion.div>
