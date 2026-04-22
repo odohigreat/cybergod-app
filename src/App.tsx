@@ -88,10 +88,10 @@ function Home() {
         <Header />
       </div>
       {/* Hero section */}
-      <div className="bg-gradient-to-bl from-neutral-100 to-neutral-200 dark:bg-none dark:bg-black h-fit lg:h-fit pt-20 md:pt-16 pb-10">
+      <div className="bg-gradient-to-bl from-neutral-100 to-neutral-200 dark:bg-none dark:bg-black h-fit lg:h-fit pt-20 pb-10">
         <div className="relative mx-auto flex lg:flex-row flex-col-reverse lg:space-x-20 max-w-6xl items-center py-5 lg:py-10 px-5 lg:px-16">
           <div className='flex flex-col space-y-5 items-start max-w-md text-gray-900 dark:text-neutral-100'>
-            <h1 className="text-4xl font-bold lg:leading-tight lg:text-5xl">Looking for the phone that's just for you?</h1>
+            <h1 className="text-4xl font-black lg:leading-tight lg:text-5xl">Looking for the phone that's just for you?</h1>
             <p className="text-lg">
               You're just one click away from finding the perfect phone that suits your needs.
             </p>
@@ -108,112 +108,7 @@ function Home() {
       </div>
 
       <main>
-
-        {/* trendy device previews */}
-        <div className="bg-white dark:bg-black py-7 md:py-10 px-2 md:px-16 mx-auto max-w-7xl transition-colors duration-300">
-          <motion.h2 className="font-semibold text-3xl md:text-4xl text-black dark:text-white pb-8 pl-2 transition-colors duration-300"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.2 }}>
-            <b className='text-blue-400'>Trending</b> Devices
-          </motion.h2>
-          <div className="">
-            <div className="grid grid-cols-2 gap-5 items-center md:grid-cols-5">
-              {devices.map((device) => (
-                <Link key={device.id} to={`/specs?device=${device.id}`}>
-                  <motion.div className='flex flex-col items-center group justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 dark:bg-neutral-900 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 ease-in-out border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 hover:shadow-xl hover:shadow-neutral-500/10 hover:-translate-y-1 transition-all duration-500'
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
-                    viewport={{ once: true, amount: 0.2 }}>
-                    {device.isNew && <span className='px-2 py-0.5 text-green-100 text-xs dark:text-black self-end rounded-md border border-green-300 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>}
-                    {device.isTrending && <span className='px-2 py-0.5 text-xs text-blue-100 dark:text-black self-end rounded-md border border-blue-300 bg-blue-400 bg-opacity-55 hover:bg-opacity-80'>Trending</span>}
-                    <img src={device.imageSrc} alt={device.name} className='rounded-lg h-28 group-hover:scale-110 transition-all duration-500 ease-in-out' />
-                    <h3 className='text-base truncate w-full font-semibold text-center text-gray-900 dark:text-white'>{device.name}</h3>
-                  </motion.div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Partnering brands section */}
-        <div className="bg-white dark:bg-black py-10 p-5 transition-colors duration-300">
-          <motion.span className='flex flex-col pb-10 items-center justify-center text-center'
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.2 }}>
-            <h2 className="font-semibold text-3xl text-black dark:text-white transition-colors duration-300">Trusted by various
-              <b className='text-blue-400'> Reputable</b> brands
-            </h2>
-          </motion.span>
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <motion.div className="mx-auto grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-12 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:grid-cols-5"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-              viewport={{ once: true, amount: 0.2 }}>
-              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/transistor-logo-gray-900.svg" alt="Transistor" width="158" height="48" />
-              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/reform-logo-gray-900.svg" alt="Reform" width="158" height="48" />
-              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/tuple-logo-gray-900.svg" alt="Tuple" width="158" height="48" />
-              <img className="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/savvycal-logo-gray-900.svg" alt="SavvyCal" width="158" height="48" />
-              <img className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/statamic-logo-gray-900.svg" alt="Statamic" width="158" height="48" />
-            </motion.div>
-          </div>
-        </div>
-
-        <div className="relative py-12 md:py-24 bg-neutral-50 dark:bg-black transition-colors duration-300">
-          <motion.span className='flex flex-col pb-10 items-center justify-center text-center'
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.2 }}>
-            <h2 className="font-semibold text-4xl text-black dark:text-white transition-colors duration-300">Quick view
-              <b className='text-blue-400'> Statistics</b>
-            </h2>
-          </motion.span>
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <dl className="grid grid-cols-1 gap-x-4 gap-y-16 text-center lg:grid-cols-3">
-              <motion.div className="mx-auto flex max-w-xs flex-col gap-y-2 w-full px-16 py-7 border border-blue-200 dark:border-blue-900/50 bg-opacity-15 dark:bg-opacity-10 rounded-xl bg-blue-300 dark:bg-blue-900 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out shadow-sm dark:shadow-none"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-                viewport={{ once: true, amount: 0.2 }}>
-                <dt className="text-base/7 text-blue-700 dark:text-blue-400 font-semibold text-nowrap transition-colors duration-300">Visits every 24 hours</dt>
-                <dd className="order-first text-3xl font-black tracking-tight text-neutral-800 dark:text-white text-nowrap sm:text-5xl transition-colors duration-300">
-                  <CountUp end={23000} />
-                </dd>
-              </motion.div>
-              <motion.div className="mx-auto flex max-w-xs flex-col gap-y-2 w-full px-16 py-7 border border-blue-200 dark:border-blue-900/50 bg-opacity-15 dark:bg-opacity-10 rounded-xl bg-blue-300 dark:bg-blue-900 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out shadow-sm dark:shadow-none"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-                viewport={{ once: true, amount: 0.2 }}>
-                <dt className="text-base/7 text-blue-700 dark:text-blue-400 font-semibold text-nowrap transition-colors duration-300">Detailed device reviews</dt>
-                <dd className="order-first text-3xl font-black tracking-tight text-neutral-800 dark:text-white text-nowrap sm:text-5xl transition-colors duration-300">
-                  <CountUp end={2000} suffix="+" />
-                </dd>
-              </motion.div>
-              <motion.div className="mx-auto flex max-w-xs flex-col gap-y-2 w-full px-16 py-7 border border-blue-200 dark:border-blue-900/50 bg-opacity-15 dark:bg-opacity-10 rounded-xl bg-blue-300 dark:bg-blue-900 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out shadow-sm dark:shadow-none"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-                viewport={{ once: true, amount: 0.2 }}>
-                <dt className="text-base/7 text-blue-700 dark:text-blue-400 font-semibold text-nowrap transition-colors duration-300">Active users currently</dt>
-                <dd className="order-first text-3xl font-black tracking-tight text-neutral-800 dark:text-white text-nowrap sm:text-5xl transition-colors duration-300">
-                  <CountUp end={1000} suffix="+" />
-                </dd>
-              </motion.div>
-            </dl>
-          </div>
-          {/* Grid background */}
-          <div className="absolute -z-10 inset-0 h-full w-full brightness-150 dark:brightness-[0.2] bg-[linear-gradient(to_right,#73737320_2px,transparent_2px),linear-gradient(to_bottom,#73737320_2px,transparent_2px)] bg-[size:30px_30px]" />
-        </div>
-
-
-        {/* Category section */}
+        {/* Blog section */}
         <section aria-labelledby="category-heading" className="dark:bg-black pt-8 pb-16 md:pt-10 xl:mx-auto xl:max-w-7xl xl:px-8">
           <div className="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="category-heading" className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -236,7 +131,7 @@ function Home() {
                 <a
                   key={category.name}
                   href={category.href}
-                  className="snap-center shrink-0 relative flex h-80 w-72 flex-col overflow-hidden border border-neutral-200 dark:border-neutral-800 rounded-2xl p-2 xl:w-auto transition-colors duration-300 bg-white dark:bg-[#0a0a0a]"
+                  className="snap-center shrink-0 relative flex h-80 w-72 flex-col bg-neutral-100 dark:bg-neutral-900 overflow-hidden border border-neutral-200 dark:border-neutral-800 rounded-2xl p-2 xl:w-auto transition-colors duration-300 bg-white dark:bg-[#0a0a0a]"
                 >
                   <span aria-hidden="true" className="absolute inset-0">
                     <img alt="" src={category.imageSrc} className="size-fit max-h-40 min-w-full object-cover hover:brightness-110 rounded-2xl p-2 object-center" />
@@ -281,6 +176,109 @@ function Home() {
             </div>
           </div>
         </section>
+
+        {/* trendy device previews */}
+        <div className="py-7 md:py-10 pb-10 md:pb-20 px-2 md:px-16 mx-auto max-w-7xl transition-colors duration-300">
+          <motion.h2 className="font-semibold text-3xl md:text-4xl text-black dark:text-white pb-8 pl-2 transition-colors duration-300"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}>
+            <b className='text-blue-400'>Trending</b> Devices
+          </motion.h2>
+          <div className="">
+            <div className="grid grid-cols-2 gap-5 items-center md:grid-cols-5">
+              {devices.map((device) => (
+                <Link key={device.id} to={`/specs?device=${device.id}`}>
+                  <motion.div className='flex flex-col items-center group justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 dark:bg-neutral-900 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 ease-in-out border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 hover:shadow-xl hover:shadow-neutral-500/10 hover:-translate-y-1 transition-all duration-500'
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    viewport={{ once: true, amount: 0.2 }}>
+                    {device.isNew && <span className='px-2 py-0.5 text-green-700 text-xs dark:text-white self-end rounded-md border border-green-200/50 bg-green-400 bg-opacity-55 hover:bg-opacity-80'>New</span>}
+                    {device.isTrending && <span className='px-2 py-0.5 text-xs text-blue-700 dark:text-white self-end rounded-md border border-blue-200/50 bg-blue-400 bg-opacity-55 hover:bg-opacity-80'>Trending</span>}
+                    <img src={device.imageSrc} alt={device.name} className='rounded-lg h-28 group-hover:scale-110 transition-all duration-500 ease-in-out' />
+                    <h3 className='text-base truncate w-full font-semibold text-center text-gray-900 dark:text-white'>{device.name}</h3>
+                  </motion.div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Partnering brands section */}
+        <div className="bg-white dark:bg-neutral-900 py-10 p-5 transition-colors duration-300">
+          <motion.span className='flex flex-col pb-10 items-center justify-center text-center'
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}>
+            <h2 className="font-semibold text-3xl text-black dark:text-white transition-colors duration-300">Trusted by various
+              <b className='text-blue-400'> Reputable</b> brands
+            </h2>
+          </motion.span>
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <motion.div className="mx-auto grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-12 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:grid-cols-5"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+              viewport={{ once: true, amount: 0.2 }}>
+              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/transistor-logo-gray-900.svg" alt="Transistor" width="158" height="48" />
+              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/reform-logo-gray-900.svg" alt="Reform" width="158" height="48" />
+              <img className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/tuple-logo-gray-900.svg" alt="Tuple" width="158" height="48" />
+              <img className="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/savvycal-logo-gray-900.svg" alt="SavvyCal" width="158" height="48" />
+              <img className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1 dark:invert opacity-70 dark:opacity-100 transition-all duration-300" src="https://tailwindcss.com/plus-assets/img/logos/158x48/statamic-logo-gray-900.svg" alt="Statamic" width="158" height="48" />
+            </motion.div>
+          </div>
+        </div>
+
+        <div className="relative py-12 md:py-24 bg-neutral-50 dark:bg-black transition-colors duration-300">
+          <motion.span className='flex flex-col pb-10 items-center justify-center text-center'
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}>
+            <h2 className="font-semibold text-4xl text-black dark:text-white transition-colors duration-300">Quick view
+              <b className='text-blue-400'> Statistics</b>
+            </h2>
+          </motion.span>
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <dl className="grid grid-cols-1 gap-x-4 gap-y-16 text-center lg:grid-cols-3">
+              <motion.div className="mx-auto flex max-w-xs flex-col gap-y-2 w-full px-16 py-7 border border-blue-200 dark:border-blue-900/50 bg-opacity-15 dark:bg-opacity-10 rounded-xl bg-blue-300 dark:bg-blue-900 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out shadow-sm dark:shadow-none"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.2 }}>
+                <dt className="text-base/7 text-blue-700/80 dark:text-blue-400/80 font-semibold text-nowrap transition-colors duration-300">Visits every 24 hours</dt>
+                <dd className="order-first text-3xl font-black tracking-tight text-neutral-800 dark:text-white text-nowrap sm:text-5xl transition-colors duration-300">
+                  <CountUp end={23000} />
+                </dd>
+              </motion.div>
+              <motion.div className="mx-auto flex max-w-xs flex-col gap-y-2 w-full px-16 py-7 border border-blue-200 dark:border-blue-900/50 bg-opacity-15 dark:bg-opacity-10 rounded-xl bg-blue-300 dark:bg-blue-900 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out shadow-sm dark:shadow-none"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.2 }}>
+                <dt className="text-base/7 text-blue-700/80 dark:text-blue-400/80 font-semibold text-nowrap transition-colors duration-300">Detailed device reviews</dt>
+                <dd className="order-first text-3xl font-black tracking-tight text-neutral-800 dark:text-white text-nowrap sm:text-5xl transition-colors duration-300">
+                  <CountUp end={2000} suffix="+" />
+                </dd>
+              </motion.div>
+              <motion.div className="mx-auto flex max-w-xs flex-col gap-y-2 w-full px-16 py-7 border border-blue-200 dark:border-blue-900/50 bg-opacity-15 dark:bg-opacity-10 rounded-xl bg-blue-300 dark:bg-blue-900 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out shadow-sm dark:shadow-none"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.2 }}>
+                <dt className="text-base/7 text-blue-700/80 dark:text-blue-400/80 font-semibold text-nowrap transition-colors duration-300">Active users currently</dt>
+                <dd className="order-first text-3xl font-black tracking-tight text-neutral-800 dark:text-white text-nowrap sm:text-5xl transition-colors duration-300">
+                  <CountUp end={100000} suffix="+" />
+                </dd>
+              </motion.div>
+            </dl>
+          </div>
+          {/* Grid background */}
+          <div className="absolute -z-10 inset-0 h-full w-full brightness-150 dark:brightness-[0.2] bg-[linear-gradient(to_right,#73737320_2px,transparent_2px),linear-gradient(to_bottom,#73737320_2px,transparent_2px)] bg-[size:30px_30px]" />
+        </div>
 
         {/* Featured section */}
         <section
