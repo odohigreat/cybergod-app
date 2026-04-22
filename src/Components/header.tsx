@@ -191,7 +191,7 @@ function Header() {
         <div className="fixed inset-0 z-40 flex">
           <DialogPanel
             transition
-            className="relative flex w-full top-20 left-3 bottom-20 max-w-xs rounded-2xl transform flex-col overflow-y-auto bg-white dark:bg-[#0a0a0a] pb-12 shadow-2xl transition duration-300 ease-in-out data-[closed]:-translate-x-full   border border-neutral-200/60 dark:border-neutral-700/60 bg-white/70 dark:bg-neutral-800/80 backdrop-blur-xl transition-all duration-300"
+            className="relative flex w-full h-[calc(100vh-6rem)] top-20 left-3 max-w-xs rounded-2xl transform flex-col overflow-y-auto bg-white dark:bg-[#0a0a0a] pb-12 shadow-2xl transition duration-300 ease-in-out data-[closed]:-translate-x-full   border border-neutral-200/60 dark:border-neutral-700/60 bg-white/70 dark:bg-neutral-800/80 backdrop-blur-xl transition-all duration-300"
           >
             <div className="flex justify-end px-4 pb-2 pt-5">
               <button
@@ -293,7 +293,7 @@ function Header() {
         </div >
       </Dialog >
 
-      <header className="relative z-10 mt-2 mx-auto w-[calc(100%-1rem)] md:w-[calc(120%-2rem)] max-w-7xl rounded-xl shadow-xl border border-neutral-200/60 dark:border-neutral-700/60 bg-white/70 dark:bg-neutral-800/80 backdrop-blur-xl transition-all duration-300">
+      <header className="relative z-10 mt-2 mx-auto w-[calc(100%-1rem)] md:w-[calc(120%-2rem)] max-w-7xl rounded-xl shadow-md border border-neutral-200/60 dark:border-neutral-700/60 bg-white/70 dark:bg-neutral-800/80 backdrop-blur-xl transition-all duration-300">
         <nav aria-label="Top">
           <div className="mx-auto px-4 sm:px-6 lg:px-8">
             <div>
@@ -402,6 +402,11 @@ function Header() {
                 <div className="flex flex-1 items-center justify-end">
                   <div className="flex items-center space-x-2">
 
+                    {/* Search bar component */}
+                    <div className='hidden lg:flex'>
+                      <SearchBar />
+                    </div>
+
                     {/* DarkMode */}
                     <div className='flex items-center space-x-2'>
                       <div className='flex'>
@@ -414,6 +419,8 @@ function Header() {
                             <><MoonIcon className='size-5 text-black dark:text-white' /></>}
                         </button>
                       </div>
+
+                      {/* Sign In */}
                       <Link to="/sign-in">
                         <button
                           title='Sign In'

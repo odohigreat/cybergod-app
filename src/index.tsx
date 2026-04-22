@@ -10,6 +10,7 @@ import AllBrands from './pages/allbrands';
 import Quiz from './pages/quiz';
 import Result from './pages/result';
 import Specs from './pages/specs';
+import Compare from './pages/compare';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -36,6 +37,7 @@ root.render(
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/result" element={<Result />} />
         <Route path="/specs" element={<Specs />} />
+        <Route path="/compare" element={<Compare />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

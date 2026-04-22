@@ -1,4 +1,4 @@
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -37,6 +37,7 @@ const getIcon = (label: string) => {
 
 function Specs() {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const deviceId = searchParams.get("device");
   const [device, setDevice] = useState<Device | null>(null);
   const [isWishlisted, setIsWishlisted] = useState(false);
@@ -132,7 +133,11 @@ function Specs() {
                 </AnimatePresence>
               </button>
 
-              <button className="flex items-center justify-center p-4 bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:bg-neutral-50 dark:hover:bg-black transition-colors">
+              <button
+                onClick={() => navigate(`/compare?device=${device.id}`)}
+                title="Compare with another device"
+                className="flex items-center justify-center p-4 bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-2xl hover:bg-neutral-50 dark:hover:bg-black hover:border-blue-300 dark:hover:border-blue-800 transition-colors"
+              >
                 <ScaleIcon className="size-5" />
               </button>
             </div>
@@ -201,18 +206,18 @@ function Specs() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 shadow-sm relative overflow-hidden group">
                   <div className="absolute inset-0 bg-green-500/5 transition-colors group-hover:bg-green-500/10"></div>
-                  <span className="text-sm text-neutral-500 font-bold tracking-widest uppercase mb-2 z-10">Nigerian Naira (NGN)</span>
-                  <span className="text-3xl font-black text-green-600 dark:text-green-500 z-10">{formattedNgn}</span>
+                  <span className="text-sm md:text-xs text-neutral-500 font-semibold uppercase mb-2 z-10">Nigerian Naira (NGN)</span>
+                  <span className="text-2xl font-black text-green-600 dark:text-green-500 z-10">{formattedNgn}</span>
                 </div>
                 <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 shadow-sm relative overflow-hidden group">
                   <div className="absolute inset-0 bg-blue-500/5 transition-colors group-hover:bg-blue-500/10"></div>
-                  <span className="text-sm text-neutral-500 font-bold tracking-widest uppercase mb-2 z-10">US Dollar (USD)</span>
-                  <span className="text-3xl font-black text-neutral-900 dark:text-white z-10">{formattedUsd}</span>
+                  <span className="text-sm md:text-xs text-neutral-500 font-semibold uppercase mb-2 z-10">US Dollar (USD)</span>
+                  <span className="text-2xl font-black text-neutral-900 dark:text-white z-10">{formattedUsd}</span>
                 </div>
                 <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 shadow-sm relative overflow-hidden group">
                   <div className="absolute inset-0 bg-orange-500/5 transition-colors group-hover:bg-orange-500/10"></div>
-                  <span className="text-sm text-neutral-500 font-bold tracking-widest uppercase mb-2 z-10">Indian Rupee (INR)</span>
-                  <span className="text-3xl font-black text-orange-600 dark:text-orange-500 z-10">{formattedInr}</span>
+                  <span className="text-sm md:text-xs text-neutral-500 font-semibold uppercase mb-2 z-10">Indian Rupee (INR)</span>
+                  <span className="text-2xl font-black text-orange-600 dark:text-orange-500 z-10">{formattedInr}</span>
                 </div>
               </div>
             </motion.section>
