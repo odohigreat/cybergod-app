@@ -161,7 +161,7 @@ function Header() {
       if (saved !== null) {
         return saved === 'true'
       }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches
+      return false
     }
     return false
   })

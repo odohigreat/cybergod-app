@@ -17,10 +17,7 @@ const root = ReactDOM.createRoot(
 );
 
 // Global Dark Mode Initialization
-if (
-  localStorage.theme === 'dark' ||
-  (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-) {
+if (localStorage.darkMode === 'true') {
   document.documentElement.classList.add('dark');
 } else {
   document.documentElement.classList.remove('dark');
