@@ -14,11 +14,12 @@ import {
   SparklesIcon,
   MapPinIcon,
   ShieldCheckIcon,
+  MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 import Header from "../Components/header";
 import Footer from "../Components/footer";
-import { devices } from "../data/devices";
 import { Device } from "../types";
+import { supabase } from "../utils/supabase";
 
 /* ─── helpers ─── */
 const getIcon = (label: string) => {
@@ -47,6 +48,22 @@ const price = (d: Device) => {
 const fmt = (v: number, currency: string, locale: string) =>
   new Intl.NumberFormat(locale, { style: "currency", currency, maximumFractionDigits: 0 }).format(v);
 
+const mapSupabasePhoneToDevice = (dbPhone: any): Device => ({
+  id: dbPhone.slug,
+  name: dbPhone.model,
+  brand: dbPhone.brand,
+  imageSrc: dbPhone.image_url || 'https://via.placeholder.com/300',
+  isNew: dbPhone.release_year >= new Date().getFullYear() - 1,
+  specs: [
+    { label: 'Display', value: dbPhone.screen_size_inches ? `${dbPhone.screen_size_inches}"` : 'Unknown' },
+    { label: 'Battery', value: dbPhone.battery_mah ? `${dbPhone.battery_mah} mAh` : 'Unknown' },
+    { label: 'RAM', value: dbPhone.ram_gb_max ? `${dbPhone.ram_gb_max} GB` : 'Unknown' },
+    { label: 'Storage', value: dbPhone.storage_gb_max ? `${dbPhone.storage_gb_max} GB` : 'Unknown' },
+    { label: 'Weight', value: dbPhone.weight_g ? `${dbPhone.weight_g} g` : 'Unknown' },
+    { label: 'Release', value: dbPhone.release_year ? dbPhone.release_year.toString() : 'Unknown' },
+  ]
+});
+
 /* ─── device picker dropdown ─── */
 function DevicePicker({
   selected,
@@ -60,7 +77,38 @@ function DevicePicker({
   label: string;
 }) {
   const [open, setOpen] = useState(false);
-  const filtered = devices.filter((d) => d.id !== excludeId);
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState<Device[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    
+    const fetchResults = async () => {
+      setIsLoading(true);
+      let supabaseQuery = supabase.from('phones').select('*');
+      
+      if (query.trim() !== '') {
+        supabaseQuery = supabaseQuery.or(`brand.ilike.%${query}%,model.ilike.%${query}%`);
+      } else {
+        // Default list when opened empty
+        supabaseQuery = supabaseQuery.order('created_at', { ascending: false });
+      }
+      
+      const { data, error } = await supabaseQuery.limit(15);
+      
+      if (!error && data) {
+        setResults(data.map(mapSupabasePhoneToDevice).filter(d => d.id !== excludeId));
+      }
+      setIsLoading(false);
+    };
+
+    const timer = setTimeout(() => {
+      fetchResults();
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [query, open, excludeId]);
 
   return (
     <div className="relative w-full">
@@ -91,22 +139,42 @@ function DevicePicker({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="absolute z-30 mt-2 w-full max-h-72 overflow-y-auto rounded-2xl bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 shadow-2xl"
+            className="absolute z-30 mt-2 w-full max-h-80 overflow-y-auto rounded-2xl bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 shadow-2xl"
           >
-            {filtered.map((d) => (
-              <button
-                key={d.id}
-                onClick={() => { onSelect(d); setOpen(false); }}
-                className={`w-full flex items-center gap-3 px-5 py-3 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors text-left ${selected?.id === d.id ? "bg-blue-50 dark:bg-blue-950/20" : ""}`}
-              >
-                <img src={d.imageSrc} alt={d.name} className="size-9 object-contain rounded-lg shrink-0" />
-                <div className="min-w-0">
-                  <p className="text-sm font-semibold truncate text-neutral-900 dark:text-white">{d.name}</p>
-                  <p className="text-xs text-neutral-500">{d.brand}</p>
-                </div>
-                {selected?.id === d.id && <CheckCircleIcon className="size-5 text-blue-500 ml-auto shrink-0" />}
-              </button>
-            ))}
+            <div className="p-3 border-b border-neutral-200 dark:border-neutral-800 sticky top-0 bg-white dark:bg-[#0a0a0a] z-10">
+              <div className="relative">
+                <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
+                <input 
+                  type="text" 
+                  autoFocus
+                  placeholder="Search brand or model..." 
+                  className="w-full pl-9 pr-4 py-2 bg-neutral-100 dark:bg-neutral-900 border-none rounded-xl text-sm focus:ring-2 focus:ring-blue-500 outline-none text-neutral-900 dark:text-white"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+              </div>
+            </div>
+
+            {isLoading ? (
+               <div className="p-5 text-center text-sm text-neutral-500">Searching...</div>
+            ) : results.length > 0 ? (
+              results.map((d) => (
+                <button
+                  key={d.id}
+                  onClick={() => { onSelect(d); setOpen(false); }}
+                  className={`w-full flex items-center gap-3 px-5 py-3 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors text-left ${selected?.id === d.id ? "bg-blue-50 dark:bg-blue-950/20" : ""}`}
+                >
+                  <img src={d.imageSrc} alt={d.name} className="size-9 object-contain rounded-lg shrink-0" />
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold truncate text-neutral-900 dark:text-white">{d.name}</p>
+                    <p className="text-xs text-neutral-500">{d.brand}</p>
+                  </div>
+                  {selected?.id === d.id && <CheckCircleIcon className="size-5 text-blue-500 ml-auto shrink-0" />}
+                </button>
+              ))
+            ) : (
+              <div className="p-5 text-center text-sm text-neutral-500">No devices found.</div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -124,8 +192,17 @@ export default function Compare() {
 
   useEffect(() => {
     if (initialId) {
-      const found = devices.find((d) => d.id === initialId);
-      if (found) setDeviceA(found);
+      const fetchInitial = async () => {
+        const { data, error } = await supabase
+          .from('phones')
+          .select('*')
+          .eq('slug', initialId)
+          .single();
+        if (!error && data) {
+          setDeviceA(mapSupabasePhoneToDevice(data));
+        }
+      };
+      fetchInitial();
     }
   }, [initialId]);
 

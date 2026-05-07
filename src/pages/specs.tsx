@@ -20,6 +20,7 @@ import Header from "../Components/header";
 import Footer from "../Components/footer";
 import { devices } from "../data/devices";
 import { Device } from "../types";
+import { supabase } from "../utils/supabase";
 
 const getIcon = (label: string) => {
   const l = label.toLowerCase();
@@ -40,16 +41,70 @@ function Specs() {
   const navigate = useNavigate();
   const deviceId = searchParams.get("device");
   const [device, setDevice] = useState<Device | null>(null);
+  const [similarDevices, setSimilarDevices] = useState<Device[]>([]);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    if (deviceId) {
-      const found = devices.find((d) => d.id === deviceId);
-      setDevice(found || devices[0]); // Default to first if not found for demo
-    } else {
-      setDevice(devices[0]);
-    }
+    const fetchDevice = async () => {
+      if (deviceId) {
+        const { data: dbPhone, error } = await supabase
+          .from('phones')
+          .select('*')
+          .eq('slug', deviceId)
+          .single();
+
+        if (!error && dbPhone) {
+          const display = dbPhone.raw_specs?.displayResolutionRaw || dbPhone.raw_specs?.displaySizeRaw || `${dbPhone.screen_size_inches || '?'} inches`;
+          const chipset = dbPhone.raw_specs?.platformChipsetRaw || dbPhone.raw_specs?.platformCPURaw || 'Latest Processor';
+          const camera = dbPhone.raw_specs?.mainCameraRaw || 'Pro Camera System';
+          const battery = dbPhone.raw_specs?.batteryRaw || `${dbPhone.battery_mah || '?'} mAh Battery`;
+
+          const fetchedDevice: Device = {
+            id: dbPhone.slug,
+            name: dbPhone.model,
+            brand: dbPhone.brand,
+            imageSrc: dbPhone.image_url || 'https://via.placeholder.com/300',
+            isNew: dbPhone.release_year >= new Date().getFullYear() - 1,
+            specs: [
+              { label: 'Display', value: display },
+              { label: 'Processor', value: chipset },
+              { label: 'Camera', value: camera },
+              { label: 'Battery', value: battery },
+            ],
+          };
+          setDevice(fetchedDevice);
+
+          const { data: similar } = await supabase
+            .from('phones')
+            .select('*')
+            .eq('brand', dbPhone.brand)
+            .neq('slug', dbPhone.slug)
+            .limit(3);
+          
+          if (similar && similar.length > 0) {
+             setSimilarDevices(similar.map((p: any) => ({
+               id: p.slug,
+               name: p.model,
+               brand: p.brand,
+               imageSrc: p.image_url || 'https://via.placeholder.com/300',
+               isNew: p.release_year >= new Date().getFullYear() - 1,
+               specs: []
+             })));
+          } else {
+             setSimilarDevices(devices.slice(0, 3));
+          }
+        } else {
+          const found = devices.find((d) => d.id === deviceId);
+          setDevice(found || devices[0]);
+          setSimilarDevices(devices.filter(d => d.id !== (found?.id || devices[0].id)).slice(0, 3));
+        }
+      } else {
+        setDevice(devices[0]);
+        setSimilarDevices(devices.slice(1, 4));
+      }
+    };
+    fetchDevice();
   }, [deviceId]);
 
   const handleShare = () => {
@@ -285,7 +340,7 @@ function Specs() {
             >
               <h2 className="text-xl font-bold mb-6">Similar Devices</h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                {devices.filter(d => d.id !== device.id).slice(0, 3).map((d) => (
+                {similarDevices.map((d) => (
                   <Link
                     key={d.id}
                     to={`/specs?device=${d.id}`}
