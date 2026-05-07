@@ -267,28 +267,6 @@ function Header() {
                 Sign in
               </Link>
             </div>
-
-            {/* <div className="space-y-6 border-t border-neutral-200 dark:border-neutral-800 px-4 py-6"> */}
-            {/* Currency selector */}
-            {/* <form>
-                <div className="inline-block">
-                  <label htmlFor="mobile-currency" className="sr-only">
-                    Currency
-                  </label>
-                  <div className="group relative -ml-2 rounded-md border-transparent focus-within:ring-2 focus-within:ring-white">
-                    <select
-                      id="mobile-currency"
-                      name="currency"
-                      className="flex items-center rounded-md border-transparent bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-gray-700 focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-800"
-                    >
-                      {currencies.map((currency) => (
-                        <option key={currency}>{currency}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              </form> */}
-            {/* </div> */}
           </DialogPanel>
         </div >
       </Dialog >

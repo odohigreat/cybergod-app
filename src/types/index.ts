@@ -1,6 +1,7 @@
 export interface Spec {
   label: string;
-  value: string;
+  value?: string;
+  subSpecs?: { label: string; value: string }[];
 }
 
 export interface Device {
@@ -11,6 +12,7 @@ export interface Device {
   isNew?: boolean;
   brand: string;
   specs: Spec[];
+  quickSpecs?: Spec[];
 }
 
 export interface Option {
