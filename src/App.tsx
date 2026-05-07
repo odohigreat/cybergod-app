@@ -104,7 +104,7 @@ function Home() {
             isNew: p.release_year >= new Date().getFullYear() - 1,
             isTrending: true,
           }));
-          
+
           setNewDevices(mapData(newPhonesData));
           setTrendingDevices(mapData(trendingPhonesData));
         }
@@ -128,7 +128,7 @@ function Home() {
         <Header />
       </div>
       {/* Hero section */}
-      <div className="bg-gradient-to-bl from-neutral-100 to-neutral-200 dark:bg-none dark:bg-black h-fit lg:h-fit pt-24 pb-5">
+      <div className="bg-gradient-to-bl from-neutral-100 to-neutral-200 dark:bg-none dark:bg-neutral-950 h-fit lg:h-fit pt-24 pb-5">
         <div className="relative mx-auto flex lg:flex-row flex-col-reverse lg:space-x-20 max-w-6xl items-center py-5 lg:py-10 px-5 lg:px-16">
           <div className='flex flex-col space-y-5 items-start max-w-md text-gray-900 dark:text-neutral-100'>
             <h1 className="text-4xl font-black lg:leading-tight lg:text-5xl">Looking for the phone that's <b className='text-blue-400'>just</b> for you?</h1>
@@ -163,7 +163,7 @@ function Home() {
           <div className="mt-8 relative">
             <div
               ref={blogScrollRef}
-              className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 pb-6 sm:px-6 lg:px-8 xl:grid xl:grid-cols-3 xl:gap-6 xl:px-0 w-full"
+              className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 pb-6 sm:px-6 lg:px-8 xl:grid xl:grid-cols-4 xl:gap-6 xl:px-0 w-full"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               <style>{`.overflow-x-auto::-webkit-scrollbar { display: none; }`}</style>
@@ -171,15 +171,15 @@ function Home() {
                 <a
                   key={category.name}
                   href={category.href}
-                  className="snap-center shrink-0 relative flex h-72 w-72 flex-col bg-neutral-100 dark:bg-neutral-900 overflow-hidden border border-neutral-200 dark:border-neutral-800 rounded-2xl p-2 xl:w-auto transition-colors duration-300 bg-white dark:bg-[#0a0a0a]"
+                  className="snap-center shrink-0 relative flex h-72 w-72 flex-col bg-neutral-100 dark:bg-neutral-900 overflow-hidden border border-neutral-200 dark:border-neutral-800 rounded-2xl group dark:hover:brightness-105 dark:hover:bg-neutral-800/50 p-2 xl:w-auto transition-colors duration-300 bg-white dark:bg-[#0a0a0a]"
                 >
                   <span aria-hidden="true" className="absolute inset-0">
-                    <img alt="" src={category.imageSrc} className="size-fit max-h-40 min-w-full object-cover hover:brightness-110 rounded-2xl p-2 object-center" />
+                    <img alt="" src={category.imageSrc} className="size-fit max-h-40 min-w-full object-cover rounded-2xl p-2 object-center" />
                     <div className='px-2'>
                       <span className='relative text-slate-900 text-[10px] mt-auto dark:text-white'>Tuesday, March 31, 2026</span>
                     </div>
                     <h4 className='px-2'>
-                      <span className="relative text-start mt-auto text-lg font-bold text-slate-900 dark:text-white transition-colors duration-300">{category.name}</span>
+                      <span className="relative text-start mt-auto text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors duration-300">{category.name}</span>
                     </h4>
                   </span>
                   {/* <span className='relative text-right mt-auto text-slate-900 text-xs dark:text-white'>
@@ -218,9 +218,9 @@ function Home() {
         </section>
 
         {/* new device previews */}
-        <div className="py-7 md:py-10 pb-10 md:pb-20 px-2 md:px-16 mx-auto max-w-7xl transition-colors duration-300">
+        <div className="bg-white dark:bg-neutral-950 py-7 md:py-10 pb-10 md:pb-20 px-2 md:px-16 mx-auto max-w-7xl transition-colors duration-300">
           <motion.h2 className="font-semibold text-3xl md:text-4xl text-black dark:text-white pb-8 pl-2 transition-colors duration-300"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }}>
@@ -231,7 +231,7 @@ function Home() {
               {newDevices.map((device) => (
                 <Link key={device.id} to={`/specs?device=${device.id}`}>
                   <motion.div className='flex flex-col items-center group justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 dark:bg-neutral-900 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 ease-in-out border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 hover:shadow-xl hover:shadow-neutral-500/10 hover:-translate-y-1 transition-all duration-500'
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 25 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}>
@@ -248,7 +248,7 @@ function Home() {
         {/* trendy device previews */}
         <div className="py-7 md:py-10 pb-10 md:pb-20 px-2 md:px-16 mx-auto max-w-7xl transition-colors duration-300">
           <motion.h2 className="font-semibold text-3xl md:text-4xl text-black dark:text-white pb-8 pl-2 transition-colors duration-300"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }}>
@@ -259,7 +259,7 @@ function Home() {
               {trendingDevices.map((device) => (
                 <Link key={device.id} to={`/specs?device=${device.id}`}>
                   <motion.div className='flex flex-col items-center group justify-between space-y-2 p-4 min-h-60 min-w-40 max-w-52 rounded-2xl bg-neutral-300 dark:bg-neutral-900 bg-opacity-30 backdrop-blur-sm cursor-pointer hover:brightness-105 active:scale-110 ease-in-out border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 hover:shadow-xl hover:shadow-neutral-500/10 hover:-translate-y-1 transition-all duration-500'
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 25 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.2 }}>
@@ -274,9 +274,9 @@ function Home() {
         </div>
 
         {/* Partnering brands section */}
-        <div className="bg-white dark:bg-neutral-900 py-10 p-5 transition-colors duration-300">
+        <div className="bg-white dark:bg-neutral-950 py-10 p-5 transition-colors duration-300">
           <motion.span className='flex flex-col pb-10 items-center justify-center text-center'
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }}>
@@ -286,7 +286,7 @@ function Home() {
           </motion.span>
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <motion.div className="mx-auto grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-12 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:grid-cols-5"
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}>
@@ -301,7 +301,7 @@ function Home() {
 
         <div className="relative py-12 md:py-24 bg-neutral-50 dark:bg-black transition-colors duration-300">
           <motion.span className='flex flex-col pb-10 items-center justify-center text-center'
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }}>
@@ -312,7 +312,7 @@ function Home() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <dl className="grid grid-cols-1 gap-x-4 gap-y-16 text-center lg:grid-cols-3">
               <motion.div className="mx-auto flex max-w-xs flex-col gap-y-2 w-full px-16 py-7 border border-blue-200 dark:border-blue-900/50 bg-opacity-15 dark:bg-opacity-10 rounded-xl bg-blue-300 dark:bg-blue-900 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out shadow-sm dark:shadow-none"
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
                 viewport={{ once: true, amount: 0.2 }}>
@@ -322,7 +322,7 @@ function Home() {
                 </dd>
               </motion.div>
               <motion.div className="mx-auto flex max-w-xs flex-col gap-y-2 w-full px-16 py-7 border border-blue-200 dark:border-blue-900/50 bg-opacity-15 dark:bg-opacity-10 rounded-xl bg-blue-300 dark:bg-blue-900 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out shadow-sm dark:shadow-none"
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
                 viewport={{ once: true, amount: 0.2 }}>
@@ -332,7 +332,7 @@ function Home() {
                 </dd>
               </motion.div>
               <motion.div className="mx-auto flex max-w-xs flex-col gap-y-2 w-full px-16 py-7 border border-blue-200 dark:border-blue-900/50 bg-opacity-15 dark:bg-opacity-10 rounded-xl bg-blue-300 dark:bg-blue-900 backdrop-blur-sm cursor-pointer hover:scale-110 transition-all duration-300 ease-out shadow-sm dark:shadow-none"
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
                 viewport={{ once: true, amount: 0.2 }}>

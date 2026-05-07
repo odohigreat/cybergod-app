@@ -13,7 +13,11 @@ import {
   SparklesIcon,
   MapPinIcon,
   ShieldCheckIcon,
-  ScaleIcon
+  ScaleIcon,
+  CalendarIcon,
+  ArrowsUpDownIcon,
+  CogIcon,
+  CircleStackIcon,
 } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
 import Header from "../Components/header";
@@ -22,14 +26,19 @@ import { devices } from "../data/devices";
 import { Device } from "../types";
 import { supabase } from "../utils/supabase";
 
-const getIcon = (label: string) => {
+const getIcon = (label: string, customClass?: string) => {
   const l = label.toLowerCase();
-  const iconClass = "size-5";
+  const iconClass = customClass || "size-5";
   if (l.includes("battery")) return <BoltIcon className={iconClass} />;
   if (l.includes("camera")) return <CameraIcon className={iconClass} />;
-  if (l.includes("chipset") || l.includes("processor")) return <CpuChipIcon className={iconClass} />;
+  if (l.includes("chipset") || l.includes("processor") || l.includes("performance")) return <CpuChipIcon className={iconClass} />;
   if (l.includes("display") || l.includes("screen")) return <DevicePhoneMobileIcon className={iconClass} />;
-  if (l.includes("dimension") || l.includes("weight")) return <ArrowsPointingOutIcon className={iconClass} />;
+  if (l.includes("dimension") || l.includes("design")) return <ArrowsPointingOutIcon className={iconClass} />;
+  if (l.includes("thickness")) return <ArrowsUpDownIcon className={iconClass} />;
+  if (l.includes("weight")) return <ScaleIcon className={iconClass} />;
+  if (l.includes("storage") || l.includes("memory")) return <CircleStackIcon className={iconClass} />;
+  if (l.includes("os")) return <CogIcon className={iconClass} />;
+  if (l.includes("release")) return <CalendarIcon className={iconClass} />;
   if (l.includes("ai") || l.includes("intelligence")) return <SparklesIcon className={iconClass} />;
   if (l.includes("connect")) return <MapPinIcon className={iconClass} />;
   if (l.includes("resist") || l.includes("shield")) return <ShieldCheckIcon className={iconClass} />;
@@ -44,6 +53,9 @@ function Specs() {
   const [similarDevices, setSimilarDevices] = useState<Device[]>([]);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [deviceId]);
 
   useEffect(() => {
     const fetchDevice = async () => {
@@ -55,10 +67,23 @@ function Specs() {
           .single();
 
         if (!error && dbPhone) {
-          const display = dbPhone.raw_specs?.displayResolutionRaw || dbPhone.raw_specs?.displaySizeRaw || `${dbPhone.screen_size_inches || '?'} inches`;
-          const chipset = dbPhone.raw_specs?.platformChipsetRaw || dbPhone.raw_specs?.platformCPURaw || 'Latest Processor';
-          const camera = dbPhone.raw_specs?.mainCameraRaw || 'Pro Camera System';
-          const battery = dbPhone.raw_specs?.batteryRaw || `${dbPhone.battery_mah || '?'} mAh Battery`;
+          // const display = dbPhone.raw_specs?.displayResolutionRaw || dbPhone.raw_specs?.displaySizeRaw || `${dbPhone.screen_size_inches || '?'} inches`;
+          const displaySize = dbPhone.raw_specs?.displaySizeRaw || `${dbPhone.screen_size_inches || '?'} inches`;
+          const displayType = dbPhone.raw_specs?.displayTypeRaw || 'AMOLED';
+          const displayRes = dbPhone.raw_specs?.displayResolutionRaw || 'Unknown';
+
+          const chipset = dbPhone.raw_specs?.platformChipsetRaw || 'Latest Processor';
+          const cpu = dbPhone.raw_specs?.platformCPURaw || 'Unknown';
+
+          const mainCam = dbPhone.raw_specs?.mainCameraRaw || 'Pro Camera System';
+          const selfieCam = dbPhone.raw_specs?.selfieCameraRaw || 'Front Camera';
+
+          const battery = dbPhone.battery_mah ? `${dbPhone.battery_mah} mAh Battery` : 'Unknown';
+          const weight = dbPhone.raw_specs?.bodyWeightRaw || (dbPhone.weight_g ? `${dbPhone.weight_g}g` : 'Unknown');
+          const dimensions = dbPhone.raw_specs?.bodyDimensionsRaw || 'Unknown';
+          const memory = dbPhone.raw_specs?.memoryInternalRaw || (dbPhone.ram_gb_max ? `${dbPhone.ram_gb_max} GB RAM` : 'Unknown');
+          const network = dbPhone.raw_specs?.networkRaw || '5G / LTE';
+          const sensors = dbPhone.raw_specs?.featuresSensorsRaw || 'Standard sensors';
 
           const fetchedDevice: Device = {
             id: dbPhone.slug,
@@ -67,11 +92,56 @@ function Specs() {
             imageSrc: dbPhone.image_url || 'https://via.placeholder.com/300',
             isNew: dbPhone.release_year >= new Date().getFullYear() - 1,
             specs: [
-              { label: 'Display', value: display },
-              { label: 'Processor', value: chipset },
-              { label: 'Camera', value: camera },
+              {
+                label: 'Display',
+                subSpecs: [
+                  { label: 'Size', value: displaySize },
+                  { label: 'Type', value: displayType },
+                  { label: 'Resolution', value: displayRes }
+                ]
+              },
+              {
+                label: 'Performance',
+                subSpecs: [
+                  { label: 'Chipset', value: chipset },
+                  { label: 'CPU', value: cpu }
+                ]
+              },
+              {
+                label: 'Cameras',
+                subSpecs: [
+                  { label: 'Main', value: mainCam },
+                  { label: 'Selfie', value: selfieCam }
+                ]
+              },
+              {
+                label: 'Design',
+                subSpecs: [
+                  { label: 'Dimensions', value: dimensions },
+                  { label: 'Weight', value: weight }
+                ]
+              },
+              {
+                label: 'Memory',
+                subSpecs: [
+                  { label: 'Options', value: memory }
+                ]
+              },
               { label: 'Battery', value: battery },
+              {
+                label: 'Connectivity',
+                subSpecs: [
+                  { label: 'Network', value: network },
+                  { label: 'Sensors', value: sensors }
+                ]
+              },
             ],
+            quickSpecs: [
+              { label: 'OS', value: dbPhone.raw_specs?.platformOSRaw?.split(',')[0] || 'Unknown' },
+              { label: 'Released', value: dbPhone.raw_specs?.launchAnnouncedRaw || 'Unknown' },
+              { label: 'Thickness', value: (dbPhone.raw_specs?.bodyDimensionsRaw?.match(/x ([\d.]+)\s*mm/) || [])[1] ? `${dbPhone.raw_specs.bodyDimensionsRaw.match(/x ([\d.]+)\s*mm/)[1]} mm` : 'Unknown' },
+              { label: 'Storage', value: dbPhone.storage_gb_max ? `${dbPhone.storage_gb_max} GB` : 'Unknown' },
+            ]
           };
           setDevice(fetchedDevice);
 
@@ -81,18 +151,18 @@ function Specs() {
             .eq('brand', dbPhone.brand)
             .neq('slug', dbPhone.slug)
             .limit(3);
-          
+
           if (similar && similar.length > 0) {
-             setSimilarDevices(similar.map((p: any) => ({
-               id: p.slug,
-               name: p.model,
-               brand: p.brand,
-               imageSrc: p.image_url || 'https://via.placeholder.com/300',
-               isNew: p.release_year >= new Date().getFullYear() - 1,
-               specs: []
-             })));
+            setSimilarDevices(similar.map((p: any) => ({
+              id: p.slug,
+              name: p.model,
+              brand: p.brand,
+              imageSrc: p.image_url || 'https://via.placeholder.com/300',
+              isNew: p.release_year >= new Date().getFullYear() - 1,
+              specs: []
+            })));
           } else {
-             setSimilarDevices(devices.slice(0, 3));
+            setSimilarDevices(devices.slice(0, 3));
           }
         } else {
           const found = devices.find((d) => d.id === deviceId);
@@ -128,10 +198,7 @@ function Specs() {
       </div>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20">
-        <Link to="/" className="inline-flex items-center text-md font-medium text-neutral-500 hover:text-neutral-800 dark:hover:text-white mb-8 transition-colors group">
-          <ChevronLeftIcon className="size-5 mr-1 group-hover:-translate-x-1 transition-transform" />
-          Back
-        </Link>
+
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left: Device Image & Quick Actions */}
@@ -142,16 +209,44 @@ function Specs() {
             className="lg:col-span-5 space-y-8"
           >
             <div className="relative group">
-              <div className="absolute -inset-4 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 rounded-[2.5rem] blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative aspect-[4/5] rounded-[2.5rem] bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 overflow-hidden shadow-2xl flex items-center justify-center p-8 transition-colors duration-300">
-                <img
-                  src={device.imageSrc}
-                  alt={device.name}
-                  className="w-full h-full object-contain hover:scale-105 transition-transform duration-700 rounded-3xl"
-                />
-                {device.isNew && (
-                  <div className="absolute top-6 left-6 px-4 py-1.5 bg-green-500 text-white text-xs font-bold tracking-wider uppercase rounded-full shadow-lg">
-                    Latest Release
+              <span className="flex flex-col gap-2 justify-between items-start">
+                <Link to="/" className="inline-flex md:hidden btn items-center text-md font-medium text-neutral-500 hover:text-neutral-800 dark:hover:text-white mb-2 transition-colors group">
+                  <ChevronLeftIcon className="size-5 md:mr-1 group-hover:-translate-x-1 transition-transform" />
+                  <p className="hidden md:block">Back</p>
+                </Link>
+                <h1 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-neutral-900 dark:text-white">
+                  {device.name}
+                </h1>
+              </span>
+              <div className="grid grid-cols-2 rounded-3xl p-2 bg-neutral-100/50 dark:bg-black border border-neutral-200 dark:border-neutral-800 gap-4">
+                <div className="absolute opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative h-72 lg:h-80 w-full rounded-3xl bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 overflow-hidden shadow-sm flex items-center justify-center p-6 transition-colors duration-300">
+                  <img
+                    src={device.imageSrc}
+                    alt={device.name}
+                    className={`w-full h-full object-contain transition-transform duration-700 ${device.isNew ? 'pt-6' : 'pt-0'}`}
+                  />
+                  {device.isNew && (
+                    <div className="absolute top-4 left-4 px-2 py-0.5 text-green-700 text-xs dark:text-white self-end rounded-md border border-green-200/50 bg-green-400 bg-opacity-55 hover:bg-opacity-80">
+                      New
+                    </div>
+                  )}
+
+                </div>
+                {/* Quick Specs Grid */}
+                {device.quickSpecs && device.quickSpecs.length > 0 && (
+                  <div className="grid grid-cols-1 gap-4">
+                    {device.quickSpecs.map((spec, idx) => (
+                      <div key={idx} className="flex flex-col px-4 py-2 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 shadow-sm transition-colors duration-300 hover:border-blue-300 dark:hover:border-blue-800 hover:shadow-md">
+                        <div className="flex items-center gap-1.5 mb-1 md:mb-2 text-neutral-500 dark:text-neutral-400">
+                          {getIcon(spec.label, "size-4")}
+                          <span className="text-[10px] font-bold uppercase">{spec.label}</span>
+                        </div>
+                        <span className="text-sm md:text-base font-light text-neutral-900 dark:text-white line-clamp-2" title={spec.value}>
+                          {spec.value}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>
@@ -208,14 +303,8 @@ function Specs() {
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-blue-600 dark:text-blue-400 font-bold tracking-widest uppercase text-xs">{device.brand}</span>
                 <div className="h-1 w-1 rounded-full bg-neutral-300 dark:bg-neutral-700" />
-                <span className="text-neutral-500 text-xs font-medium uppercase tracking-widest">Premium Device</span>
+                <span className="text-neutral-500 text-xs font-medium uppercase tracking-widest">Flagship Device</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-neutral-900 dark:text-white">
-                {device.name}
-              </h1>
-              <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl">
-                Experience the peak of mobile innovation. {device.name} combines cutting-edge performance with an elegant design that redefines excellence.
-              </p>
             </motion.header>
 
             <motion.section
@@ -235,14 +324,26 @@ function Specs() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.05 * idx }}
-                  className="group flex items-start gap-4 p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#0a0a0a] hover:bg-neutral-50 dark:hover:bg-black transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/5 hover:-translate-y-1"
+                  className="group flex flex-col items-start gap-4 p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#0a0a0a] hover:bg-neutral-50 dark:hover:bg-black transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/5 hover:-translate-y-1"
                 >
-                  <div className="p-3 rounded-xl bg-neutral-100 dark:bg-black text-neutral-500 group-hover:text-blue-500 transition-colors duration-300 border border-neutral-200 dark:border-neutral-800">
-                    {getIcon(spec.label)}
-                  </div>
-                  <div>
+                  <span className='flex items-center gap-2'>
+                    <div className="p-3 rounded-xl bg-neutral-100 dark:bg-black text-neutral-500 group-hover:text-blue-500 transition-colors duration-300 border border-neutral-200 dark:border-neutral-800">
+                      {getIcon(spec.label, "size-5")}
+                    </div>
                     <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-1">{spec.label}</h3>
-                    <p className="font-semibold text-neutral-900 dark:text-neutral-100">{spec.value}</p>
+                  </span>
+                  <div className="flex-1 min-w-0 w-full">
+                    {spec.value && <p className="font-semibold text-neutral-900 dark:text-neutral-100">{spec.value}</p>}
+                    {spec.subSpecs && (
+                      <div className="flex flex-col gap-2 mt-2 w-full">
+                        {spec.subSpecs.map(sub => (
+                          <div key={sub.label} className="flex flex-col p-2 w-full bg-neutral-100/50 dark:bg-neutral-900/50 rounded-lg border border-neutral-200 dark:border-neutral-800">
+                            <span className="text-[10px] font-bold uppercase text-neutral-400">{sub.label}</span>
+                            <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 line-clamp-2" title={sub.value}>{sub.value}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               ))}
@@ -298,7 +399,7 @@ function Specs() {
                 {[
                   // { name: 'Amazon', rating: '4.9/5', desc: 'Global shipping and prime coverage.', color: 'from-orange-500/20 to-yellow-500/20' },
                   // { name: 'Best Buy', rating: '4.8/5', desc: 'Expert tech support and warranties.', color: 'from-blue-500/20 to-cyan-500/20' },
-                  { name: 'Jumia', rating: '4.6/5', desc: 'Fast delivery across the continent.', color: 'from-neutral-500/20 to-neutral-400/20' },
+                  { name: 'Jumia', rating: '4.6/5', desc: 'Fast delivery across the continent.', color: 'from-orange-500/20 to-orange-400/20' },
                   { name: 'Slot Systems', rating: '4.7/5', desc: 'Premium local retail experience.', color: 'from-red-500/20 to-rose-500/20' }
                 ].map((vendor, idx) => (
                   <motion.a
@@ -346,7 +447,7 @@ function Specs() {
                     to={`/specs?device=${d.id}`}
                     className="group"
                   >
-                    <div className="aspect-square rounded-2xl bg-neutral-100 dark:bg-[#0a0a0a] p-4 border border-transparent dark:border-neutral-800 group-hover:border-blue-500/30 transition-all mb-3 overflow-hidden">
+                    <div className="aspect-square rounded-2xl bg-neutral-100/60 dark:bg-[#0a0a0a] p-4 border border-neutral-200 dark:border-neutral-800 group-hover:border-blue-500/30 transition-all mb-3 overflow-hidden">
                       <img src={d.imageSrc} alt={d.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
                     </div>
                     <h3 className="text-sm font-bold truncate group-hover:text-blue-500 transition-colors">{d.name}</h3>
