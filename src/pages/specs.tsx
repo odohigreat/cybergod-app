@@ -183,7 +183,45 @@ function Specs() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  if (!device) return null;
+  if (!device) {
+    return (
+      <div className="min-h-screen bg-neutral-50 dark:bg-black text-neutral-900 dark:text-neutral-100 font-sans transition-colors duration-300">
+        <div className="fixed top-0 w-full z-50">
+          <Header />
+        </div>
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 animate-pulse">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            {/* Left Column Skeleton */}
+            <div className="lg:col-span-5 space-y-8">
+              <div className="h-10 w-2/3 bg-neutral-200 dark:bg-neutral-800/60 rounded-xl" />
+              <div className="grid grid-cols-2 rounded-3xl p-2 bg-neutral-100/50 dark:bg-black border border-neutral-200 dark:border-neutral-800 gap-4">
+                <div className="relative h-72 lg:h-80 w-full rounded-3xl bg-neutral-200 dark:bg-neutral-900/60" />
+                <div className="grid grid-cols-1 gap-4">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="h-16 w-full bg-neutral-200 dark:bg-neutral-900/60 rounded-2xl" />
+                  ))}
+                </div>
+              </div>
+              <div className="h-14 w-full bg-neutral-200 dark:bg-neutral-900/60 rounded-2xl" />
+            </div>
+
+            {/* Right Column Skeleton */}
+            <div className="lg:col-span-7 space-y-7">
+              <div className="h-6 w-1/3 bg-neutral-200 dark:bg-neutral-800/60 rounded-md" />
+              <div className="h-px bg-neutral-200 dark:bg-neutral-800/60 my-4" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <div key={i} className="p-5 h-48 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-200 dark:bg-neutral-900/60" />
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   // Generate consistent pseudo-random price
   const baseUsdPrice = 499 + (device.id.length * 15) + (device.name.charCodeAt(0) * 5);
