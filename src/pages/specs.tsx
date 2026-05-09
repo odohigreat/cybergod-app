@@ -204,7 +204,7 @@ function Specs() {
       }
     };
     fetchDevice();
-  }, [deviceId]);
+  }, [deviceId, navigate]);
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);

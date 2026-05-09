@@ -30,6 +30,13 @@ interface ScoredDevice {
   };
 }
 
+const loadingTexts = [
+  "Analyzing your style profile...",
+  "Scanning global smartphone database...",
+  "Evaluating dynamic spec weights...",
+  "Generating customized compatibility scorecard...",
+];
+
 export default function Result() {
   const navigate = useNavigate();
   const scorecardRef = useRef<HTMLDivElement>(null);
@@ -46,13 +53,6 @@ export default function Result() {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
-  const loadingTexts = [
-    "Analyzing your style profile...",
-    "Scanning global smartphone database...",
-    "Evaluating dynamic spec weights...",
-    "Generating customized compatibility scorecard...",
-  ];
 
   useEffect(() => {
     // Elegant loading phase sequence
