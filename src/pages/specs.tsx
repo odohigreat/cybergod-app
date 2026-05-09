@@ -22,7 +22,6 @@ import {
 import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
 import Header from "../Components/header";
 import Footer from "../Components/footer";
-import { devices } from "../data/devices";
 import { Device } from "../types";
 import { supabase } from "../utils/supabase";
 
@@ -137,10 +136,10 @@ function Specs() {
               },
             ],
             quickSpecs: [
-              { label: 'OS', value: dbPhone.raw_specs?.platformOSRaw?.split(',')[0] || 'Unknown' },
               { label: 'Released', value: dbPhone.raw_specs?.launchAnnouncedRaw || 'Unknown' },
-              { label: 'Thickness', value: (dbPhone.raw_specs?.bodyDimensionsRaw?.match(/x ([\d.]+)\s*mm/) || [])[1] ? `${dbPhone.raw_specs.bodyDimensionsRaw.match(/x ([\d.]+)\s*mm/)[1]} mm` : 'Unknown' },
+              { label: 'OS', value: dbPhone.raw_specs?.platformOSRaw?.split(',')[0] || 'Unknown' },
               { label: 'Storage', value: dbPhone.storage_gb_max ? `${dbPhone.storage_gb_max} GB` : 'Unknown' },
+              { label: 'Thickness', value: (dbPhone.raw_specs?.bodyDimensionsRaw?.match(/x ([\d.]+)\s*mm/) || [])[1] ? `${dbPhone.raw_specs.bodyDimensionsRaw.match(/x ([\d.]+)\s*mm/)[1]} mm` : 'Unknown' },
             ]
           };
           setDevice(fetchedDevice);
@@ -162,20 +161,50 @@ function Specs() {
               specs: []
             })));
           } else {
-            setSimilarDevices(devices.slice(0, 3));
+            // Backup similar from any brands
+            const { data: backup } = await supabase
+              .from('phones')
+              .select('*')
+              .neq('slug', dbPhone.slug)
+              .limit(3);
+            if (backup) {
+              setSimilarDevices(backup.map((p: any) => ({
+                id: p.slug,
+                name: p.model,
+                brand: p.brand,
+                imageSrc: p.image_url || 'https://via.placeholder.com/300',
+                isNew: p.release_year >= new Date().getFullYear() - 1,
+                specs: []
+              })));
+            } else {
+              setSimilarDevices([]);
+            }
           }
         } else {
-          const found = devices.find((d) => d.id === deviceId);
-          setDevice(found || devices[0]);
-          setSimilarDevices(devices.filter(d => d.id !== (found?.id || devices[0].id)).slice(0, 3));
+          // If the specific phone wasn't found, find any first available phone as a fallback
+          const { data: anyPhone } = await supabase
+            .from('phones')
+            .select('*')
+            .limit(1)
+            .single();
+          if (anyPhone) {
+            navigate(`/specs?device=${anyPhone.slug}`, { replace: true });
+          }
         }
       } else {
-        setDevice(devices[0]);
-        setSimilarDevices(devices.slice(1, 4));
+        // If no device ID specified, fetch the first available phone from Supabase
+        const { data: anyPhone } = await supabase
+          .from('phones')
+          .select('*')
+          .limit(1)
+          .single();
+        if (anyPhone) {
+          navigate(`/specs?device=${anyPhone.slug}`, { replace: true });
+        }
       }
     };
     fetchDevice();
-  }, [deviceId]);
+  }, [deviceId, navigate]);
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -191,7 +220,7 @@ function Specs() {
         </div>
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 animate-pulse">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            
+
             {/* Left Column Skeleton */}
             <div className="lg:col-span-5 space-y-8">
               <div className="h-10 w-2/3 bg-neutral-200 dark:bg-neutral-800/60 rounded-xl" />
@@ -258,7 +287,7 @@ function Specs() {
               </span>
               <div className="grid grid-cols-2 rounded-3xl p-2 bg-neutral-100/50 dark:bg-black border border-neutral-200 dark:border-neutral-800 gap-4">
                 <div className="absolute opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative h-72 lg:h-80 w-full rounded-3xl bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 overflow-hidden shadow-sm flex items-center justify-center p-6 transition-colors duration-300">
+                <div className="relative h-72 lg:h-80 w-full rounded-2xl bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 overflow-hidden shadow-sm flex items-center justify-center p-6 transition-colors duration-300">
                   <img
                     src={device.imageSrc}
                     alt={device.name}
@@ -275,7 +304,7 @@ function Specs() {
                 {device.quickSpecs && device.quickSpecs.length > 0 && (
                   <div className="grid grid-cols-1 gap-4">
                     {device.quickSpecs.map((spec, idx) => (
-                      <div key={idx} className="flex flex-col px-4 py-2 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 shadow-sm transition-colors duration-300 hover:border-blue-300 dark:hover:border-blue-800 hover:shadow-md">
+                      <div key={idx} className="flex flex-col px-4 py-2 rounded-xl bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 shadow-sm transition-colors duration-300 hover:border-blue-300 dark:hover:border-blue-800 hover:shadow-md">
                         <div className="flex items-center gap-1.5 mb-1 md:mb-2 text-neutral-500 dark:text-neutral-400">
                           {getIcon(spec.label, "size-4")}
                           <span className="text-[10px] font-bold uppercase">{spec.label}</span>
@@ -313,7 +342,7 @@ function Specs() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
-                      className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-black text-white text-[10px] rounded-lg shadow-xl whitespace-nowrap"
+                      className="absolute -top-7 left-1/7 -translate-x-1/2 px-3 py-1 bg-black text-white text-[10px] rounded-lg shadow-xl whitespace-nowrap"
                     >
                       Link Copied!
                     </motion.span>

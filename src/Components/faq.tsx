@@ -50,20 +50,18 @@ function Faq() {
               <div className={`${openStates[index] ? "border-2 border-blue-400 dark:border-neutral-700/60 rounded-3xl" : "border-none"}`}>
                 <div className={`${openStates[index] ? "rounded-t-3xl hover:bg-neutral-100 dark:hover:bg-[#0a0a0a]" : "rounded-2xl"} flex space-x-5 items-center justify-between w-full p-3 md:p-5 cursor-pointer transition-colors ease-in-out duration-300 hover:bg-neutral-100 dark:hover:bg-[#0a0a0a] bg-neutral-50 dark:bg-black`}>
                   <h4 className="font-bold text-base md:text-xl pl-2 text-slate-900 dark:text-white transition-colors duration-300">{faq.question}</h4>
-                  <DisclosureButton className={`${openStates[index] ? "" : ""}`}>
-                    <button
-                      onClick={() => toggleOpenState(index)}
-                      className="p-2 rounded-full btn text-blue-500 shadow-md bg-white dark:bg-neutral-900 dark:text-white border border-transparent dark:border-neutral-800 transition-all ease-in-out duration-100 hover:scale-105 active:scale-95">
-                      {openStates[index] ? (
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-                        </svg>
-                      ) : (
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                        </svg>
-                      )}
-                    </button>
+                  <DisclosureButton
+                    onClick={() => toggleOpenState(index)}
+                    className="p-2 rounded-full btn text-blue-500 shadow-md bg-white dark:bg-neutral-900 dark:text-white border border-transparent dark:border-neutral-800 transition-all ease-in-out duration-100 hover:scale-105 active:scale-95">
+                    {openStates[index] ? (
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                      </svg>
+                    ) : (
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    )}
                   </DisclosureButton>
                 </div>
                 <DisclosurePanel className={`px-5 pb-5 bg-neutral-50 dark:bg-black rounded-b-3xl transition-colors duration-300`}>
