@@ -6,7 +6,6 @@ import { motion, useInView } from "framer-motion";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Faq from './Components/faq';
 import Footer from './Components/footer';
-import { devices as initialDevices } from './data/devices';
 import { supabase } from './utils/supabase';
 
 const categories = [
@@ -75,8 +74,8 @@ function CountUp({ end, suffix = "", duration = 2 }: { end: number, suffix?: str
 
 function Home() {
   const blogScrollRef = React.useRef<HTMLDivElement>(null);
-  const [trendingDevices, setTrendingDevices] = React.useState<any[]>(initialDevices.slice(0, 5));
-  const [newDevices, setNewDevices] = React.useState<any[]>(initialDevices.slice(0, 5));
+  const [trendingDevices, setTrendingDevices] = React.useState<any[]>([]);
+  const [newDevices, setNewDevices] = React.useState<any[]>([]);
 
   React.useEffect(() => {
     const fetchPhones = async () => {

@@ -54,10 +54,10 @@ const mapSupabasePhoneToDevice = (dbPhone: any): Device => {
   const displaySize = dbPhone.raw_specs?.displaySizeRaw || `${dbPhone.screen_size_inches || '?'} inches`;
   const displayType = dbPhone.raw_specs?.displayTypeRaw || 'AMOLED';
   const displayRes = dbPhone.raw_specs?.displayResolutionRaw || 'Unknown';
-  
+
   const chipset = dbPhone.raw_specs?.platformChipsetRaw || 'Latest Processor';
   const cpu = dbPhone.raw_specs?.platformCPURaw || 'Unknown';
-  
+
   const mainCam = dbPhone.raw_specs?.mainCameraRaw || 'Pro Camera System';
   const selfieCam = dbPhone.raw_specs?.selfieCameraRaw || 'Front Camera';
 
@@ -75,44 +75,44 @@ const mapSupabasePhoneToDevice = (dbPhone: any): Device => {
     imageSrc: dbPhone.image_url || 'https://via.placeholder.com/300',
     isNew: dbPhone.release_year >= new Date().getFullYear() - 1,
     specs: [
-      { 
-        label: 'Display', 
+      {
+        label: 'Display',
         subSpecs: [
           { label: 'Size', value: displaySize },
           { label: 'Type', value: displayType },
           { label: 'Resolution', value: displayRes }
         ]
       },
-      { 
-        label: 'Performance', 
+      {
+        label: 'Performance',
         subSpecs: [
           { label: 'Chipset', value: chipset },
           { label: 'CPU', value: cpu }
         ]
       },
-      { 
-        label: 'Cameras', 
+      {
+        label: 'Cameras',
         subSpecs: [
           { label: 'Main', value: mainCam },
           { label: 'Selfie', value: selfieCam }
         ]
       },
-      { 
-        label: 'Design', 
+      {
+        label: 'Design',
         subSpecs: [
           { label: 'Dimensions', value: dimensions },
           { label: 'Weight', value: weight }
         ]
       },
-      { 
-        label: 'Memory', 
+      {
+        label: 'Memory',
         subSpecs: [
           { label: 'Options', value: memory }
         ]
       },
       { label: 'Battery', value: battery },
-      { 
-        label: 'Connectivity', 
+      {
+        label: 'Connectivity',
         subSpecs: [
           { label: 'Network', value: network },
           { label: 'Sensors', value: sensors }
@@ -120,10 +120,10 @@ const mapSupabasePhoneToDevice = (dbPhone: any): Device => {
       },
     ],
     quickSpecs: [
-      { label: 'OS', value: dbPhone.raw_specs?.platformOSRaw?.split(',')[0] || 'Unknown' },
       { label: 'Released', value: dbPhone.raw_specs?.launchAnnouncedRaw || 'Unknown' },
-      { label: 'Thickness', value: (dbPhone.raw_specs?.bodyDimensionsRaw?.match(/x ([\d.]+)\s*mm/) || [])[1] ? `${dbPhone.raw_specs.bodyDimensionsRaw.match(/x ([\d.]+)\s*mm/)[1]} mm` : 'Unknown' },
+      { label: 'OS', value: dbPhone.raw_specs?.platformOSRaw?.split(',')[0] || 'Unknown' },
       { label: 'Storage', value: dbPhone.storage_gb_max ? `${dbPhone.storage_gb_max} GB` : 'Unknown' },
+      { label: 'Thickness', value: (dbPhone.raw_specs?.bodyDimensionsRaw?.match(/x ([\d.]+)\s*mm/) || [])[1] ? `${dbPhone.raw_specs.bodyDimensionsRaw.match(/x ([\d.]+)\s*mm/)[1]} mm` : 'Unknown' },
     ]
   };
 };
@@ -250,13 +250,14 @@ function DevicePicker({
 export default function Compare() {
   const [searchParams] = useSearchParams();
   const initialId = searchParams.get("device");
+  const initialId2 = searchParams.get("device2");
 
   const [deviceA, setDeviceA] = useState<Device | null>(null);
   const [deviceB, setDeviceB] = useState<Device | null>(null);
 
   useEffect(() => {
-    if (initialId) {
-      const fetchInitial = async () => {
+    const fetchInitials = async () => {
+      if (initialId) {
         const { data, error } = await supabase
           .from('phones')
           .select('*')
@@ -265,10 +266,20 @@ export default function Compare() {
         if (!error && data) {
           setDeviceA(mapSupabasePhoneToDevice(data));
         }
-      };
-      fetchInitial();
-    }
-  }, [initialId]);
+      }
+      if (initialId2) {
+        const { data, error } = await supabase
+          .from('phones')
+          .select('*')
+          .eq('slug', initialId2)
+          .single();
+        if (!error && data) {
+          setDeviceB(mapSupabasePhoneToDevice(data));
+        }
+      }
+    };
+    fetchInitials();
+  }, [initialId, initialId2]);
 
   const allLabels = useMemo(() => {
     const set = new Set<string>();
@@ -311,7 +322,7 @@ export default function Compare() {
         {/* Back link */}
         <Link
           to={deviceA ? `/specs?device=${deviceA.id}` : "/"}
-          className="inline-flex items-center text-md font-medium text-neutral-500 hover:text-neutral-800 dark:hover:text-white mb-8 transition-colors group"
+          className="inline-flex items-center btn text-md font-medium text-neutral-500 hover:text-neutral-800 dark:hover:text-white mb-8 transition-colors group"
         >
           <ChevronLeftIcon className="size-5 mr-1 group-hover:-translate-x-1 transition-transform" />
           Back

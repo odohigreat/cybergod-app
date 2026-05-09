@@ -18,6 +18,7 @@ export interface Device {
 export interface Option {
   text: string;
   trait: string;
+  description?: string;
 }
 
 export interface QuestionType {
